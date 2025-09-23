@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opioid Prescribing Risk Analytics - Seemab Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #7B68EE;
+        }
+        
+        .content {
+            margin-top: 80px;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        section {
+            margin: 3rem 0;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e6ed;
+        }
+        
+        h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chart-container {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .chart-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .implementation-table th,
+        .implementation-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e6ed;
+        }
+        
+        .implementation-table th {
+            background: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e6ed;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .two-column-chart {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column-chart {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" style="font-size: 1.2rem; font-weight: bold;">Seemab Analytics</a>
+            <a href="index.html">← Back to Projects</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="content">
+            <h1>Opioid Prescribing Risk Analytics</h1>
+            <p class="subtitle">Identifying High-Risk Patterns in Medicare Part D Data - A Data-Driven Framework for Healthcare Quality Improvement and Cost Reduction</p>
+            
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">$1.22B</div>
+                    <div class="metric-label">Annual Excess Medicare Costs</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">51,660</div>
+                    <div class="metric-label">High-Risk Prescribers Identified</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">61.6%</div>
+                    <div class="metric-label">ML-Statistical Concordance</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">28.1M</div>
+                    <div class="metric-label">Excess Prescriptions Annually</div>
+                </div>
+            </div>
+            
+            <section>
+                <h2>Executive Summary</h2>
+                <p>The United States faces a critical public health and economic challenge with inappropriate opioid prescribing patterns contributing to both the ongoing overdose crisis and unsustainable healthcare costs. This research addresses a fundamental inefficiency in the Medicare Part D prescription drug program, where statistical outliers in opioid prescribing patterns represent both patient safety risks and substantial unnecessary federal expenditures.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Key Impact:</strong> Through analysis of 1.38 million Medicare Part D prescribers, this project develops a comprehensive framework identifying 51,660 prescribers (5.0% of total) exhibiting anomalous opioid prescribing patterns, representing $1.22 billion in excess Medicare Part D costs annually, with potential for $2.57 billion in national healthcare savings when extrapolated beyond Medicare.</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Risk Score Distribution Analysis</h2>
+                
+                <div class="chart-container">
+                    <div class="chart-title">Distribution of Risk Scores Across Medicare Part D Prescribers</div>
+                    <canvas id="riskDistributionChart" width="400" height="200"></canvas>
+                </div>
+                
+                <p>The developed framework assigns risk scores from 0-100 based on deviation from peer norms across multiple dimensions. The distribution reveals:</p>
+                <ul>
+                    <li><strong>Low Risk (0-25):</strong> 1,029,430 prescribers (99.6%)</li>
+                    <li><strong>Medium Risk (26-50):</strong> 3,667 prescribers (0.35%)</li>
+                    <li><strong>High Risk (51-75):</strong> 91 prescribers (0.01%)</li>
+                    <li><strong>Critical Risk (76-100):</strong> 0 prescribers (0.00%)</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Geographic Analysis</h2>
+                
+                <div class="two-column-chart">
+                    <div class="chart-container">
+                        <div class="chart-title">Top 15 States by Financial Impact</div>
+                        <canvas id="geographicChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Anomaly Rates by State</div>
+                        <canvas id="anomalyRatesChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+                
+                <p>High-risk patterns concentrate in specific geographic regions, with Southern states exhibiting both higher anomaly rates (mean 6.2% vs 4.1% nationally) and greater per-prescriber excess costs. Urban areas show 3.2 times more anomalies in absolute numbers but lower rates (4.6%) compared to rural regions (5.8%).</p>
+            </section>
+            
+            <section>
+                <h2>Temporal Trends Analysis</h2>
+                
+                <div class="two-column-chart">
+                    <div class="chart-container">
+                        <div class="chart-title">Opioid Claims Trends (2019-2023)</div>
+                        <canvas id="temporalTrendsChart" width="400" height="250"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-title">Annual Excess Cost Proportion</div>
+                        <canvas id="excessCostChart" width="400" height="250"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Methodology</h2>
+                
+                <h3>Data Integration Framework</h3>
+                <ul>
+                    <li><strong>Medicare Part D Prescriber Public Use File:</strong> 1,380,665 individual prescribers across 61 U.S. jurisdictions</li>
+                    <li><strong>OIG Excluded Individuals Database:</strong> 81,914 excluded healthcare providers for validation</li>
+                    <li><strong>CDC National Vital Statistics System:</strong> Overdose death data for ecological validation</li>
+                    <li><strong>Temporal Scope:</strong> 5-year trend analysis (2019-2023)</li>
+                </ul>
+                
+                <h3>Analytical Approach</h3>
+                <p>The framework employs a dual-method approach combining:</p>
+                <ul>
+                    <li><strong>Statistical Analysis:</strong> Peer benchmarking using robust statistical measures (median, IQR) with specialty-state cohorts</li>
+                    <li><strong>Machine Learning:</strong> Isolation Forest algorithm detecting multivariate anomalies with 5% contamination parameter</li>
+                    <li><strong>Risk Scoring:</strong> Composite score integrating peer deviation (30%), absolute volume (20%), prescribing rate (20%), intensity ratio (15%), and cost metrics (15%)</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Validation Performance</h2>
+                
+                <div class="chart-container">
+                    <div class="chart-title">Model Validation Metrics</div>
+                    <canvas id="validationChart" width="400" height="200"></canvas>
+                </div>
+                
+                <p>Cross-validation demonstrates robust methodology with:</p>
+                <ul>
+                    <li>61.6% concordance between machine learning and statistical methods</li>
+                    <li>63% two-year persistence in high-risk classifications</li>
+                    <li>Bootstrap validation confirming stability with 2.3% standard error</li>
+                    <li>External validation against OIG exclusions identifying 28 confirmed matches</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Financial Impact Modeling</h2>
+                
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Target Population</th>
+                            <th>Annual Impact</th>
+                            <th>Implementation Time</th>
+                            <th>ROI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conservative</td>
+                            <td>Top 100 prescribers</td>
+                            <td>$46.4 million</td>
+                            <td>6 months</td>
+                            <td>12:1</td>
+                        </tr>
+                        <tr>
+                            <td>Moderate</td>
+                            <td>Top 5% (2,500)</td>
+                            <td>$584 million</td>
+                            <td>12 months</td>
+                            <td>28:1</td>
+                        </tr>
+                        <tr>
+                            <td>Comprehensive</td>
+                            <td>All anomalies (51,660)</td>
+                            <td>$1.22 billion</td>
+                            <td>24 months</td>
+                            <td>45:1</td>
+                        </tr>
+                        <tr>
+                            <td>National Scale</td>
+                            <td>Medicare + Commercial</td>
+                            <td>$2.57 billion</td>
+                            <td>36 months</td>
+                            <td>62:1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section>
+                <h2>Policy Implications</h2>
+                
+                <h3>Federal Alignment</h3>
+                <p>This framework directly advances federal priorities established in:</p>
+                <ul>
+                    <li><strong>SUPPORT for Patients and Communities Act (2018):</strong> Section 6052 requirements for improving prescription drug monitoring</li>
+                    <li><strong>HHS 5-Point Strategy to Combat the Opioid Crisis:</strong> Supports data/evidence initiatives and provider accountability</li>
+                    <li><strong>Executive Order 13784:</strong> Enables enhanced prescription drug monitoring and provider accountability measures</li>
+                </ul>
+                
+                <h3>Recommended Actions</h3>
+                <div class="highlight-box">
+                    <p><strong>Year 1:</strong> Deploy risk scoring framework for top 100 prescribers ($46.4M savings)</p>
+                    <p><strong>Years 2-3:</strong> Integrate with state PDMPs, develop educational interventions ($584M savings)</p>
+                    <p><strong>Years 4-5:</strong> Full implementation addressing all anomalies ($1.22B annual savings)</p>
+                </div>
+            </section>
+            
+            <section>
+                <h2>Technical Implementation</h2>
+                <p>The analytical pipeline processes 1.38 million prescriber records through an eight-stage framework:</p>
+                <ul>
+                    <li>Data validation and clinical exclusions (oncology, palliative care)</li>
+                    <li>Peer group formation with hierarchical fallback</li>
+                    <li>Statistical outlier detection using z-scores</li>
+                    <li>Machine learning anomaly detection</li>
+                    <li>Composite risk score calculation</li>
+                    <li>Financial impact quantification</li>
+                    <li>Temporal stability assessment</li>
+                    <li>External validation procedures</li>
+                </ul>
+            </section>
+            
+            <div class="nav-buttons">
+                <a href="project1.html" class="nav-btn">← Previous Project</a>
+                <a href="project3.html" class="nav-btn">Next Project →</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Risk Distribution Chart
+        const riskCtx = document.getElementById('riskDistributionChart').getContext('2d');
+        new Chart(riskCtx, {
+            type: 'bar',
+            data: {
+                labels: ['0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40', '40-45', '45-50', '50-55', '55-60', '60-65', '65-70', '70-75', '75-80'],
+                datasets: [{
+                    label: 'Number of Prescribers',
+                    data: [280000, 250000, 220000, 180000, 100000, 2800, 500, 250, 100, 60, 40, 25, 15, 8, 3, 0],
+                    backgroundColor: function(context) {
+                        const value = context.parsed.y;
+                        if (context.dataIndex <= 4) {
+                            return 'rgba(74, 144, 226, 0.8)';
+                        } else if (context.dataIndex <= 9) {
+                            return 'rgba(123, 104, 238, 0.8)';
+                        } else {
+                            return 'rgba(238, 104, 104, 0.8)';
+                        }
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Prescribers'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Opioid Prescribing Risk Score'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Geographic Impact Chart
+        const geoCtx = document.getElementById('geographicChart').getContext('2d');
+        new Chart(geoCtx, {
+            type: 'horizontalBar',
+            data: {
+                labels: ['Florida', 'California', 'Texas', 'North Carolina', 'Georgia', 'New York', 'Ohio', 'Pennsylvania', 'Michigan', 'Illinois', 'Tennessee', 'Alabama', 'Kentucky', 'New Jersey', 'Virginia'],
+                datasets: [{
+                    label: 'Excess Cost ($ Millions)',
+                    data: [101.8, 80.2, 69.7, 56.3, 49.5, 45.6, 42.3, 38.4, 35.7, 33.2, 31.8, 28.7, 26.3, 24.1, 22.5],
+                    backgroundColor: 'rgba(123, 104, 238, 0.8)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Excess Cost ($ Millions)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Anomaly Rates Chart
+        const anomalyCtx = document.getElementById('anomalyRatesChart').getContext('2d');
+        new Chart(anomalyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['NC', 'AL', 'KY', 'GA', 'TX', 'CA', 'FL', 'TN', 'OH', 'SC'],
+                datasets: [{
+                    label: 'Anomaly Rate (%)',
+                    data: [7.25, 6.84, 6.42, 4.83, 4.84, 4.85, 4.67, 5.92, 5.38, 6.15],
+                    backgroundColor: function(context) {
+                        const value = context.parsed.y;
+                        if (value > 6) {
+                            return 'rgba(238, 104, 104, 0.8)';
+                        } else if (value > 5) {
+                            return 'rgba(238, 184, 104, 0.8)';
+                        } else {
+                            return 'rgba(74, 144, 226, 0.8)';
+                        }
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Anomaly Rate (%)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Temporal Trends Chart
+        const temporalCtx = document.getElementById('temporalTrendsChart').getContext('2d');
+        new Chart(temporalCtx, {
+            type: 'line',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Total Claims (Millions)',
+                    data: [35.2, 33.8, 31.5, 30.1, 29.8],
+                    borderColor: 'rgba(74, 144, 226, 1)',
+                    backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Anomaly Claims (Millions)',
+                    data: [3.8, 3.5, 3.2, 2.9, 2.7],
+                    borderColor: 'rgba(238, 104, 104, 1)',
+                    backgroundColor: 'rgba(238, 104, 104, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Claims (Millions)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+        
+        // Excess Cost Chart
+        const excessCtx = document.getElementById('excessCostChart').getContext('2d');
+        new Chart(excessCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Excess Cost as % of Total',
+                    data: [46.8, 47.8, 48.9, 50.0, 51.0],
+                    backgroundColor: 'rgba(123, 104, 238, 0.8)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 60,
+                        title: {
+                            display: true,
+                            text: 'Percentage (%)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+        
+        // Validation Chart
+        const validationCtx = document.getElementById('validationChart').getContext('2d');
+        new Chart(validationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Anomaly Detection', 'Method Agreement', 'Temporal Stability', 'Bootstrap Stability', 'External Validation'],
+                datasets: [{
+                    label: 'Performance (%)',
+                    data: [95.0, 61.6, 63.0, 97.7, 72.0],
+                    backgroundColor: [
+                        'rgba(74, 144, 226, 0.8)',
+                        'rgba(123, 104, 238, 0.8)',
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(74, 144, 226, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Performance (%)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
