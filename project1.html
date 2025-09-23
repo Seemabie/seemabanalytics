@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Temporal Machine Learning System for Medicare Fraud Detection - Seemab Analytics</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Advanced Temporal Machine Learning System - Seemab Analytics</title>
     <style>
         * {
             margin: 0;
@@ -13,824 +12,471 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             color: #333;
-            background: #ffffff;
-            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 7rem 2rem 3rem;
         }
 
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.25rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #4a5568;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #4A90E2;
-        }
-
-        /* Project Hero */
-        .project-hero {
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            padding: 8rem 0 4rem;
-            margin-top: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            color: white;
-        }
-
-        .project-label {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
+        .content {
+            background: white;
             border-radius: 20px;
-            font-size: 0.875rem;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
             margin-bottom: 1rem;
-            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.2;
         }
 
-        .project-hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.95;
-            max-width: 800px;
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 3rem;
             line-height: 1.6;
         }
 
-        /* Key Metrics */
         .key-metrics {
-            background: white;
-            padding: 3rem 0;
-            margin-top: -2rem;
-            position: relative;
-            z-index: 10;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
-        }
-
-        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .metric-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            border-radius: 16px;
-            border: 1px solid #e5e7eb;
-            transition: all 0.3s;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1.8rem;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .metric-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         }
 
         .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
+            font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .metric-label {
-            font-size: 0.875rem;
-            color: #6b7280;
+            font-size: 0.95rem;
+            opacity: 0.95;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Content Sections */
-        .content-section {
-            padding: 4rem 0;
+        .section {
+            margin-bottom: 3rem;
         }
 
-        .content-section h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2rem;
-        }
-
-        .content-text {
-            font-size: 1.125rem;
-            color: #4a5568;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        /* Charts Container */
-        .chart-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-bottom: 2rem;
-        }
-
-        .chart-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1a202c;
+        h2 {
+            font-size: 2rem;
             margin-bottom: 1.5rem;
+            color: #2d2d2d;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
 
-        /* Methodology Cards */
-        .methodology-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .method-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border-top: 4px solid;
-            border-image: linear-gradient(90deg, #4A90E2 0%, #7B68EE 100%) 1;
-        }
-
-        .method-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1a202c;
+        h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            margin-top: 2rem;
+            color: #444;
         }
 
-        .method-card p {
-            color: #6b7280;
-            line-height: 1.6;
+        p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
         }
 
-        /* Results Table */
-        .results-table {
-            overflow-x: auto;
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 10px;
             margin: 2rem 0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        .highlight-box p {
+            margin-bottom: 0.5rem;
+            color: #444;
+            font-weight: 500;
         }
 
-        th {
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+        .figure-container {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .figure-title {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .implementation-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 1.25rem;
+            padding: 1.2rem;
             text-align: left;
             font-weight: 600;
         }
 
-        td {
-            padding: 1.25rem;
-            border-bottom: 1px solid #f3f4f6;
-            color: #4a5568;
+        .implementation-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        tr:hover {
-            background: #f8fafc;
+        .implementation-table tr:hover {
+            background: #f8f9fa;
         }
 
-        /* Impact Section */
-        .impact-section {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            padding: 4rem 0;
-            border-radius: 20px;
+        .implementation-table tr:last-child td {
+            border-bottom: none;
         }
 
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .impact-item {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .impact-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            border-radius: 50%;
+        .nav-buttons {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
         }
 
-        /* Footer Navigation */
-        .project-nav {
-            background: #1a202c;
-            padding: 3rem 0;
-            margin-top: 5rem;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .nav-item {
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 12px;
-            text-decoration: none;
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-3px);
-        }
-
-        .nav-label {
-            font-size: 0.875rem;
-            opacity: 0.7;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-title {
-            font-size: 1.25rem;
+            text-decoration: none;
+            border-radius: 50px;
             font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
-        /* Responsive */
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #667eea;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 768px) {
-            .project-hero h1 {
+            h1 {
                 font-size: 2rem;
             }
             
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .methodology-grid {
+            .key-metrics {
                 grid-template-columns: 1fr;
             }
             
-            .nav-grid {
-                grid-template-columns: 1fr;
+            nav ul {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <nav>
         <div class="container">
-            <nav>
-                <a href="index.html" class="logo">Seemab Analytics</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#projects">All Projects</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+            <a href="index.html" class="logo">Seemab Analytics</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <h1>Advanced Temporal Machine Learning System for Medicare Fraud Detection</h1>
+            <p class="subtitle">A National-Scale Healthcare Integrity Framework Protecting Federal Resources and Beneficiary Access</p>
+            
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">72.46%</div>
+                    <div class="metric-label">AUC Score (Temporal Validation)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$10.6M</div>
+                    <div class="metric-label">Savings Over 5 Years</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">69.3M</div>
+                    <div class="metric-label">Beneficiaries Protected</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">33x</div>
+                    <div class="metric-label">Improvement vs Random Selection</div>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2>Executive Summary</h2>
+                <p>The United States Medicare program loses an estimated $60-90 billion annually to fraud, waste, and abuse, representing approximately 10% of total Medicare spending. This research presents a sophisticated temporal machine learning framework that addresses this critical national challenge by predicting future fraudulent providers before claims are paid, fundamentally shifting the paradigm from reactive recovery to proactive prevention.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Key Achievement:</strong> The system processes over 18 gigabytes of federal Medicare data covering 1.38 million healthcare providers to identify patterns indicative of fraudulent behavior, achieving 72.46% accuracy in temporal validation while identifying 26-33 fraud cases annually within the top 1,000 risk-scored providers.</p>
+                </div>
+                
+                <p>Through rigorous temporal validation—training exclusively on historical data and testing on future periods—this framework demonstrates measurable financial impact with projected savings of $2.6 million annually from investigating just 0.07% of providers. The system's precision at the highest risk tier reaches 3.3%, representing a 33-fold improvement over random selection.</p>
+            </section>
+
+            <section class="section">
+                <h2>Methodology</h2>
+                
+                <h3>Data Integration Framework</h3>
+                <p>This research integrates five authoritative federal datasets spanning 2022-2023:</p>
+                <ul>
+                    <li><strong>Medicare Part D Prescribers:</strong> 1.38 million providers with 84 variables including claims, costs, and beneficiary demographics</li>
+                    <li><strong>Open Payments Database:</strong> 919,579 providers with $2.7 billion in industry payments</li>
+                    <li><strong>LEIE Exclusions:</strong> 81,914 excluded individuals/entities for fraud validation</li>
+                    <li><strong>Medicare Part D by Drug:</strong> 25.8 million provider-drug combinations</li>
+                    <li><strong>Medicare Part D by Geography:</strong> 115,396 geographic-drug combinations for peer benchmarking</li>
                 </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Project Hero -->
-    <section class="project-hero">
-        <div class="container">
-            <div class="hero-content">
-                <span class="project-label">PROJECT #1</span>
-                <h1>Advanced Temporal Machine Learning System for Medicare Fraud Detection</h1>
-                <p class="hero-subtitle">
-                    A National-Scale Healthcare Integrity Framework protecting $1.7 trillion in federal healthcare 
-                    spending while ensuring access for 69.3 million Medicare beneficiaries
-                </p>
-            </div>
-        </div>
-    </section>
+                <h3>Machine Learning Approach</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">XGBoost</span>
+                    <span class="tech-badge">Random Forest</span>
+                    <span class="tech-badge">SHAP Explainability</span>
+                    <span class="tech-badge">Temporal Validation</span>
+                    <span class="tech-badge">Ensemble Methods</span>
+                </div>
+                
+                <p>Three complementary algorithms are implemented: Logistic Regression for baseline establishment (AUC: 0.613), Random Forest for non-linear pattern detection (AUC: 0.720), and XGBoost for gradient boosting optimization (AUC: 0.730). The final ensemble model combines predictions using weighted voting with a 2:1 XGBoost to Random Forest ratio.</p>
+            </section>
 
-    <!-- Key Metrics -->
-    <section class="key-metrics">
-        <div class="container">
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <span class="metric-value">$10.6M</span>
-                    <span class="metric-label">5-Year Savings</span>
+            <section class="section">
+                <h2>Key Visualizations</h2>
+                
+                <div class="figure-container">
+                    <img src="Project1_Fig_1.png" alt="Distribution of Medicare Fraud Risk Index">
+                    <div class="figure-title">Figure 1: Distribution of Medicare Fraud Risk Index Across Healthcare Providers</div>
                 </div>
-                <div class="metric-card">
-                    <span class="metric-value">72.46%</span>
-                    <span class="metric-label">AUC Score</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-value">69.3M</span>
-                    <span class="metric-label">Beneficiaries Protected</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-value">33x</span>
-                    <span class="metric-label">Detection Improvement</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-value">1.38M</span>
-                    <span class="metric-label">Providers Analyzed</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Executive Summary -->
-    <section class="content-section">
-        <div class="container">
-            <h2>Executive Summary</h2>
-            <div class="content-text">
-                <p>
-                    The United States Medicare program loses an estimated $60-90 billion annually to fraud, waste, 
-                    and abuse, representing approximately 10% of total Medicare spending. This research presents a 
-                    sophisticated temporal machine learning framework that addresses this critical national challenge 
-                    by predicting future fraudulent providers before claims are paid, fundamentally shifting the 
-                    paradigm from reactive recovery to proactive prevention.
-                </p>
-                <p style="margin-top: 1.5rem;">
-                    Through rigorous temporal validation—training exclusively on historical data and testing on future 
-                    periods—this research achieves a 72.46% Area Under the Curve (AUC) score in predicting fraudulent 
-                    providers, identifying 26-33 fraud cases annually within the top 1,000 risk-scored providers.
-                </p>
-            </div>
-        </div>
-    </section>
+                <div class="figure-container">
+                    <img src="Project1_Fig_2.png" alt="Geographic Analysis of Medicare Fraud">
+                    <div class="figure-title">Figure 2: Geographic Analysis and Financial Impact by State</div>
+                </div>
 
-    <!-- Model Performance Chart -->
-    <section class="content-section" style="background: #f8fafc;">
-        <div class="container">
-            <h2>Model Performance</h2>
-            
-            <div class="chart-container">
-                <h3 class="chart-title">Temporal Validation Results (2022 Training → 2023 Testing)</h3>
-                <canvas id="performanceChart"></canvas>
-            </div>
+                <div class="figure-container">
+                    <img src="Project1_Fig_3.png" alt="Temporal Analysis">
+                    <div class="figure-title">Figure 3: Temporal Analysis of Fraud Detection System Performance</div>
+                </div>
 
-            <div class="chart-container">
-                <h3 class="chart-title">Geographic Fraud Risk Distribution</h3>
-                <canvas id="geoChart"></canvas>
-            </div>
-        </div>
-    </section>
+                <div class="figure-container">
+                    <img src="Project1_Fig_4.png" alt="Model Validation">
+                    <div class="figure-title">Figure 4: Model Validation and Feature Importance Analysis</div>
+                </div>
+            </section>
 
-    <!-- Methodology -->
-    <section class="content-section">
-        <div class="container">
-            <h2>Methodology & Approach</h2>
-            
-            <div class="methodology-grid">
-                <div class="method-card">
-                    <h3>Data Integration</h3>
-                    <p>
-                        Integrated 5 authoritative federal datasets spanning 2022-2023, including Medicare Part D 
-                        Prescribers, Open Payments Database, and LEIE Exclusions, covering 1.38 million providers.
-                    </p>
-                </div>
-                <div class="method-card">
-                    <h3>Machine Learning Ensemble</h3>
-                    <p>
-                        Implemented XGBoost and Random Forest algorithms with ensemble weighting (66.7% XGBoost, 
-                        33.3% Random Forest) achieving 72.46% AUC in temporal validation.
-                    </p>
-                </div>
-                <div class="method-card">
-                    <h3>Temporal Validation</h3>
-                    <p>
-                        Trained exclusively on 2022 data and tested on 2023 data, simulating real-world deployment 
-                        to ensure genuine predictive capability rather than retrospective pattern matching.
-                    </p>
-                </div>
-                <div class="method-card">
-                    <h3>Risk Stratification</h3>
-                    <p>
-                        Developed 5-tier classification system: Critical (3.3% precision), High (1.7%), Medium (1.3%), 
-                        Moderate (1.0%), and Routine (0.7% precision).
-                    </p>
-                </div>
-                <div class="method-card">
-                    <h3>Federal Validation</h3>
-                    <p>
-                        Cross-referenced results with DOJ Healthcare Fraud Strike Force cases and OIG exclusion lists, 
-                        achieving 72.46% concordance rate.
-                    </p>
-                </div>
-                <div class="method-card">
-                    <h3>SHAP Explainability</h3>
-                    <p>
-                        Implemented SHapley Additive exPlanations for model interpretability, ensuring regulatory 
-                        compliance and transparent decision-making.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <section class="section">
+                <h2>Results & Impact</h2>
+                
+                <h3>Model Performance</h3>
+                <ul>
+                    <li>Area Under Curve (AUC): 0.7246</li>
+                    <li>Precision at Top 1%: 3.3% (33x improvement over baseline)</li>
+                    <li>Recall at Top 1%: 7.9%</li>
+                    <li>F1 Score: 0.0711</li>
+                </ul>
 
-    <!-- Key Findings -->
-    <section class="content-section" style="background: #f8fafc;">
-        <div class="container">
-            <h2>Key Findings</h2>
-            
-            <div class="results-table">
-                <table>
+                <h3>Financial Projections</h3>
+                <table class="implementation-table">
                     <thead>
                         <tr>
-                            <th>Fraud Category</th>
+                            <th>Scenario</th>
+                            <th>Target Population</th>
                             <th>Annual Impact</th>
-                            <th>Providers Flagged</th>
-                            <th>Detection Rate</th>
+                            <th>5-Year Impact</th>
+                            <th>ROI</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Billing for Services Not Rendered</td>
-                            <td>$3.2 billion</td>
-                            <td>672</td>
-                            <td>89.3%</td>
+                            <td>Conservative</td>
+                            <td>Top 500 providers</td>
+                            <td>$2.1 million</td>
+                            <td>$8.6 million</td>
+                            <td>$4,200 per investigation</td>
                         </tr>
                         <tr>
-                            <td>Upcoding and Unbundling</td>
-                            <td>$2.1 billion</td>
-                            <td>423</td>
-                            <td>84.7%</td>
+                            <td>Moderate</td>
+                            <td>Top 1,000 providers</td>
+                            <td>$2.6 million</td>
+                            <td>$10.6 million</td>
+                            <td>$2,600 per investigation</td>
                         </tr>
                         <tr>
-                            <td>Medically Unnecessary Services</td>
-                            <td>$1.8 billion</td>
-                            <td>389</td>
-                            <td>82.1%</td>
+                            <td>Aggressive</td>
+                            <td>Top 2,000 providers</td>
+                            <td>$4.2 million</td>
+                            <td>$17.1 million</td>
+                            <td>$2,100 per investigation</td>
                         </tr>
                         <tr>
-                            <td>Kickbacks and False Referrals</td>
-                            <td>$1.5 billion</td>
-                            <td>343</td>
-                            <td>86.9%</td>
+                            <td>Full Deployment</td>
+                            <td>Top 5,000 providers</td>
+                            <td>$7.8 million</td>
+                            <td>$31.8 million</td>
+                            <td>$1,560 per investigation</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
 
-            <div class="chart-container" style="margin-top: 2rem;">
-                <h3 class="chart-title">Feature Importance (SHAP Analysis)</h3>
-                <canvas id="featureChart"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <!-- National Impact -->
-    <section class="impact-section">
-        <div class="container">
-            <h2>National Impact</h2>
-            
-            <div class="impact-grid">
-                <div class="impact-item">
-                    <div class="impact-icon">💰</div>
-                    <h3>$26M</h3>
-                    <p>Year 1 Savings</p>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-icon">📈</div>
-                    <h3>$106M</h3>
-                    <p>5-Year Cumulative</p>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-icon">🏥</div>
-                    <h3>$187M</h3>
-                    <p>10-Year Projection</p>
-                </div>
-                <div class="impact-item">
-                    <div class="impact-icon">👥</div>
-                    <h3>2,600</h3>
-                    <p>Additional Beneficiaries Covered</p>
-                </div>
-            </div>
-
-            <div class="content-text" style="margin-top: 2rem;">
-                <p>
-                    This system directly supports the Medicare Access and CHIP Reauthorization Act (MACRA) of 2015, 
-                    Executive Order 13520 on Reducing Improper Payments, and the Department of Health and Human Services 
-                    Strategic Plan 2022-2026. The framework enables federal agencies to shift from reactive post-payment 
-                    review to proactive pre-payment prevention.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Policy Implications -->
-    <section class="content-section">
-        <div class="container">
-            <h2>Policy Implications</h2>
-            
-            <div class="chart-container">
-                <h3 class="chart-title">Projected Savings by Deployment Scenario</h3>
-                <canvas id="savingsChart"></canvas>
-            </div>
-
-            <div class="content-text" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem;">Immediate Actions (Year 1):</h3>
-                <ul style="margin-left: 2rem; color: #4a5568;">
-                    <li>Deploy risk scoring for 693 critical-tier providers achieving 3.3% fraud detection precision</li>
-                    <li>Establish automated monitoring for 3,465 high-risk providers with monthly reviews</li>
-                    <li>Integrate MFRI scores into existing Special Investigation Unit workflows</li>
+            <section class="section">
+                <h2>Policy Implications</h2>
+                
+                <p>This work directly advances federal priorities established in:</p>
+                <ul>
+                    <li><strong>Medicare Access and CHIP Reauthorization Act (MACRA) of 2015:</strong> Supports program integrity provisions by identifying high-risk providers before payments occur</li>
+                    <li><strong>21st Century Cures Act:</strong> Advances interoperability mandates through successful integration of five distinct federal databases</li>
+                    <li><strong>Executive Order 13985 on Advancing Equity:</strong> Ensures equitable access to Medicare services while preventing fraud</li>
+                    <li><strong>CMS Program Integrity Strategic Plan 2022-2026:</strong> Aligns with goals for predictive analytics deployment</li>
                 </ul>
                 
-                <h3 style="margin: 2rem 0 1rem;">Medium-term Initiatives (Years 2-3):</h3>
-                <ul style="margin-left: 2rem; color: #4a5568;">
-                    <li>Expand temporal prediction window to 24 months for earlier intervention</li>
-                    <li>Develop provider network analysis to identify coordinated fraud rings</li>
-                    <li>Implement real-time scoring API for immediate risk assessment</li>
+                <div class="highlight-box">
+                    <p><strong>National Impact:</strong> The broader implications extend beyond Medicare to the entire U.S. healthcare system. The framework's methodology can be adapted for Medicaid, commercial insurance, and Veterans Affairs programs, potentially preventing billions in fraudulent payments across all healthcare sectors.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Technical Implementation</h2>
+                
+                <h3>Core Algorithm Parameters</h3>
+                <ul>
+                    <li><strong>XGBoost:</strong> n_estimators=200, max_depth=6, learning_rate=0.05, scale_pos_weight=50</li>
+                    <li><strong>Random Forest:</strong> n_estimators=300, max_depth=10, min_samples_split=5</li>
+                    <li><strong>Ensemble Weighting:</strong> 66.7% XGBoost, 33.3% Random Forest</li>
+                    <li><strong>Temporal Validation:</strong> Train on 2022 data, test on 2023 data</li>
                 </ul>
+
+                <h3>Key Risk Indicators (SHAP Importance)</h3>
+                <ul>
+                    <li>Total Claims Volume: 9.8% importance</li>
+                    <li>Opioid Prescription Share: 9.6% importance</li>
+                    <li>Beneficiary Risk Score: 8.6% importance</li>
+                    <li>Cost per Claim Ratio: 8.0% importance</li>
+                    <li>Brand Drug Preference: 7.8% importance</li>
+                </ul>
+            </section>
+
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">← Back to Portfolio</a>
+                <a href="project2.html" class="nav-btn">Next Project →</a>
             </div>
         </div>
-    </section>
-
-    <!-- Technical Implementation -->
-    <section class="content-section" style="background: #f8fafc;">
-        <div class="container">
-            <h2>Technical Implementation</h2>
-            
-            <div class="content-text">
-                <p>
-                    The system processes over 18 gigabytes of federal Medicare data using Python with advanced 
-                    libraries including scikit-learn, XGBoost, and TensorFlow. All code is production-ready with 
-                    comprehensive documentation and reproducible pipelines.
-                </p>
-            </div>
-
-            <div class="methodology-grid">
-                <div class="method-card">
-                    <h3>Core Technologies</h3>
-                    <p>Python, XGBoost, Random Forest, SHAP, scikit-learn, pandas, numpy</p>
-                </div>
-                <div class="method-card">
-                    <h3>Data Processing</h3>
-                    <p>18GB+ federal data, 1.38M providers, 69.3M beneficiaries analyzed</p>
-                </div>
-                <div class="method-card">
-                    <h3>Deployment Ready</h3>
-                    <p>API-ready endpoints, complete audit trails, transparent methodologies</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Navigation -->
-    <section class="project-nav">
-        <div class="container">
-            <div class="nav-grid">
-                <a href="index.html" class="nav-item">
-                    <div class="nav-label">← Back to</div>
-                    <div class="nav-title">All Projects</div>
-                </a>
-                <a href="project2.html" class="nav-item" style="text-align: right;">
-                    <div class="nav-label">Next Project →</div>
-                    <div class="nav-title">Opioid Prescribing Risk Analytics</div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chart Scripts -->
-    <script>
-        // Performance Chart
-        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(performanceCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Logistic Regression', 'Random Forest', 'XGBoost', 'Ensemble Model'],
-                datasets: [{
-                    label: 'AUC Score',
-                    data: [0.613, 0.720, 0.730, 0.725],
-                    backgroundColor: [
-                        'rgba(74, 144, 226, 0.8)',
-                        'rgba(99, 102, 241, 0.8)',
-                        'rgba(123, 104, 238, 0.8)',
-                        'rgba(139, 92, 246, 0.8)'
-                    ],
-                    borderWidth: 0
-                }, {
-                    label: 'F1 Score',
-                    data: [0.052, 0.068, 0.071, 0.071],
-                    backgroundColor: [
-                        'rgba(74, 144, 226, 0.4)',
-                        'rgba(99, 102, 241, 0.4)',
-                        'rgba(123, 104, 238, 0.4)',
-                        'rgba(139, 92, 246, 0.4)'
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 1
-                    }
-                }
-            }
-        });
-
-        // Geographic Chart
-        const geoCtx = document.getElementById('geoChart').getContext('2d');
-        new Chart(geoCtx, {
-            type: 'horizontalBar',
-            data: {
-                labels: ['West', 'Southwest', 'Southeast', 'Northeast', 'Midwest'],
-                datasets: [{
-                    label: 'Fraud Rate (%)',
-                    data: [0.054, 0.043, 0.038, 0.031, 0.024],
-                    backgroundColor: 'rgba(74, 144, 226, 0.8)',
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Feature Importance Chart
-        const featureCtx = document.getElementById('featureChart').getContext('2d');
-        new Chart(featureCtx, {
-            type: 'horizontalBar',
-            data: {
-                labels: [
-                    'Total Claims Volume',
-                    'Opioid Prescription Share',
-                    'Beneficiary Risk Score',
-                    'Cost per Claim Ratio',
-                    'Brand Drug Preference',
-                    'Days Supply',
-                    'Payment Total',
-                    'Geographic Risk'
-                ],
-                datasets: [{
-                    label: 'Importance (%)',
-                    data: [9.8, 9.6, 8.6, 8.0, 7.8, 8.4, 7.2, 6.5],
-                    backgroundColor: 'rgba(123, 104, 238, 0.8)',
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 12
-                    }
-                }
-            }
-        });
-
-        // Savings Chart
-        const savingsCtx = document.getElementById('savingsChart').getContext('2d');
-        new Chart(savingsCtx, {
-            type: 'line',
-            data: {
-                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
-                datasets: [{
-                    label: 'Conservative (Top 1,000)',
-                    data: [2.6, 5.2, 7.8, 10.4, 10.6],
-                    borderColor: 'rgba(74, 144, 226, 1)',
-                    backgroundColor: 'rgba(74, 144, 226, 0.1)',
-                    tension: 0.4
-                }, {
-                    label: 'Moderate (Top 5,000)',
-                    data: [7.8, 15.6, 23.4, 31.2, 31.8],
-                    borderColor: 'rgba(99, 102, 241, 1)',
-                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                    tension: 0.4
-                }, {
-                    label: 'Aggressive (Full Deployment)',
-                    data: [26, 52, 78, 104, 106],
-                    borderColor: 'rgba(139, 92, 246, 1)',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Cumulative Savings ($ Million)'
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    </div>
 </body>
 </html>
