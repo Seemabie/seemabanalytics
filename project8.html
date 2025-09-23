@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Access & Equity Analytics - Seemab Analytics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        nav {
+            background: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav h2 {
+            background: linear-gradient(135deg, #4A90E2, #7B68EE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #666;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #4A90E2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #4A90E2, #7B68EE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #4A90E2, #7B68EE);
+            padding: 1.5rem;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(74, 144, 226, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        section {
+            margin: 3rem 0;
+        }
+        
+        h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 4px solid #4A90E2;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .figure-container {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        
+        .figure-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .figure-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .implementation-table thead {
+            background: linear-gradient(135deg, #4A90E2, #7B68EE);
+            color: white;
+        }
+        
+        .implementation-table th,
+        .implementation-table td {
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .implementation-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .implementation-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .nav-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #4A90E2, #7B68EE);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+        }
+        
+        ul {
+            padding-left: 2rem;
+            margin: 1rem 0;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+        
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .methodology-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #7B68EE;
+        }
+        
+        .methodology-card h3 {
+            color: #4A90E2;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h2>Seemab Analytics</h2>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="#methodology">Methodology</a>
+                <a href="#results">Results</a>
+                <a href="#impact">Impact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="content">
+            <h1>Healthcare Access & Equity Analytics</h1>
+            <p class="subtitle">Comprehensive Analysis of Medicare Spending Inefficiencies and Healthcare Access Disparities</p>
+            
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">$36.7B</div>
+                    <div class="metric-label">Annual Federal Savings Identified</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.6%</div>
+                    <div class="metric-label">Model Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">255</div>
+                    <div class="metric-label">High-Risk Counties Identified</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.5M</div>
+                    <div class="metric-label">Beneficiaries Impacted</div>
+                </div>
+            </div>
+            
+            <section>
+                <h2>Executive Summary</h2>
+                <p>The United States healthcare system faces an unprecedented crisis of efficiency and equity, with Medicare and Medicaid expenditures exceeding $1.7 trillion annually while 20.4 million beneficiaries lack adequate access to essential healthcare services. This comprehensive analysis addresses this critical national challenge by systematically examining Medicare spending patterns, provider availability, and healthcare outcomes across all 3,198 U.S. counties.</p>
+                
+                <div class="highlight-box">
+                    <strong>Key Achievement:</strong> Through rigorous analysis of federal datasets, this research identifies $20.8-36.7 billion in potential annual federal savings while simultaneously improving healthcare access for 2.5 million high-risk beneficiaries. The analysis achieved 98.4% concordance with federal HRSA shortage designations, demonstrating exceptional validity and reliability of findings.
+                </div>
+                
+                <p>The developed Healthcare Equity Index provides federal policymakers with a validated, reproducible framework for continuous monitoring and targeted resource allocation, enabling data-driven decisions that advance both fiscal responsibility and health equity.</p>
+            </section>
+            
+            <section id="methodology">
+                <h2>Methodology</h2>
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <h3>Data Integration</h3>
+                        <p>Integrated four authoritative federal datasets covering 29.5 million Medicare beneficiaries across 3,198 counties, including CMS Medicare Geographic Variation files and HRSA Health Professional Shortage Area designations.</p>
+                    </div>
+                    <div class="methodology-card">
+                        <h3>Healthcare Equity Index</h3>
+                        <p>Developed novel composite scoring system: HEI = 0.3(Access) + 0.3(Quality) + 0.4(Equity), normalized to 0-100 scale for standardized national assessment.</p>
+                    </div>
+                    <div class="methodology-card">
+                        <h3>Machine Learning</h3>
+                        <p>Implemented Random Forest classifier with 100 decision trees, incorporating 9 key features including vulnerability scores, utilization rates, and demographic factors.</p>
+                    </div>
+                    <div class="methodology-card">
+                        <h3>Validation</h3>
+                        <p>Achieved 98.4% concordance with HRSA designations, 85.7% alignment with CMS regional variations, and temporal stability coefficient of r=0.94.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="results">
+                <h2>Key Findings</h2>
+                
+                <div class="figure-container">
+                    <img src="Project8_Fig_1.png" alt="Healthcare Access & Equity Analytics National Impact Assessment">
+                    <p class="figure-caption">Figure 1: Comprehensive National Impact Assessment showing potential federal savings, equity distribution, and policy intervention ROI</p>
+                </div>
+                
+                <h3>Geographic Disparities</h3>
+                <p>Analysis revealed profound geographic and demographic disparities in healthcare access and spending efficiency. The Southeast region contains 35% of high-risk counties (89 counties) with 892,000 affected beneficiaries and $986 million in annual excess spending.</p>
+                
+                <div class="figure-container">
+                    <img src="Project8_Fig_2.png" alt="Healthcare Equity Index State Performance Rankings">
+                    <p class="figure-caption">Figure 2: State Performance Rankings showing top and bottom performing jurisdictions on the Healthcare Equity Index</p>
+                </div>
+                
+                <h3>Provider Shortage Analysis</h3>
+                <ul>
+                    <li>1,704 counties with severe provider shortages (HPSA score >15)</li>
+                    <li>43.6% of counties experiencing severe shortage levels</li>
+                    <li>20.4 million beneficiaries lacking adequate primary care access</li>
+                    <li>Rural beneficiaries travel average of 40 miles for specialty care</li>
+                </ul>
+                
+                <div class="figure-container">
+                    <img src="Project8_Fig_3.png" alt="Healthcare Access & Equity Key Findings">
+                    <p class="figure-caption">Figure 3: Key findings showing county risk distribution, spending variations, provider shortages, and 5-year savings projections</p>
+                </div>
+            </section>
+            
+            <section id="impact">
+                <h2>Policy Implications</h2>
+                
+                <h3>Federal Budget Impact</h3>
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Target</th>
+                            <th>Annual Savings</th>
+                            <th>ROI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conservative</td>
+                            <td>Top 10% counties to 75th percentile</td>
+                            <td>$20.8 billion</td>
+                            <td>461%</td>
+                        </tr>
+                        <tr>
+                            <td>Moderate</td>
+                            <td>High-cost counties to median</td>
+                            <td>$26.5 billion</td>
+                            <td>347%</td>
+                        </tr>
+                        <tr>
+                            <td>Aggressive</td>
+                            <td>All counties to best-practice</td>
+                            <td>$36.7 billion</td>
+                            <td>178%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Recommended Interventions</h3>
+                <div class="highlight-box">
+                    <h4>Immediate Actions (Year 1)</h4>
+                    <ul>
+                        <li><strong>Targeted HRSA Grant Allocation:</strong> Direct $500 million to 255 highest-risk counties</li>
+                        <li><strong>Telehealth Infrastructure:</strong> Deploy broadband covering 2.5 million high-risk beneficiaries</li>
+                        <li><strong>Mobile Health Units:</strong> Launch 100 units providing 500,000 annual encounters</li>
+                    </ul>
+                </div>
+                
+                <h3>Alignment with Federal Priorities</h3>
+                <ul>
+                    <li><strong>MACRA (2015):</strong> Validates 12 new quality metrics for MIPS scoring enhancement</li>
+                    <li><strong>Executive Order 13985:</strong> Identifies 147 counties with >40% minority populations experiencing disparities</li>
+                    <li><strong>CMS National Quality Strategy:</strong> Achieves triple aim of better care, healthier people, smarter spending</li>
+                    <li><strong>Inflation Reduction Act:</strong> Supports Medicare drug pricing provisions through efficiency gains</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>Implementation Framework</h2>
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Timeline</th>
+                            <th>Key Actions</th>
+                            <th>Expected Outcomes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Phase 1</td>
+                            <td>Months 1-6</td>
+                            <td>Deploy emergency funding to high-risk counties</td>
+                            <td>Immediate access for 500,000 beneficiaries</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 2</td>
+                            <td>Months 7-18</td>
+                            <td>Establish telehealth infrastructure</td>
+                            <td>Remote access for 2.5M beneficiaries</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 3</td>
+                            <td>Months 19-36</td>
+                            <td>Workforce expansion programs</td>
+                            <td>1,500 new physicians in underserved areas</td>
+                        </tr>
+                        <tr>
+                            <td>Phase 4</td>
+                            <td>Months 37-60</td>
+                            <td>Value-based payment transition</td>
+                            <td>30% Medicare payments in new models</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section>
+                <h2>Conclusion</h2>
+                <p>This comprehensive analysis provides definitive evidence of systematic inefficiencies in U.S. healthcare delivery, quantifying $20.8-36.7 billion in achievable annual federal savings while identifying clear pathways to improve healthcare access for 2.5 million underserved Medicare beneficiaries.</p>
+                
+                <p>The novel Healthcare Equity Index offers federal policymakers a validated, reproducible framework for continuous monitoring and targeted intervention that can transform healthcare delivery across the nation. Implementation of the recommended interventions could position the United States as a global leader in efficient, equitable healthcare delivery while generating savings equivalent to the entire annual budget of the National Institutes of Health.</p>
+                
+                <div class="highlight-box">
+                    <strong>National Impact:</strong> Through data-driven resource allocation and evidence-based policy implementation, the United States can simultaneously reduce federal spending, improve population health outcomes, and advance health equity—achieving the rare triple aim of healthcare reform.
+                </div>
+            </section>
+            
+            <div class="nav-buttons">
+                <a href="project7.html" class="nav-btn">← Previous: Home Health Fraud</a>
+                <a href="index.html" class="nav-btn">Return to Portfolio</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
