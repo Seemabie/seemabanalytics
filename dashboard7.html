@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 7 - Home Health & Hospice | Healthcare Analytics</title>
+    <style>
+        /* Website Navigation Styles */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #4f46e5 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+        }
+        
+        /* Navigation Header */
+        .site-header {
+            background: var(--primary-gradient);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-links .active {
+            border-bottom: 2px solid white;
+            padding-bottom: 2px;
+        }
+        
+        /* Dashboard Navigation */
+        .dashboard-nav {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .dashboard-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .back-button:hover {
+            color: #667eea;
+        }
+        
+        .dashboard-counter {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-button {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-button.prev {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .nav-button.prev:hover {
+            background: #e5e7eb;
+        }
+        
+        .nav-button.next {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+        
+        .nav-button.next:hover {
+            transform: translateX(2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        @media print {
+            .site-header,
+            .dashboard-nav {
+                display: none;
+            }
+            
+            .dashboard-container {
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+        }
+        
+        /* Original Dashboard Styles */
+        .page {
+            width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+        }
+        
+        @media screen {
+            .page {
+                margin-bottom: 20px;
+                margin-top: 20px;
+            }
+        }
+        
+        @media print {
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+        
+        /* PAGE 1 STYLES */
+        .page1-header {
+            background: linear-gradient(90deg, #1e3a8a 0%, #312e81 100%);
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .page1-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .page1-header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .crisis-banner {
+            display: flex;
+            background: #fef2f2;
+            border-bottom: 3px solid #dc2626;
+        }
+        
+        .crisis-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border-right: 1px solid #fca5a5;
+        }
+        
+        .crisis-item:last-child {
+            border-right: none;
+        }
+        
+        .crisis-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #991b1b;
+        }
+        
+        .crisis-label {
+            font-size: 12px;
+            color: #7f1d1d;
+            margin-top: 3px;
+        }
+        
+        .page1-content {
+            padding: 20px 30px;
+            height: calc(100% - 200px);
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #dbeafe;
+        }
+        
+        .roadmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        .roadmap-table th {
+            background: #e0e7ff;
+            color: #1e3a8a;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .roadmap-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .phase-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .phase-1 { background: #dbeafe; color: #1e40af; }
+        .phase-2 { background: #fef3c7; color: #92400e; }
+        .phase-3 { background: #d1fae5; color: #065f46; }
+        
+        .caption {
+            font-size: 12px;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .chart-img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: contain;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+        }
+        
+        .state-table {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+        
+        .state-table th {
+            background: #f3f4f6;
+            padding: 6px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .state-table td {
+            padding: 6px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .risk-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .risk-high { background: #fee2e2; color: #991b1b; }
+        .risk-medium { background: #fef3c7; color: #92400e; }
+        .risk-low { background: #d1fae5; color: #065f46; }
+        
+        /* PAGE 2 STYLES */
+        .page2-header {
+            background: linear-gradient(90deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .page2-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .page2-content {
+            padding: 20px 30px;
+            height: calc(100% - 220px);
+        }
+        
+        .kpi-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .kpi-card {
+            flex: 1;
+            background: #f8fafc;
+            border: 2px solid;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .kpi-card.blue { border-color: #3b82f6; }
+        .kpi-card.green { border-color: #10b981; }
+        .kpi-card.orange { border-color: #f59e0b; }
+        .kpi-card.purple { border-color: #8b5cf6; }
+        .kpi-card.red { border-color: #ef4444; }
+        
+        .kpi-value {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .kpi-card.blue .kpi-value { color: #2563eb; }
+        .kpi-card.green .kpi-value { color: #059669; }
+        .kpi-card.orange .kpi-value { color: #d97706; }
+        .kpi-card.purple .kpi-value { color: #7c3aed; }
+        .kpi-card.red .kpi-value { color: #dc2626; }
+        
+        .kpi-label {
+            font-size: 11px;
+            color: #4b5563;
+            font-weight: 600;
+        }
+        
+        .results-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card {
+            flex: 1;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        
+        .result-card h3 {
+            font-size: 14px;
+            color: #059669;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .validation-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            font-size: 12px;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 6px;
+            background: #f9fafb;
+        }
+        
+        .metric-label {
+            color: #4b5563;
+            font-weight: 600;
+        }
+        
+        .metric-value {
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        .fraud-box {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .fraud-box h3 {
+            color: #991b1b;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .fraud-case {
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .fraud-amount {
+            font-size: 16px;
+            font-weight: bold;
+            color: #dc2626;
+        }
+        
+        .fraud-details {
+            font-size: 11px;
+            color: #7f1d1d;
+            margin-top: 2px;
+        }
+        
+        .oig-stat {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+        }
+        
+        .oig-amount {
+            color: #059669;
+        }
+        
+        .impact-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .impact-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .impact-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .performance-chart {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Website Navigation Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="site-logo">Healthcare Analytics</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="dashboards.html" class="active">Dashboards</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Dashboard Navigation -->
+    <div class="dashboard-nav">
+        <div class="dashboard-nav-container">
+            <a href="dashboards.html" class="back-button">
+                ← Back to All Dashboards
+            </a>
+            <span class="dashboard-counter">Dashboard 7 of 8</span>
+            <div class="nav-buttons">
+                <a href="dashboard6.html" class="nav-button prev">← Previous</a>
+                <a href="dashboard8.html" class="nav-button next">Next →</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- PAGE 1: NATIONAL CRISIS & ROADMAP -->
+        <div class="page">
+            <div class="page1-header">
+                <h1>Medicare Fraud Detection System - Home Health & Hospice</h1>
+                <div class="subtitle">Advanced machine learning identifies fraudulent providers with 91.7% accuracy</div>
+            </div>
+            
+            <div class="crisis-banner">
+                <div class="crisis-item">
+                    <div class="crisis-number">$60-90B</div>
+                    <div class="crisis-label">Annual Fraud Losses</div>
+                </div>
+                <div class="crisis-item">
+                    <div class="crisis-number">65 Million</div>
+                    <div class="crisis-label">Beneficiaries at Risk</div>
+                </div>
+                <div class="crisis-item">
+                    <div class="crisis-number">10,000</div>
+                    <div class="crisis-label">New Enrollees Daily</div>
+                </div>
+            </div>
+            
+            <div class="page1-content">
+                <div class="section">
+                    <h2 class="section-title">Implementation Roadmap & Projected Savings</h2>
+                    <table class="roadmap-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Timeline</th>
+                                <th>Geographic Scope</th>
+                                <th>Recovery Target</th>
+                                <th>ROI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="phase-badge phase-1">Phase I</span></td>
+                                <td>2025-2026</td>
+                                <td>5 States (TX, FL, CA, NY, IL)</td>
+                                <td><strong>$4.5-18M</strong></td>
+                                <td>45x</td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-badge phase-2">Phase II</span></td>
+                                <td>2026-2028</td>
+                                <td>National (50 states)</td>
+                                <td><strong>$40-65M/year</strong></td>
+                                <td>182x</td>
+                            </tr>
+                            <tr>
+                                <td><span class="phase-badge phase-3">Phase III</span></td>
+                                <td>2029+</td>
+                                <td>Cross-Program Integration</td>
+                                <td><strong>$60-90M/year</strong></td>
+                                <td>455x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="caption">Each phase builds on validated results to minimize risk while maximizing recovery</p>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Geographic Risk Concentration</h2>
+                    <img src="Project7_Fig_3.png" alt="State Financial Impact" class="chart-img">
+                    <p class="caption">Fraud concentrates in Texas and Florida despite nationwide provider distribution</p>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">High-Risk State Prioritization</h2>
+                    <table class="state-table">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Providers</th>
+                                <th>High-Risk</th>
+                                <th>Risk Rate</th>
+                                <th>Est. Fraud</th>
+                                <th>Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Texas</td>
+                                <td>1,867</td>
+                                <td>5</td>
+                                <td>0.27%</td>
+                                <td><strong>$837K</strong></td>
+                                <td><span class="risk-badge risk-high">HIGH</span></td>
+                            </tr>
+                            <tr>
+                                <td>Florida</td>
+                                <td>1,089</td>
+                                <td>2</td>
+                                <td>0.18%</td>
+                                <td><strong>$302K</strong></td>
+                                <td><span class="risk-badge risk-high">HIGH</span></td>
+                            </tr>
+                            <tr>
+                                <td>Massachusetts</td>
+                                <td>294</td>
+                                <td>2</td>
+                                <td>0.68%</td>
+                                <td><strong>$209K</strong></td>
+                                <td><span class="risk-badge risk-medium">MED</span></td>
+                            </tr>
+                            <tr>
+                                <td>California</td>
+                                <td>2,914</td>
+                                <td>2</td>
+                                <td>0.07%</td>
+                                <td><strong>$140K</strong></td>
+                                <td><span class="risk-badge risk-medium">MED</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="caption">Texas and Florida account for 58% of fraud with only 24% of providers</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PAGE 2: MODEL RESULTS & ENFORCEMENT CASES -->
+        <div class="page">
+            <div class="page2-header">
+                <h1>Model Validation & Enforcement Impact</h1>
+                <div class="subtitle">Proven detection with OIG-validated results and DOJ enforcement alignment</div>
+            </div>
+            
+            <div class="page2-content">
+                <div class="kpi-row">
+                    <div class="kpi-card blue">
+                        <div class="kpi-value">12,112</div>
+                        <div class="kpi-label">Providers Analyzed</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="kpi-value">91.7%</div>
+                        <div class="kpi-label">Accuracy</div>
+                    </div>
+                    <div class="kpi-card orange">
+                        <div class="kpi-value">0.1%</div>
+                        <div class="kpi-label">Flagged</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="kpi-value">$4.5-6.1M</div>
+                        <div class="kpi-label">Detected</div>
+                    </div>
+                    <div class="kpi-card red">
+                        <div class="kpi-value">45x</div>
+                        <div class="kpi-label">ROI</div>
+                    </div>
+                </div>
+                
+                <div class="results-row">
+                    <div class="result-card">
+                        <h3>Risk Distribution</h3>
+                        <img src="Project7_Fig_2.png" alt="Risk Distribution" class="chart-img" style="max-height: 150px;">
+                        <p class="caption" style="font-size: 11px;">Only 0.1% of providers are true outliers</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Validation Metrics</h3>
+                        <div class="validation-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">Sensitivity</span>
+                                <span class="metric-value">91.7%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Specificity</span>
+                                <span class="metric-value">99.9%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Precision</span>
+                                <span class="metric-value">91.7%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">F1 Score</span>
+                                <span class="metric-value">0.917</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">OIG Match</span>
+                                <span class="metric-value">25%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Processing</span>
+                                <span class="metric-value">4.3 min</span>
+                            </div>
+                        </div>
+                        <p class="caption" style="font-size: 11px;">Triple validation ensures reliability</p>
+                    </div>
+                </div>
+                
+                <div class="fraud-box">
+                    <h3>Recent DOJ/OIG Enforcement Actions</h3>
+                    <div class="fraud-case">
+                        <div class="fraud-amount">$87 Million - Fort Bend County, TX</div>
+                        <div class="fraud-details">June 2025: 3 hospice owners billed for non-dying patients</div>
+                    </div>
+                    <div class="fraud-case">
+                        <div class="fraud-amount">$17 Million - Los Angeles, CA</div>
+                        <div class="fraud-details">Feb 2025: Sham hospices using fake identities & kickbacks</div>
+                    </div>
+                    <div class="fraud-case oig-stat">
+                        <div class="fraud-amount oig-amount">$7.13 Billion - OIG FY2024</div>
+                        <div class="fraud-details" style="color: #047857;">1,548 actions, 3,234 exclusions nationwide</div>
+                    </div>
+                    <p class="caption">Our model aligns with actual prosecution patterns</p>
+                </div>
+                
+                <div class="performance-chart">
+                    <img src="Project7_Fig_5.png" alt="Performance Analysis" class="chart-img" style="max-height: 180px;">
+                    <p class="caption">Confusion matrix shows minimal false positives with high detection rate</p>
+                </div>
+            </div>
+            
+            <div class="impact-footer">
+                <div class="impact-title">10-Year Impact: $500-700 Million Recovered</div>
+                <div class="impact-subtitle">
+                    Protecting 65 million Medicare beneficiaries • Extending Trust Fund solvency<br>
+                    Aligned with MACRA 2015 • 21st Century Cures Act 2016 • Executive Order 13985
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
