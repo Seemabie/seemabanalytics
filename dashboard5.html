@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Medicare Telehealth Fraud Detection | Seemab Analytics</title>
+    <title>Medicare Telehealth Billing Anomaly Detection System - Seemab Analytics</title>
     <style>
-        /* Website Navigation Styles */
         * {
             margin: 0;
             padding: 0;
@@ -13,878 +12,473 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #e5e7eb;
-            color: #111827;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+        
+        nav {
+            background: white;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        nav {
+        
+        nav .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 0;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+        
+        nav h2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            font-size: 1.5rem;
         }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #4a5568;
+        
+        nav a {
+            color: #667eea;
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
+            margin-left: 2rem;
             transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #4A90E2;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            border-radius: 2px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            color: white;
-            padding: 0.625rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-        }
-
-        /* Dashboard Container */
-        .dashboard-container {
-            margin-top: 80px;
-            padding: 20px 0;
         }
         
-        /* Dashboard Specific Styles from Project 5 */
-        .page {
-            width: 1200px;
-            height: 1550px;
-            margin: 20px auto;
+        nav a:hover {
+            color: #764ba2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+        
+        .content {
             background: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            page-break-after: always;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
         
-        /* Header Styling */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #1e40af;
-        }
-        
-        .title-section h1 {
-            color: #1e3a8a;
-            font-size: 28px;
-            margin-bottom: 5px;
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
         }
         
         .subtitle {
-            color: #64748b;
-            font-size: 14px;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
         
-        .exhibit-tag {
-            background: #1e40af;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        /* Crisis Banner */
-        .crisis-banner {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .crisis-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .crisis-metrics {
+        .key-metrics {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
         
-        .crisis-card {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
+        .metric-card {
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .crisis-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
-        .crisis-label {
-            font-size: 11px;
-            text-transform: uppercase;
+        .metric-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-card p {
             opacity: 0.95;
+            font-size: 0.95rem;
         }
         
-        /* Roadmap Section */
-        .roadmap-section {
-            margin-bottom: 30px;
+        .section {
+            margin-bottom: 3rem;
         }
         
-        .section-header {
-            background: #f1f5f9;
-            padding: 10px 15px;
-            border-left: 4px solid #1e40af;
-            margin-bottom: 20px;
+        .section h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
         }
         
-        .section-header h2 {
-            color: #1e3a8a;
-            font-size: 18px;
+        .highlight-box {
+            background: linear-gradient(to right, rgba(106, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
         }
         
-        .roadmap-timeline {
+        .methodology-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
         }
         
-        .phase-card {
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s;
+        .method-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
         }
         
-        .phase-card:hover {
-            border-color: #1e40af;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
-        }
-        
-        .phase-number {
-            position: absolute;
-            top: -12px;
-            left: 15px;
-            background: white;
-            padding: 0 8px;
-            color: #1e40af;
-            font-weight: bold;
-        }
-        
-        .phase-title {
-            color: #1e3a8a;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-        
-        .phase-timeline {
-            color: #64748b;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-        
-        .phase-impact {
-            background: #dbeafe;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        
-        .phase-savings {
-            color: #1e3a8a;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        
-        .phase-details {
-            font-size: 11px;
-            color: #475569;
-            margin-top: 5px;
-        }
-        
-        /* Geographic Section */
-        .geographic-section {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .figure-panel {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px;
-        }
-        
-        .figure-title {
-            color: #1e3a8a;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .method-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
         }
         
         .figure-container {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
         }
         
         .figure-container img {
             max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         .figure-caption {
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 8px;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 1rem;
             font-style: italic;
-            text-align: center;
         }
         
-        .state-breakdown {
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
             background: white;
-            border-radius: 8px;
-            padding: 15px;
-        }
-        
-        .state-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 13px;
-        }
-        
-        .state-name {
-            font-weight: 500;
-            color: #374151;
-        }
-        
-        .state-value {
-            color: #dc2626;
-            font-weight: 600;
-        }
-        
-        /* Page 2 Styling */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .kpi-card {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            color: white;
-            padding: 20px 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .kpi-value {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .kpi-label {
-            font-size: 11px;
-            opacity: 0.95;
-        }
-        
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 0.7fr;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .validation-panel {
-            background: #f0fdf4;
-            border: 2px solid #22c55e;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        
-        .validation-title {
-            color: #15803d;
-            font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        
-        .validation-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .validation-item {
-            background: white;
-            padding: 12px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        
-        .validation-score {
-            font-size: 24px;
-            font-weight: bold;
-            color: #15803d;
-        }
-        
-        .validation-label {
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 3px;
-        }
-        
-        /* Fraud Cases */
-        .fraud-cases {
-            background: #fef2f2;
-            border-left: 4px solid #dc2626;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .fraud-cases-title {
-            color: #991b1b;
-            font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        
-        .case-item {
-            background: white;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .case-details {
-            flex: 1;
-        }
-        
-        .case-provider {
-            font-weight: 600;
-            color: #374151;
-            font-size: 13px;
-        }
-        
-        .case-description {
-            font-size: 11px;
-            color: #6b7280;
-            margin-top: 3px;
-        }
-        
-        .case-amount {
-            color: #dc2626;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        /* Impact Banner */
-        .impact-banner {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-radius: 10px;
-            text-align: center;
+            overflow: hidden;
         }
         
-        .impact-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 20px;
+        .implementation-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
         }
         
-        .impact-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        .implementation-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
         }
         
-        .impact-item {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+        .implementation-table tr:hover {
+            background: #f8f9fa;
         }
         
-        .impact-value {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .impact-label {
-            font-size: 13px;
-            opacity: 0.95;
-        }
-
-        /* Navigation Controls */
-        .dashboard-nav {
+        .nav-buttons {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .nav-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-        }
-
-        .nav-button.back {
-            background: #6b7280;
-        }
-
-        .nav-button.back:hover {
-            background: #4b5563;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0f0f0;
         }
         
-        @media print {
-            header, .dashboard-nav {
-                display: none;
-            }
-            .dashboard-container {
-                margin-top: 0;
-            }
-            .page {
-                page-break-after: always;
-                margin: 0;
-                box-shadow: none;
-            }
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
         }
-
-        @media (max-width: 1300px) {
-            .page {
-                width: 95%;
-            }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(to right, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+            border-left: 4px solid #FFC107;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Seemab Analytics</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="dashboards.html" class="active">Dashboards</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                    <li><a href="https://github.com/seemabie" class="btn-primary">View GitHub</a></li>
+    <nav>
+        <div class="nav-content">
+            <h2>Seemab Analytics</h2>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <h1>Medicare Telehealth Billing Anomaly Detection System</h1>
+            <p class="subtitle">Identifying and Quantifying Billing Anomalies in Post-COVID Telehealth Expansion</p>
+
+            <div class="key-metrics">
+                <div class="metric-card">
+                    <h3>$420.2M</h3>
+                    <p>Excess Payments Identified</p>
+                </div>
+                <div class="metric-card">
+                    <h3>100%</h3>
+                    <p>Statistical Precision</p>
+                </div>
+                <div class="metric-card">
+                    <h3>50,000</h3>
+                    <p>Providers Analyzed</p>
+                </div>
+                <div class="metric-card">
+                    <h3>126:1</h3>
+                    <p>Return on Investment</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Executive Summary</h2>
+                <p>The rapid expansion of Medicare telehealth coverage during the COVID-19 pandemic created unprecedented opportunities for irregular billing patterns, with the Office of Inspector General identifying over 1,700 high-risk providers requiring investigation. This research addresses a critical gap in Medicare program integrity by developing an advanced billing anomaly detection system that identified $420.2 million in excess payments from 35 providers with extreme statistical outliers.</p>
+                
+                <div class="highlight-box">
+                    <strong>National Impact:</strong> When scaled nationally, the system projects $12.6 billion in potential annual savings if these anomalies represent improper payments. The analysis processed Medicare claims data from over 50,000 providers across all U.S. states and territories, achieving 100% statistical precision in identifying critical outliers through a novel dual-methodology approach.
+                </div>
+                
+                <p>The analysis revealed systematic billing anomaly patterns concentrated in pharmacy and laboratory services, with individual providers billing up to $28.5 million in excess of peer medians. Through comprehensive analysis of 50,000 provider records spanning 2019-2023, the system identified 35 critical-risk providers whose billing patterns exceeded peer benchmarks by margins ranging from 200% to 10,000%.</p>
+            </div>
+
+            <div class="section">
+                <h2>Top High-Risk Providers Identified</h2>
+                <div class="figure-container">
+                    <img src="Project5_Fig_1.png" alt="Top 5 High-Risk Providers Table">
+                    <p class="figure-caption">Figure 1: Top 5 providers showing extreme billing anomalies with services ranging from 5.8M to 14.4M and excess payments from $18.1M to $28.5M</p>
+                </div>
+                
+                <p>The identification of specific providers billing up to 30,500% above peer medians demonstrates the system's capability to provide actionable intelligence for investigation. The top provider (NPI: 1013998921) alone generated $28.5 million in excess payments with 14.4 million services billed.</p>
+            </div>
+
+            <div class="section">
+                <h2>Model Validation and Performance</h2>
+                <div class="figure-container">
+                    <img src="Project5_Fig_2.png" alt="Model Validation and Performance Analysis">
+                    <p class="figure-caption">Figure 2: Comprehensive validation metrics showing confusion matrix, model performance (91.3% accuracy, 100% statistical precision), and 126:1 return on investment</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Methodology</h2>
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <h3>Statistical Analysis</h3>
+                        <p>Z-score analysis for univariate outlier detection, calculating provider-specific deviations from specialty and geographic peer groups. Providers exceeding 3 standard deviations trigger initial anomaly flags.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>Machine Learning</h3>
+                        <p>Isolation Forest algorithm processes 5 key features (service volume, payment variance, service diversity, daily volume, beneficiary ratios) with contamination parameter of 0.01 targeting top 1% unusual patterns.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>Combined Risk Score</h3>
+                        <p>Integrates statistical z-scores (15% weight), ML anomaly scores (85% weight), geographic risk adjustment (+10 points for high-risk states), and temporal growth flags for >200% increases.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>Validation Framework</h3>
+                        <p>Statistical cross-validation using k-fold methodology confirmed model accuracy of 91.3%. Temporal stability testing across 2019-2023 showed consistent pattern detection.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Financial Impact Projection</h2>
+                <div class="figure-container">
+                    <img src="Project5_Fig_3.png" alt="Financial Impact Projection">
+                    <p class="figure-caption">Figure 3: Financial impact scaling from $420.2M sample detection to $12.6B annual projection and $63B five-year potential impact</p>
+                </div>
+                
+                <p>The system's financial projections demonstrate exceptional value for federal resources. The conservative scenario targeting only the top 1% of statistical outliers could prevent $4.2 billion in improper payments with a 42:1 return on investment. Full national deployment could save taxpayers $63 billion over five years if these anomalies represent actual improper payments.</p>
+            </div>
+
+            <div class="section">
+                <h2>Geographic Distribution Analysis</h2>
+                <div class="figure-container">
+                    <img src="Project5_Fig_4.png" alt="Geographic Distribution of Billing Anomalies">
+                    <p class="figure-caption">Figure 4: Geographic concentration showing Florida leading with $119.5M in excess billing, followed by California ($89.8M) and Texas ($76.2M)</p>
+                </div>
+                
+                <p>The geographic concentration of billing anomalies aligns with historical Medicare program integrity concerns. Florida alone accounts for 11 critical-risk providers, representing 31% of all identified high-risk entities despite having only 7.7% of analyzed providers. This pattern validates the detection methodology and supports targeted investigation efforts.</p>
+            </div>
+
+            <div class="section">
+                <h2>Risk Score Distribution</h2>
+                <div class="figure-container">
+                    <img src="Project5_Fig_5.png" alt="Distribution of Risk Scores">
+                    <p class="figure-caption">Figure 5: Distribution of Combined Risk Scores across 50,000 Medicare providers showing clear separation of critical risk providers (35 providers with $420.2M excess)</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Risk Distribution:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Critical (76-100): 35 providers (0.07%) - $420.2M excess payments</li>
+                        <li>High (51-75): 465 providers (0.93%) - $312.5M potential issues</li>
+                        <li>Medium (26-50): 9,440 providers (18.88%) - Under investigation threshold</li>
+                        <li>Low (0-25): 40,060 providers (80.12%) - Normal billing patterns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Implementation Roadmap</h2>
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Target</th>
+                            <th>Estimated Impact</th>
+                            <th>Timeframe</th>
+                            <th>ROI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Conservative</strong></td>
+                            <td>Top 1% outliers only</td>
+                            <td>$4.2 billion</td>
+                            <td>1 year</td>
+                            <td>42:1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Moderate</strong></td>
+                            <td>Top 5% risk scores</td>
+                            <td>$12.6 billion</td>
+                            <td>1 year</td>
+                            <td>126:1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aggressive</strong></td>
+                            <td>All high-risk providers</td>
+                            <td>$23.8 billion</td>
+                            <td>1 year</td>
+                            <td>238:1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>National Scale</strong></td>
+                            <td>Full Medicare deployment</td>
+                            <td>$63 billion</td>
+                            <td>5 years</td>
+                            <td>630:1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Policy Recommendations</h2>
+                
+                <div class="highlight-box">
+                    <strong>Immediate Actions (Year 1):</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Deploy automated risk scoring for all Medicare claims exceeding $100,000 annually</li>
+                        <li>Integrate NPPES and OIG databases with real-time claims processing systems</li>
+                        <li>Establish provider peer-benchmarking thresholds by specialty and geography</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Medium-term Initiatives (Years 2-3):</strong></p>
+                <ul>
+                    <li>Implement machine learning models for predictive anomaly detection</li>
+                    <li>Create provider scorecards accessible to beneficiaries for transparency</li>
+                    <li>Develop interstate data sharing agreements for multi-state billing verification</li>
+                    <li>Establish real-time API for immediate claim adjudication</li>
                 </ul>
-            </nav>
-        </div>
-    </header>
+            </div>
 
-    <!-- Dashboard Container -->
-    <div class="dashboard-container">
-        <!-- Navigation Controls -->
-        <div class="dashboard-nav">
-            <a href="dashboard4.html" class="nav-button back">
-                ← Previous Dashboard
-            </a>
-            <span style="color: #666;">Dashboard 5 of 8</span>
-            <a href="dashboard6.html" class="nav-button">
-                Next Dashboard →
-            </a>
-        </div>
+            <div class="section">
+                <h2>Federal Alignment</h2>
+                <ul>
+                    <li><strong>Medicare Access and CHIP Reauthorization Act (MACRA) - 2015:</strong> Framework directly advances program integrity provisions by establishing data-driven quality metrics</li>
+                    <li><strong>Executive Order 13520 - Reducing Improper Payments:</strong> System addresses mandate to reduce payment error rates below 10% through pre-payment anomaly indicators</li>
+                    <li><strong>HHS Strategic Plan 2022-2026:</strong> Directly supports Objective 3.3 "Strengthen program integrity and combat fraud" with measurable progress toward 25% reduction target</li>
+                    <li><strong>CMS Program Integrity Strategic Plan:</strong> Fulfills mandate for advanced analytics and data integration to identify emerging billing patterns</li>
+                </ul>
+            </div>
 
-        <!-- PAGE 1: National Importance & Roadmap -->
-        <div class="page">
-            <div class="header">
-                <div class="title-section">
-                    <h1>Medicare Telehealth Fraud Detection — National Risk Dashboard</h1>
-                    <div class="subtitle">Leveraging CMS, OIG, and HHS datasets to detect fraud and save $12.6B annually</div>
-                </div>
-                <div class="exhibit-tag">Built by Seemab Hassan — Petition Exhibit E</div>
-            </div>
-            
-            <div class="crisis-banner">
-                <div class="crisis-title">NATIONAL CRISIS: Medicare Fraud Epidemic</div>
-                <div class="crisis-metrics">
-                    <div class="crisis-card">
-                        <div class="crisis-value">$60B</div>
-                        <div class="crisis-label">Annual Fraud Losses</div>
+            <div class="section">
+                <h2>Technical Innovation</h2>
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <h3>Processing Speed</h3>
+                        <p>148 providers per second enables real-time anomaly detection, processing 50,000 providers in under 6 minutes on standard hardware</p>
                     </div>
-                    <div class="crisis-card">
-                        <div class="crisis-value">45x</div>
-                        <div class="crisis-label">Telehealth Billing Spike</div>
+                    <div class="method-card">
+                        <h3>Data Quality</h3>
+                        <p>99.7% data completeness with intelligent peer-group imputation for missing values, ensuring robust analysis across all providers</p>
                     </div>
-                    <div class="crisis-card">
-                        <div class="crisis-value">$164M</div>
-                        <div class="crisis-label">Daily Cost to Taxpayers</div>
+                    <div class="method-card">
+                        <h3>Scalability</h3>
+                        <p>Cloud-ready architecture supports full Medicare deployment processing 1.5M+ providers with linear scaling characteristics</p>
                     </div>
-                    <div class="crisis-card">
-                        <div class="crisis-value">60M</div>
-                        <div class="crisis-label">Beneficiaries at Risk</div>
+                    <div class="method-card">
+                        <h3>Reproducibility</h3>
+                        <p>Fixed random seeds and documented parameters enable complete result reproduction with <0.1% variation</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="roadmap-section">
-                <div class="section-header">
-                    <h2>Implementation Roadmap & Projected Impact</h2>
-                </div>
-                <div class="roadmap-timeline">
-                    <div class="phase-card">
-                        <div class="phase-number">PHASE I</div>
-                        <div class="phase-title">Pilot Deployment</div>
-                        <div class="phase-timeline">Years 1-2</div>
-                        <div class="phase-details">
-                            • Deploy in 5 high-fraud states<br>
-                            • Real-time risk scoring<br>
-                            • Target top 1% outliers
-                        </div>
-                        <div class="phase-impact">
-                            <div class="phase-savings">$1.5-3B</div>
-                            <div class="phase-details">Annual fraud prevention</div>
-                        </div>
-                    </div>
-                    
-                    <div class="phase-card">
-                        <div class="phase-number">PHASE II</div>
-                        <div class="phase-title">National Rollout</div>
-                        <div class="phase-timeline">Years 3-5</div>
-                        <div class="phase-details">
-                            • All 1.1M providers<br>
-                            • Temporal anomaly detection<br>
-                            • State Medicaid integration
-                        </div>
-                        <div class="phase-impact">
-                            <div class="phase-savings">$8-14B</div>
-                            <div class="phase-details">Annual savings at scale</div>
-                        </div>
-                    </div>
-                    
-                    <div class="phase-card">
-                        <div class="phase-number">PHASE III</div>
-                        <div class="phase-title">Cross-Program Expansion</div>
-                        <div class="phase-timeline">Years 5+</div>
-                        <div class="phase-details">
-                            • TRICARE & VA integration<br>
-                            • Real-time APIs (≤250ms)<br>
-                            • Fraud ring detection
-                        </div>
-                        <div class="phase-impact">
-                            <div class="phase-savings">$25-30B</div>
-                            <div class="phase-details">Annual cross-program</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Added Context Callout -->
-            <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 5px;">
-                <div style="color: #92400e; font-size: 13px; text-align: center;">
-                    <strong>Context:</strong> This project targets fraud rings responsible for $12.6B annual losses — equivalent to the yearly Medicare budget for 3 million seniors
-                </div>
-            </div>
-            
-            <div class="section-header">
-                <h2>Geographic Distribution & Financial Impact</h2>
-            </div>
-            
-            <div class="geographic-section">
-                <div class="figure-panel">
-                    <div class="figure-title">Fraud Concentration by State</div>
-                    <div class="figure-container">
-                        <img src="Project5_Fig_2.png" alt="Geographic Distribution">
-                    </div>
-                    <div class="figure-caption">Fraud concentrated in high-risk states, aligning with DOJ/OIG enforcement zones</div>
+
+            <div class="section">
+                <h2>Conclusion</h2>
+                <p>This research successfully developed and validated a comprehensive Medicare billing anomaly detection system identifying $420.2 million in excess payments from 35 providers with extreme statistical outliers, with national scaling potential to address $12.6 billion in annual billing irregularities. The novel Combined Risk Score framework achieved 100% statistical precision in identifying critical outliers while maintaining scalability to process millions of provider records.</p>
+                
+                <div class="warning-box">
+                    <strong>National Program Integrity Implication:</strong> The identification of systematic billing anomalies threatens the long-term solvency of Medicare Trust Fund. Without immediate implementation of advanced detection systems, irregular billing patterns could divert up to $200 billion from legitimate patient care over the next decade, endangering healthcare access for 60 million beneficiaries. Note: These are statistical findings requiring investigation by authorized agencies to determine actual improper payments or fraud.
                 </div>
                 
-                <div class="figure-panel">
-                    <div class="figure-title">Top 5 High-Risk States</div>
-                    <div class="state-breakdown">
-                        <div class="state-item">
-                            <span class="state-name">🔴 Florida (11 providers)</span>
-                            <span class="state-value">$119.5M</span>
-                        </div>
-                        <div class="state-item">
-                            <span class="state-name">🔴 California (5 providers)</span>
-                            <span class="state-value">$89.8M</span>
-                        </div>
-                        <div class="state-item">
-                            <span class="state-name">🟡 Texas (3 providers)</span>
-                            <span class="state-value">$76.2M</span>
-                        </div>
-                        <div class="state-item">
-                            <span class="state-name">🟡 New York (2 providers)</span>
-                            <span class="state-value">$64.3M</span>
-                        </div>
-                        <div class="state-item">
-                            <span class="state-name">🟡 Maryland (2 providers)</span>
-                            <span class="state-value">$45.1M</span>
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px; padding: 10px; background: #f0f9ff; border-radius: 5px;">
-                        <div style="font-size: 12px; color: #0369a1; text-align: center;">
-                            <strong>94% Alignment</strong> with DOJ Strike Force Priority Regions
-                        </div>
-                    </div>
-                </div>
+                <p>The broader implications extend beyond immediate anomaly detection to establishing a new paradigm for healthcare program oversight. By demonstrating that advanced analytics can identify billing patterns invisible to traditional auditing, this work provides a template for protecting all federal healthcare programs while strengthening the Medicare Trust Fund's long-term solvency.</p>
             </div>
-            
-            <div class="figure-panel">
-                <div class="figure-title">Financial Impact Projection</div>
-                <div class="figure-container" style="height: 220px;">
-                    <img src="Project5_Fig_3.png" alt="Financial Impact">
-                </div>
-                <div class="figure-caption">Telehealth billing spiked 45-fold during the pandemic — creating fertile ground for fraud</div>
-            </div>
-        </div>
-        
-        <!-- PAGE 2: Model Results & Validation -->
-        <div class="page">
-            <div class="header">
-                <div class="title-section">
-                    <h1>Model Results & Validation</h1>
-                    <div class="subtitle">Proven detection system with 100% precision for critical fraud cases</div>
-                </div>
-                <div class="exhibit-tag">Petition Exhibit E — Page 2</div>
-            </div>
-            
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-value">50,000</div>
-                    <div class="kpi-label">Providers Analyzed</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">35</div>
-                    <div class="kpi-label">Critical Cases Found</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">100%</div>
-                    <div class="kpi-label">Detection Precision</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">$420.2M</div>
-                    <div class="kpi-label">Excess Detected</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-value">126:1</div>
-                    <div class="kpi-label">Return on Investment</div>
-                </div>
-            </div>
-            
-            <div class="analysis-grid">
-                <div class="figure-panel">
-                    <div class="figure-title">Risk Distribution Analysis</div>
-                    <div class="figure-container">
-                        <img src="Project5_Fig_1.png" alt="Risk Distribution">
-                    </div>
-                    <div class="figure-caption">Only 0.07% of providers (35 out of 50,000) drive massive fraud losses</div>
-                </div>
-                
-                <div class="validation-panel">
-                    <div class="validation-title">✔ External Validation Results</div>
-                    <div class="validation-metrics">
-                        <div class="validation-item">
-                            <div class="validation-score">100%</div>
-                            <div class="validation-label">OIG Concordance</div>
-                        </div>
-                        <div class="validation-item">
-                            <div class="validation-score">94%</div>
-                            <div class="validation-label">DOJ Alignment</div>
-                        </div>
-                        <div class="validation-item">
-                            <div class="validation-score">91.3%</div>
-                            <div class="validation-label">Model Accuracy</div>
-                        </div>
-                        <div class="validation-item">
-                            <div class="validation-score">0.94</div>
-                            <div class="validation-label">AUC Score</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Separated and Enhanced Fraud Cases Section -->
-            <div class="section-header">
-                <h2>Real-World Fraud Cases Identified</h2>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px;">
-                <div class="fraud-cases" style="margin-bottom: 0;">
-                    <div class="fraud-cases-title">🚨 Extreme Billing Outliers</div>
-                    <div class="case-item">
-                        <div class="case-details">
-                            <div class="case-provider">Pharmacy Provider (CA)</div>
-                            <div class="case-description">Billed 305x more than peers — physically impossible volume</div>
-                        </div>
-                        <div class="case-amount">$28.5M</div>
-                    </div>
-                    <div class="case-item">
-                        <div class="case-details">
-                            <div class="case-provider">Clinical Laboratory (NC)</div>
-                            <div class="case-description">277x above median — serving more patients than city population</div>
-                        </div>
-                        <div class="case-amount">$21.6M</div>
-                    </div>
-                    <div class="case-item">
-                        <div class="case-details">
-                            <div class="case-provider">Hematology-Oncology (TN)</div>
-                            <div class="case-description">334x peer average — billing for 24-hour workdays</div>
-                        </div>
-                        <div class="case-amount">$19.1M</div>
-                    </div>
-                </div>
-                
-                <div class="figure-panel" style="background: #fef2f2;">
-                    <div class="figure-title">Top 5 Fraudulent Providers</div>
-                    <div class="figure-container" style="height: 200px;">
-                        <img src="Project5_Fig_5.png" alt="Top Providers">
-                    </div>
-                    <div class="figure-caption">Each outlier represents millions stolen from Medicare beneficiaries</div>
-                </div>
-            </div>
-            
-            <!-- Model Performance Visualization -->
-            <div class="figure-panel" style="margin-bottom: 30px;">
-                <div class="figure-title">Model Performance & ROI Validation</div>
-                <div class="figure-container" style="height: 200px;">
-                    <img src="Project5_Fig_4.png" alt="Model Performance">
-                </div>
-                <div class="figure-caption">Validated detection system achieves 100% precision with 126:1 return on investment</div>
-            </div>
-            
-            <div class="section-header">
-                <h2>Federal Data Sources & Policy Alignment</h2>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; padding: 20px; background: #f8fafc; border-radius: 8px;">
-                <div>
-                    <h3 style="color: #1e3a8a; font-size: 14px; margin-bottom: 10px;">Data Sources</h3>
-                    <ul style="font-size: 12px; color: #475569; line-height: 1.8;">
-                        <li>CMS Medicare Physician & Other Practitioners PUF</li>
-                        <li>NPPES Registry (8.2M providers)</li>
-                        <li>OIG LEIE Database (81,914 excluded entities)</li>
-                        <li>PECOS Enrollment System (2.3M records)</li>
-                        <li>Medicare Geographic Variation Dataset</li>
-                        <li>Medicare Telehealth Trends Dataset</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 style="color: #1e3a8a; font-size: 14px; margin-bottom: 10px;">Policy Alignment</h3>
-                    <ul style="font-size: 12px; color: #475569; line-height: 1.8;">
-                        <li>CMS Program Integrity Plan 2022-2026</li>
-                        <li>Payment Integrity Act (2019)</li>
-                        <li>DOJ Healthcare Fraud Strike Force</li>
-                        <li>HHS Strategic Plan: 25% fraud reduction</li>
-                        <li>MACRA Program Integrity Provisions</li>
-                        <li>Executive Order 13520</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="impact-banner">
-                <div class="impact-title">10-YEAR NATIONAL IMPACT</div>
-                <div class="impact-metrics">
-                    <div class="impact-item">
-                        <div class="impact-value">$63B+</div>
-                        <div class="impact-label">Cumulative Savings</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-value">60M</div>
-                        <div class="impact-label">Beneficiaries Protected</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-value">1-2 Years</div>
-                        <div class="impact-label">Medicare Trust Fund Extension</div>
-                    </div>
-                </div>
+
+            <div class="nav-buttons">
+                <a href="project4.html" class="nav-btn">← Previous: DME Analysis</a>
+                <a href="project6.html" class="nav-btn">Next: Hospital Billing Analysis →</a>
             </div>
         </div>
     </div>
