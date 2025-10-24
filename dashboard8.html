@@ -3,769 +3,511 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard 8 - Medicare Program Integrity and Healthcare Equity Analytics Framework | Healthcare Analytics</title>
+    <title>Medicare Program Integrity and Healthcare Equity Analytics Framework</title>
     <style>
-        /* Website Navigation Styles */
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #4f46e5 100%);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background: #f5f5f5;
-            color: #1a1a1a;
-        }
-        
-        /* Navigation Header */
-        .site-header {
-            background: var(--primary-gradient);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .site-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .nav-links .active {
-            border-bottom: 2px solid white;
-            padding-bottom: 2px;
-        }
-        
-        /* Dashboard Navigation */
-        .dashboard-nav {
-            background: white;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .dashboard-nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #4f46e5;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .back-button:hover {
-            color: #667eea;
-        }
-        
-        .dashboard-counter {
-            color: #6b7280;
-            font-size: 0.875rem;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .nav-button {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .nav-button.prev {
-            background: #f3f4f6;
-            color: #374151;
-        }
-        
-        .nav-button.prev:hover {
-            background: #e5e7eb;
-        }
-        
-        .nav-button.complete {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-        }
-        
-        .nav-button.complete:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-        
-        /* Dashboard Container */
-        .main-dashboard-container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 20px;
-        }
-        
-        @media print {
-            .site-header,
-            .dashboard-nav {
-                display: none;
-            }
-            
-            .main-dashboard-container {
-                margin: 0;
-                padding: 0;
-                max-width: 100%;
-            }
-        }
-        
-        /* Original Dashboard Styles */
-        .dashboard-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        /* Header Section */
-        .header-strip {
-            background: linear-gradient(135deg, #dc2626 0%, #f97316 50%, #059669 100%);
-            padding: 25px 30px;
-            color: white;
-        }
-        
-        .project-title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .scorecard {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .score-item {
-            text-align: center;
-            flex: 1;
-            min-width: 200px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 15px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .score-value {
-            font-size: 36px;
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 5px;
-        }
-        
-        .score-label {
-            font-size: 14px;
-            opacity: 0.95;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .tagline {
-            text-align: center;
-            margin-top: 15px;
-            font-style: italic;
-            opacity: 0.95;
-            font-size: 16px;
-        }
-        
-        /* Main Content Grid */
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-            padding: 25px;
-        }
-        
-        /* Map Section */
-        .map-section {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 20px;
+            color: #2c3e50;
+            line-height: 1.5;
+            font-size: 11pt;
         }
-        
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+
+        @page {
+            size: A4;
+            margin: 15mm 20mm;
         }
-        
-        .section-title::before {
-            content: '';
-            width: 5px;
-            height: 24px;
-            background: #f97316;
-            border-radius: 2px;
+
+        @media print {
+            .page {
+                page-break-after: always;
+                min-height: 297mm;
+                max-height: 297mm;
+                padding: 0;
+                margin: 0;
+            }
         }
-        
-        .map-container {
-            position: relative;
-            width: 100%;
-            min-height: 400px;
-            background: #f3f4f6;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .map-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .map-callout {
-            position: absolute;
+
+        .page {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 20mm;
             background: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            font-size: 12px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .header h1 {
+            font-size: 20pt;
+            margin-bottom: 5px;
             font-weight: 600;
         }
-        
-        .callout-top {
-            top: 20px;
-            right: 20px;
-            color: #059669;
+
+        .subtitle {
+            font-size: 11pt;
+            opacity: 0.95;
         }
-        
-        .callout-bottom {
-            bottom: 20px;
-            left: 20px;
-            color: #dc2626;
+
+        .section-header {
+            background: #34495e;
+            color: white;
+            padding: 8px 15px;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
+            font-size: 11pt;
+            border-radius: 5px;
         }
-        
-        .map-caption {
-            margin-top: 12px;
-            font-size: 14px;
-            color: #6b7280;
-            text-align: center;
-            font-style: italic;
+
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
         }
-        
-        /* Risk Table Section */
-        .risk-section {
-            background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 20px;
+
+        .metric-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            border-radius: 5px;
         }
-        
+
+        .metric-value {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: #7f8c8d;
+            margin-top: 2px;
+        }
+
+        .roadmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-table th {
+            background: #ecf0f1;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #bdc3c7;
+            font-size: 10pt;
+        }
+
+        .roadmap-table td {
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            font-size: 9pt;
+        }
+
         .risk-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-        }
-        
-        .risk-table th {
-            background: #f9fafb;
-            color: #374151;
-            padding: 12px 8px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 13px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-        
-        .risk-table td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #f3f4f6;
-            font-size: 14px;
-        }
-        
-        .severity-severe {
-            color: #dc2626;
-            font-weight: bold;
-        }
-        
-        .severity-high {
-            color: #ea580c;
-            font-weight: bold;
-        }
-        
-        .severity-moderate {
-            color: #f59e0b;
-            font-weight: bold;
-        }
-        
-        .mini-chart {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f9fafb;
-            border-radius: 8px;
-        }
-        
-        .mini-chart-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 10px;
-        }
-        
-        .disparity-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .disparity-item:last-child {
-            border-bottom: none;
-        }
-        
-        .disparity-label {
-            font-size: 13px;
-            color: #4b5563;
-        }
-        
-        .disparity-value {
-            font-size: 14px;
-            font-weight: bold;
-            color: #dc2626;
-        }
-        
-        /* Bottom Section */
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            padding: 0 25px 25px;
-        }
-        
-        .savings-section, .policy-section {
-            background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        
-        .savings-bars {
-            margin-top: 15px;
-        }
-        
-        .savings-item {
             margin-bottom: 15px;
         }
-        
-        .savings-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        
-        .savings-scenario {
-            color: #4b5563;
-        }
-        
-        .savings-amount {
-            font-weight: bold;
-            color: #059669;
-        }
-        
-        .savings-bar {
-            height: 30px;
-            background: #f3f4f6;
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .savings-fill {
-            height: 100%;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            padding-left: 10px;
+
+        .risk-table th {
+            background: #34495e;
             color: white;
-            font-size: 12px;
-            font-weight: bold;
-            transition: width 0.5s ease;
+            padding: 8px;
+            text-align: left;
+            font-size: 10pt;
         }
-        
-        .fill-conservative {
-            background: #059669;
-            width: 57%;
+
+        .risk-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 9pt;
         }
-        
-        .fill-moderate {
-            background: #f97316;
-            width: 72%;
-        }
-        
-        .fill-aggressive {
-            background: #dc2626;
-            width: 100%;
-        }
-        
-        .policy-grid {
+
+        .specialty-list, .feature-list {
             display: grid;
-            gap: 12px;
-            margin-top: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            font-size: 9pt;
         }
-        
-        .policy-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: #f9fafb;
-            border-radius: 8px;
-            border-left: 4px solid #f97316;
+
+        .specialty-item, .feature-item {
+            padding: 5px 10px;
+            background: #f8f9fa;
+            border-radius: 3px;
         }
-        
-        .policy-icon {
-            width: 36px;
-            height: 36px;
-            background: #f97316;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .kpi-box {
+            background: #ecf0f1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .kpi-value {
+            font-size: 16pt;
             font-weight: bold;
-            font-size: 18px;
-            flex-shrink: 0;
+            color: #27ae60;
         }
-        
-        .policy-content {
-            flex: 1;
-        }
-        
-        .policy-name {
-            font-weight: 600;
-            color: #1f2937;
-            font-size: 14px;
-        }
-        
-        .policy-desc {
-            font-size: 12px;
-            color: #6b7280;
+
+        .kpi-label {
+            font-size: 8pt;
+            color: #7f8c8d;
             margin-top: 2px;
         }
-        
-        .caption {
-            margin-top: 12px;
-            font-size: 13px;
-            color: #6b7280;
-            text-align: center;
-            font-style: italic;
+
+        .validation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
         }
-        
-        /* Visual Elements */
-        .validation-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #059669;
+
+        .validation-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .validation-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 10pt;
+        }
+
+        .validation-item {
+            font-size: 9pt;
+            margin: 3px 0;
+            color: #34495e;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .performance-table th {
+            background: #3498db;
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+            padding: 8px;
+            text-align: left;
+            font-size: 10pt;
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .bottom-section {
-                grid-template-columns: 1fr;
-            }
+
+        .performance-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 9pt;
         }
-        
-        @media (max-width: 768px) {
-            .scorecard {
-                flex-direction: column;
-            }
-            
-            .score-item {
-                width: 100%;
-            }
-        }
-        
-        .data-footer {
-            background: #f9fafb;
-            padding: 15px 25px;
-            border-top: 1px solid #e5e7eb;
+
+        .impact-section {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 12px;
-            color: #6b7280;
-            font-style: italic;
+            margin-top: 15px;
+        }
+
+        .impact-title {
+            font-size: 12pt;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .impact-value {
+            font-size: 20pt;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .impact-description {
+            font-size: 10pt;
+            opacity: 0.95;
         }
     </style>
 </head>
 <body>
-    <!-- Website Navigation Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="index.html" class="site-logo">Healthcare Analytics</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#projects">Projects</a></li>
-                    <li><a href="dashboards.html" class="active">Dashboards</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <!-- PAGE 1: PROJECT OVERVIEW & ANALYSIS -->
+    <div class="page">
+        <div class="header">
+            <h1>Medicare Program Integrity and Healthcare Equity Analytics Framework</h1>
+            <p class="subtitle">National-scale analytical framework identifying high-risk Medicare counties through machine-learning-based healthcare equity modeling to enhance program integrity and reduce systemic inefficiencies</p>
         </div>
-    </header>
-    
-    <!-- Dashboard Navigation -->
-    <div class="dashboard-nav">
-        <div class="dashboard-nav-container">
-            <a href="dashboards.html" class="back-button">
-                ← Back to All Dashboards
-            </a>
-            <span class="dashboard-counter">Dashboard 8 of 8</span>
-            <div class="nav-buttons">
-                <a href="dashboard7.html" class="nav-button prev">← Previous</a>
-                <a href="dashboards.html" class="nav-button complete">✓ View All Dashboards</a>
+        
+        <div class="section-header">THE HEALTHCARE DISPARITIES CRISIS</div>
+        <div class="metrics-container">
+            <div class="metric-box">
+                <div class="metric-value">$1 Trillion+</div>
+                <div class="metric-label">Annual Medicare and Medicaid Expenditures</div>
             </div>
+            <div class="metric-box">
+                <div class="metric-value">20.4 Million</div>
+                <div class="metric-label">Americans Lacking Adequate Healthcare Access</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">1,704 Counties</div>
+                <div class="metric-label">Face Severe Provider Shortages (HPSA >15)</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">35% Higher</div>
+                <div class="metric-label">Emergency Room Utilization in Underserved Areas</div>
+            </div>
+        </div>
+        
+        <div class="section-header">IMPLEMENTATION ROADMAP</div>
+        <table class="roadmap-table">
+            <tr>
+                <th>Phase</th>
+                <th>Timeline</th>
+                <th>Scope</th>
+                <th>Financial Impact</th>
+            </tr>
+            <tr>
+                <td><strong>Phase I</strong></td>
+                <td>Years 1-2</td>
+                <td>Pilot Expansion: Medicare Advantage integration, sub-county analysis, SDOH integration</td>
+                <td>$10-15B annually (subset of validated $20.8B baseline)</td>
+            </tr>
+            <tr>
+                <td><strong>Phase II</strong></td>
+                <td>Years 3-5</td>
+                <td>National Rollout: All 3,198 counties, workforce data integration, Medicaid pilots in 5 states</td>
+                <td>$26.5B annually (moderate scenario)</td>
+            </tr>
+            <tr>
+                <td><strong>Phase III</strong></td>
+                <td>Years 5+</td>
+                <td>Cross-Program Integration: Medicare, Medicaid, VA, TRICARE via real-time APIs</td>
+                <td>$36.7B annually ($367B over decade)</td>
+            </tr>
+        </table>
+        
+        <div class="section-header">GEOGRAPHIC RISK DISTRIBUTION</div>
+        <table class="risk-table">
+            <tr>
+                <th>Region</th>
+                <th>High-Risk Counties</th>
+                <th>Vulnerability Score</th>
+                <th>ED Utilization Rate</th>
+            </tr>
+            <tr>
+                <td>Southeast</td>
+                <td>35% of all high-risk</td>
+                <td>Data Not Available</td>
+                <td>Data Not Available</td>
+            </tr>
+            <tr>
+                <td>Rural Counties</td>
+                <td>Data Not Available</td>
+                <td>78.5</td>
+                <td>812 per 1,000</td>
+            </tr>
+            <tr>
+                <td>Urban Counties</td>
+                <td>Data Not Available</td>
+                <td>58.2</td>
+                <td>706 per 1,000</td>
+            </tr>
+            <tr>
+                <td>Total High-Risk</td>
+                <td>255 counties (8%)</td>
+                <td>Data Not Available</td>
+                <td>Data Not Available</td>
+            </tr>
+        </table>
+        
+        <div class="section-header">HIGH-RISK INDICATORS BY CATEGORY</div>
+        <div class="specialty-list">
+            <div class="specialty-item">• Per-beneficiary spending variation: $8,295 to $13,644 (64%)</div>
+            <div class="specialty-item">• High-spending regions: 23% higher mortality rates</div>
+            <div class="specialty-item">• Spending-quality correlation: r=0.12 (negligible)</div>
+            <div class="specialty-item">• Counties >40% minority: $1,247 less per beneficiary</div>
+            <div class="specialty-item">• Dual-eligible ED utilization: 15% higher</div>
+            <div class="specialty-item">• Preventable hospitalizations: 20% higher in shortage areas</div>
+        </div>
+        
+        <div class="section-header">TOP 9 RISK INDICATORS (FEATURE IMPORTANCE)</div>
+        <div class="feature-list">
+            <div class="feature-item">1. Vulnerability Score: 36.3%</div>
+            <div class="feature-item">2. Emergency Department Utilization: 24.1%</div>
+            <div class="feature-item">3. Hospital Readmission Rate: 17.7%</div>
+            <div class="feature-item">4. Dual Eligibility Percentage: 10.7%</div>
+            <div class="feature-item">5. Rural-Urban Classification: 5.3%</div>
+            <div class="feature-item">6. Provider Density: 3.2%</div>
+            <div class="feature-item">7. Preventable Hospitalizations: 1.8%</div>
+            <div class="feature-item">8. Standardized Spending: 0.7%</div>
+            <div class="feature-item">9. Demographic Diversity: 0.2%</div>
         </div>
     </div>
     
-    <!-- Dashboard Content -->
-    <div class="main-dashboard-container">
-        <div class="dashboard-container">
-            <!-- Header Scorecard -->
-            <div class="header-strip">
-                <h1 class="project-title">Medicare Program Integrity and Healthcare Equity Analytics Framework Dashboard</h1>
-                <div class="scorecard">
-                    <div class="score-item">
-                        <div class="score-value">$20.8-36.7B</div>
-                        <div class="score-label">Annual Savings Potential</div>
-                    </div>
-                    <div class="score-item">
-                        <div class="score-value">2.5M</div>
-                        <div class="score-label">High-Risk Beneficiaries</div>
-                    </div>
-                    <div class="score-item">
-                        <div class="score-value">98.4%</div>
-                        <div class="score-label">HRSA Validation Accuracy</div>
-                    </div>
-                    <div class="score-item">
-                        <div class="score-value">3,198</div>
-                        <div class="score-label">Counties Analyzed</div>
-                    </div>
-                </div>
-                <div class="tagline">"Systemic inefficiencies + inequities = billions lost annually. This framework corrects both."</div>
+    <!-- PAGE 2: MODEL VALIDATION & RESULTS -->
+    <div class="page">
+        <div class="header">
+            <h1>MODEL VALIDATION & PERFORMANCE RESULTS</h1>
+            <p class="subtitle">Comprehensive validation against federal benchmarks with Random Forest classifier achieving exceptional performance metrics</p>
+        </div>
+        
+        <div class="section-header">KEY PERFORMANCE INDICATORS</div>
+        <div class="kpi-container">
+            <div class="kpi-box">
+                <div class="kpi-value">99.1%</div>
+                <div class="kpi-label">Overall Accuracy</div>
             </div>
-            
-            <!-- Main Content Grid -->
-            <div class="main-content">
-                <!-- Map Section -->
-                <div class="map-section">
-                    <h2 class="section-title">U.S. Healthcare Equity Index Map</h2>
-                    <div class="map-container">
-                        <img src="Project8_Fig_3.png" alt="Healthcare Equity Index Map">
-                        <div class="map-callout callout-top">Utah & Rhode Island: Best Performing (Grade A)</div>
-                        <div class="map-callout callout-bottom">Mississippi & DC: Worst Performing (Grade F)</div>
-                    </div>
-                    <div class="map-caption">Equity Index highlights 255 high-risk counties, clustered in Southeast & rural America.</div>
-                </div>
-                
-                <!-- Risk & Shortage Table -->
-                <div class="risk-section">
-                    <h2 class="section-title">Provider Shortage Severity Analysis</h2>
-                    <table class="risk-table">
-                        <thead>
-                            <tr>
-                                <th>Severity</th>
-                                <th>Counties</th>
-                                <th>Beneficiaries</th>
-                                <th>Excess $/Capita</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="severity-severe">Severe (>15)</td>
-                                <td>1,704</td>
-                                <td>20.4 M</td>
-                                <td>$716</td>
-                            </tr>
-                            <tr>
-                                <td class="severity-high">High (10-15)</td>
-                                <td>389</td>
-                                <td>5.1 M</td>
-                                <td>$623</td>
-                            </tr>
-                            <tr>
-                                <td class="severity-moderate">Moderate (5-10)</td>
-                                <td>634</td>
-                                <td>3.2 M</td>
-                                <td>$412</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div class="mini-chart">
-                        <div class="mini-chart-title">Rural vs Urban Disparities</div>
-                        <div class="disparity-item">
-                            <span class="disparity-label">Flu Vaccination Gap</span>
-                            <span class="disparity-value">-8.2%</span>
-                        </div>
-                        <div class="disparity-item">
-                            <span class="disparity-label">Diabetes Care Gap</span>
-                            <span class="disparity-value">-15%</span>
-                        </div>
-                        <div class="disparity-item">
-                            <span class="disparity-label">Osteoporosis Screening Gap</span>
-                            <span class="disparity-value">-7%</span>
-                        </div>
-                        <div class="disparity-item">
-                            <span class="disparity-label">ED Utilization Excess</span>
-                            <span class="disparity-value">+24.1%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="caption">20.4 M beneficiaries live in severe shortage areas → higher costs, poorer outcomes.</div>
-                </div>
+            <div class="kpi-box">
+                <div class="kpi-value">0.97</div>
+                <div class="kpi-label">Precision</div>
             </div>
-            
-            <!-- Bottom Section -->
-            <div class="bottom-section">
-                <!-- Savings Scenarios -->
-                <div class="savings-section">
-                    <h2 class="section-title">Federal Savings Scenarios</h2>
-                    <div class="savings-bars">
-                        <div class="savings-item">
-                            <div class="savings-label">
-                                <span class="savings-scenario">Conservative (12-18 months)</span>
-                                <span class="savings-amount">$20.8B</span>
-                            </div>
-                            <div class="savings-bar">
-                                <div class="savings-fill fill-conservative">$20.8B • ROI: 461%</div>
-                            </div>
-                        </div>
-                        <div class="savings-item">
-                            <div class="savings-label">
-                                <span class="savings-scenario">Moderate (24-36 months)</span>
-                                <span class="savings-amount">$26.5B</span>
-                            </div>
-                            <div class="savings-bar">
-                                <div class="savings-fill fill-moderate">$26.5B • ROI: 347%</div>
-                            </div>
-                        </div>
-                        <div class="savings-item">
-                            <div class="savings-label">
-                                <span class="savings-scenario">Aggressive (36-60 months)</span>
-                                <span class="savings-amount">$36.7B</span>
-                            </div>
-                            <div class="savings-bar">
-                                <div class="savings-fill fill-aggressive">$36.7B • ROI: 178%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption">Savings achieved within 12–60 months, ROI >170% in all cases.</div>
-                </div>
-                
-                <!-- Policy Alignment -->
-                <div class="policy-section">
-                    <h2 class="section-title">Federal Policy Alignment</h2>
-                    <div class="policy-grid">
-                        <div class="policy-item">
-                            <div class="policy-icon">M</div>
-                            <div class="policy-content">
-                                <div class="policy-name">MACRA 2015</div>
-                                <div class="policy-desc">Enables value-based payment reform</div>
-                            </div>
-                        </div>
-                        <div class="policy-item">
-                            <div class="policy-icon">EO</div>
-                            <div class="policy-content">
-                                <div class="policy-name">Executive Order 13985</div>
-                                <div class="policy-desc">Federal mandate for racial equity</div>
-                            </div>
-                        </div>
-                        <div class="policy-item">
-                            <div class="policy-icon">C</div>
-                            <div class="policy-content">
-                                <div class="policy-name">CMS Program Integrity Plan 2022-26</div>
-                                <div class="policy-desc">Reduces improper payments</div>
-                            </div>
-                        </div>
-                        <div class="policy-item">
-                            <div class="policy-icon">P</div>
-                            <div class="policy-content">
-                                <div class="policy-name">Payment Integrity Act 2019</div>
-                                <div class="policy-desc">County-level spending monitoring</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="caption">Directly aligned with federal equity and efficiency mandates.</div>
-                </div>
+            <div class="kpi-box">
+                <div class="kpi-value">0.95</div>
+                <div class="kpi-label">Recall</div>
             </div>
-            
-            <!-- Data Source Footer -->
-            <div class="data-footer">
-                Source: CMS Medicare Geographic Variation (2019-2023), HRSA Health Professional Shortage Area Database & Area Health Resources File, U.S. Census American Community Survey 5-Year Estimates
+            <div class="kpi-box">
+                <div class="kpi-value">0.96</div>
+                <div class="kpi-label">F1 Score</div>
             </div>
-            
-            <div class="validation-badge">✓ 98.4% HRSA Validated</div>
+            <div class="kpi-box">
+                <div class="kpi-value">0.998</div>
+                <div class="kpi-label">ROC-AUC</div>
+            </div>
+        </div>
+        
+        <div class="section-header">VALIDATION METRICS</div>
+        <div class="validation-grid">
+            <div class="validation-box">
+                <div class="validation-title">Federal Benchmark Concordance</div>
+                <div class="validation-item">• HRSA HPSA Designations: 98.4% concordance</div>
+                <div class="validation-item">• CMS Regional Variations: 85.7% alignment</div>
+                <div class="validation-item">• MedPAC Geographic Analysis: 91% consistency</div>
+                <div class="validation-item">• Temporal Stability (2019-2022): r=0.94</div>
+            </div>
+            <div class="validation-box">
+                <div class="validation-title">Healthcare Equity Index Composition</div>
+                <div class="validation-item">• Access Component: 30%</div>
+                <div class="validation-item">• Quality Component: 30%</div>
+                <div class="validation-item">• Equity Component: 40%</div>
+                <div class="validation-item">• Bootstrap Validation: 1,000 iterations</div>
+            </div>
+        </div>
+        
+        <div class="section-header">MODEL COMPARISON RESULTS</div>
+        <table class="performance-table">
+            <tr>
+                <th>Metric</th>
+                <th>Random Forest</th>
+                <th>Federal Baseline</th>
+                <th>Improvement</th>
+            </tr>
+            <tr>
+                <td>Risk Detection Accuracy</td>
+                <td>99.1%</td>
+                <td>~70% (manual review)</td>
+                <td>29 percentage points</td>
+            </tr>
+            <tr>
+                <td>Processing Time</td>
+                <td>18.4 hours</td>
+                <td>Months</td>
+                <td>60x faster</td>
+            </tr>
+            <tr>
+                <td>County Coverage</td>
+                <td>All 3,198 counties</td>
+                <td>Regional sampling</td>
+                <td>100% coverage</td>
+            </tr>
+            <tr>
+                <td>Data Completeness</td>
+                <td>99.7%</td>
+                <td>Not specified</td>
+                <td><0.3% missing data</td>
+            </tr>
+        </table>
+        
+        <div class="section-header">FINANCIAL IMPACT PROJECTIONS</div>
+        <table class="risk-table">
+            <tr>
+                <th>Implementation Phase</th>
+                <th>Federal Investment</th>
+                <th>Annual Savings</th>
+                <th>ROI</th>
+                <th>Payback Period</th>
+            </tr>
+            <tr>
+                <td>Phase 1 (Immediate)</td>
+                <td>$236 million</td>
+                <td>$20.8 billion</td>
+                <td>461%</td>
+                <td>2.2 months</td>
+            </tr>
+            <tr>
+                <td>Phase 2 (Scaled)</td>
+                <td>$2.2 billion</td>
+                <td>$26.5 billion</td>
+                <td>347%</td>
+                <td>3.5 months</td>
+            </tr>
+            <tr>
+                <td>Phase 3 (Full)</td>
+                <td>$5.9 billion</td>
+                <td>$36.7 billion</td>
+                <td>178%</td>
+                <td>6.3 months</td>
+            </tr>
+            <tr>
+                <td>5-Year Infrastructure Cost</td>
+                <td>$150-200M</td>
+                <td>$100B+ cumulative</td>
+                <td>30:1</td>
+                <td>Year 5</td>
+            </tr>
+        </table>
+        
+        <div class="section-header">SYSTEM SPECIFICATIONS</div>
+        <div class="validation-grid">
+            <div class="validation-box">
+                <div class="validation-title">Dataset Coverage</div>
+                <div class="validation-item">• Beneficiaries Analyzed: 29.5 million</div>
+                <div class="validation-item">• Counties Examined: 3,198 (100% U.S.)</div>
+                <div class="validation-item">• County-Years: 12,792 (2019-2022)</div>
+                <div class="validation-item">• Random Seed: 42 (reproducibility)</div>
+            </div>
+            <div class="validation-box">
+                <div class="validation-title">Policy Alignment</div>
+                <div class="validation-item">• MACRA (2015): MIPS scoring integration</div>
+                <div class="validation-item">• 21st Century Cures Act: FHIR/HL7 standards</div>
+                <div class="validation-item">• Executive Order 13985: Equity targeting</div>
+                <div class="validation-item">• CMS Program Integrity Plan 2022-2026</div>
+            </div>
+        </div>
+        
+        <div class="impact-section">
+            <div class="impact-title">PROJECTED NATIONAL IMPACT</div>
+            <div class="impact-value">$208B - $367B</div>
+            <p class="impact-description">10-year cumulative savings while improving access for 20+ million underserved Americans. Medicare Trust Fund solvency extended by 1-2 years.</p>
         </div>
     </div>
 </body>
