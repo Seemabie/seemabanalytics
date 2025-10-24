@@ -248,28 +248,35 @@
         }
 
         .impact-title {
-            font-size: 12pt;
-            font-weight: 600;
+            font-size: 14pt;
+            font-weight: 700;
             margin-bottom: 10px;
-            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .impact-value {
             font-size: 28pt;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
 
         .impact-description {
             font-size: 10pt;
-            opacity: 0.95;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .footnote {
+            font-size: 8pt;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+            padding: 5px 0;
         }
     </style>
 </head>
 <body>
-    <!-- PAGE 1: PROJECT OVERVIEW & ANALYSIS -->
+    <!-- PAGE 1: OVERVIEW -->
     <div class="page">
         <div class="header">
             <h1>Medicare Part D Opioid Prescribing Integrity Analytics</h1>
@@ -417,7 +424,7 @@
                 <div class="kpi-label">Method Concordance</div>
             </div>
             <div class="kpi-box">
-                <div class="kpi-value">63%</div>
+                <div class="kpi-value">63%*</div>
                 <div class="kpi-label">2-Year Persistence</div>
             </div>
             <div class="kpi-box">
@@ -433,6 +440,7 @@
                 <div class="kpi-label">Max ROI Potential</div>
             </div>
         </div>
+        <p class="footnote">*Projected from published literature; not directly observed in this single-year analysis</p>
         
         <div class="section-header">VALIDATION METRICS</div>
         <div class="validation-grid">
@@ -496,44 +504,45 @@
         <table class="risk-table">
             <thead>
                 <tr>
-                    <th>Scenario</th>
+                    <th>Implementation Scenario</th>
+                    <th>Target Population</th>
                     <th>Identified Excess</th>
-                    <th>Recovery Rate</th>
-                    <th>Annual Recovery</th>
-                    <th>ROI</th>
+                    <th>Estimated Annual Recovery (10-20%)</th>
+                    <th>Return on Investment</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Conservative (10%)</td>
-                    <td>$1.22 billion</td>
-                    <td>10%</td>
-                    <td>$122 million</td>
+                    <td>Conservative</td>
+                    <td>Top 100 prescribers</td>
+                    <td>$46.4 million</td>
+                    <td>$4.6M - $9.2M</td>
                     <td>12:1</td>
                 </tr>
                 <tr>
-                    <td>Moderate (15%)</td>
-                    <td>$1.22 billion</td>
-                    <td>15%</td>
-                    <td>$183 million</td>
+                    <td>Moderate</td>
+                    <td>Top 5% (2,500 prescribers)</td>
+                    <td>$584 million</td>
+                    <td>$58.4M - $116.8M</td>
                     <td>28:1</td>
                 </tr>
                 <tr>
-                    <td>Optimistic (20%)</td>
+                    <td>Comprehensive</td>
+                    <td>All anomalies (51,660)</td>
                     <td>$1.22 billion</td>
-                    <td>20%</td>
-                    <td>$244 million</td>
+                    <td>$122M - $244M</td>
                     <td>45:1</td>
                 </tr>
                 <tr>
-                    <td>10-Year Cumulative</td>
-                    <td>$12.2 billion</td>
-                    <td>10-20%</td>
-                    <td>$1.2-2.4 billion</td>
-                    <td>Sustained</td>
+                    <td>National Scale</td>
+                    <td>Medicare + Commercial</td>
+                    <td>$2.57 billion</td>
+                    <td>$257M - $514M</td>
+                    <td>62:1</td>
                 </tr>
             </tbody>
         </table>
+        <p class="footnote">Note: Recovery rates based on historical 10-20% recovery documented in Department of Justice healthcare fraud enforcement actions. ROI calculations based on implementation costs relative to recoverable amounts.</p>
         
         <div class="section-header">SYSTEM SPECIFICATIONS</div>
         <div class="validation-grid">
