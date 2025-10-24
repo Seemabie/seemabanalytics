@@ -195,62 +195,9 @@
 
         .figure-title {
             margin-top: 1rem;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .implementation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .implementation-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .implementation-table td {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .implementation-table tr:hover {
-            background: #f8f9fa;
-        }
-
-        .implementation-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 2px solid #e0e0e0;
-        }
-
-        .nav-btn {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            color: #666;
+            font-style: italic;
+            font-size: 1rem;
         }
 
         .tech-stack {
@@ -261,25 +208,89 @@
         }
 
         .tech-badge {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            color: #667eea;
-            font-weight: 500;
-            font-size: 0.95rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .implementation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .implementation-table thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .implementation-table th,
+        .implementation-table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .implementation-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .implementation-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
-            
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
             .key-metrics {
                 grid-template-columns: 1fr;
             }
-            
-            nav ul {
-                display: none;
+
+            .implementation-table {
+                font-size: 0.85rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -304,7 +315,7 @@
             
             <div class="key-metrics">
                 <div class="metric-card">
-                    <div class="metric-value">72.5%</div>
+                    <div class="metric-value">72.46%</div>
                     <div class="metric-label">AUC Score (Temporal Validation)</div>
                 </div>
                 <div class="metric-card">
@@ -312,8 +323,8 @@
                     <div class="metric-label">Savings Over 5 Years</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">69.3M</div>
-                    <div class="metric-label">Beneficiaries Protected</div>
+                    <div class="metric-value">54M</div>
+                    <div class="metric-label">Part D Enrollees</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">33x</div>
@@ -323,10 +334,10 @@
 
             <section class="section">
                 <h2>Executive Summary</h2>
-                <p>The United States Medicare program loses an estimated $60-90 billion annually to fraud, waste, and abuse, representing approximately 10% of total Medicare spending. This research presents a sophisticated temporal machine learning framework that addresses this critical national challenge by identifying high-risk providers warranting investigation before improper payments occur, fundamentally shifting the paradigm from reactive recovery to proactive prevention.</p>
+                <p>The United States Medicare program reported over $50 billion in annual improper payments across Medicare Fee-for-Service, Part C, and Part D programs in fiscal year 2024. This research presents a sophisticated temporal machine learning framework that addresses this critical national challenge by identifying high-risk providers warranting investigation before improper payments occur, fundamentally shifting the paradigm from reactive recovery to proactive prevention.</p>
                 
                 <div class="highlight-box">
-                    <p><strong>Key Achievement:</strong> The system processes over 26 gigabytes of federal Medicare data covering 1.38 million healthcare providers to identify patterns indicative of compliance risks and anomalous prescribing behavior, achieving 72.5% accuracy in temporal validation while identifying 26 OIG exclusion cases annually within the top 1,000 risk-scored providers.</p>
+                    <p><strong>Key Achievement:</strong> The system processes over 26 gigabytes of federal Medicare data covering 1.38 million healthcare providers to identify patterns indicative of compliance risks and anomalous prescribing behavior, achieving 72.46% accuracy in temporal validation while identifying 26 OIG exclusion cases annually within the top 1,000 risk-scored providers.</p>
                 </div>
                 
                 <p>Through rigorous temporal validation—training exclusively on historical data and testing on future periods—this framework demonstrates measurable financial impact with projected savings of $2.6 million annually from investigating just 0.07% of providers. The system's precision at the highest risk tier reaches 3.3%, representing a 33-fold improvement over random selection.</p>
@@ -339,9 +350,9 @@
                 <p>This research integrates five authoritative federal datasets spanning 2022-2023:</p>
                 <ul>
                     <li><strong>Medicare Part D Prescribers:</strong> 1.38 million providers with 84 variables including claims, costs, and beneficiary demographics</li>
-                    <li><strong>Open Payments Database:</strong> 919,579 providers with $2.7 billion in industry payments</li>
+                    <li><strong>Open Payments Database:</strong> 919,579 providers with approximately $12.6 billion in annual industry payments</li>
                     <li><strong>LEIE Exclusions:</strong> 81,914 excluded individuals/entities for exclusion validation</li>
-                    <li><strong>Medicare Part D by Drug:</strong> 25.8 million provider-drug combinations</li>
+                    <li><strong>Medicare Part D by Drug:</strong> Approximately 26 million provider-drug combinations</li>
                     <li><strong>Medicare Part D by Geography:</strong> 115,396 geographic-drug combinations for peer benchmarking</li>
                 </ul>
 
@@ -354,7 +365,7 @@
                     <span class="tech-badge">Ensemble Methods</span>
                 </div>
                 
-                <p>Three complementary algorithms are implemented: Logistic Regression for baseline establishment (AUC: 0.613), Random Forest for non-linear pattern detection (AUC: 0.720), and XGBoost for gradient boosting optimization (AUC: 0.730). The final ensemble model combines predictions using weighted voting with a 2:1 XGBoost to Random Forest ratio.</p>
+                <p>Three complementary algorithms are implemented: Logistic Regression for baseline establishment (AUC: 0.613), Random Forest for non-linear pattern detection (AUC: 0.705), and XGBoost for gradient boosting optimization (AUC: 0.724). The final ensemble model combines predictions using weighted voting with a 2:1 XGBoost to Random Forest ratio.</p>
             </section>
 
             <section class="section">
@@ -386,7 +397,7 @@
                 
                 <h3>Model Performance</h3>
                 <ul>
-                    <li>Area Under Curve (AUC): 0.725</li>
+                    <li>Area Under Curve (AUC): 0.7246</li>
                     <li>Precision at Top 1%: 3.3% (33x improvement over baseline)</li>
                     <li>Recall at Top 1%: 7.9%</li>
                     <li>F1 Score: 0.0711</li>
@@ -422,7 +433,7 @@
                             <td>Aggressive</td>
                             <td>Top 2,000 providers</td>
                             <td>$4.2 million</td>
-                            <td>$17.1 million</td>
+                            <td>$17.2 million</td>
                             <td>$2,100 per investigation</td>
                         </tr>
                         <tr>
