@@ -200,77 +200,85 @@
             background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
             color: white;
             padding: 1rem 2rem;
-            border-radius: 50px;
+            border-radius: 8px;
             text-decoration: none;
+            font-weight: 500;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .highlight-box {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-left: 4px solid #4A90E2;
             padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-radius: 4px;
         }
         
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
+        .highlight-box p {
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
         }
         
         .drug-list {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
+            margin: 2rem 0;
         }
         
         .drug-item {
             display: grid;
-            grid-template-columns: 50px 200px 100px 100px 120px;
-            padding: 0.8rem;
+            grid-template-columns: 0.5fr 2fr 1fr 1fr 1.5fr;
+            gap: 1rem;
+            padding: 1rem;
             border-bottom: 1px solid #e0e6ed;
-            font-size: 0.9rem;
             align-items: center;
         }
         
         .drug-header {
-            font-weight: bold;
-            background: #e0e6ed;
-            border-radius: 4px;
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .drug-item:hover:not(.drug-header) {
+            background: #f8f9fa;
         }
         
         @media (max-width: 768px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .content {
-                padding: 2rem 1.5rem;
-            }
-            
             .drug-item {
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
             }
+            
+            .drug-header {
+                display: none;
+            }
+            
+            .drug-item span:before {
+                font-weight: 600;
+                display: inline-block;
+                width: 120px;
+            }
+            
+            .drug-item span:nth-child(1):before { content: "Rank: "; }
+            .drug-item span:nth-child(2):before { content: "Drug: "; }
+            .drug-item span:nth-child(3):before { content: "HCPCS: "; }
+            .drug-item span:nth-child(4):before { content: "Score: "; }
+            .drug-item span:nth-child(5):before { content: "Impact: "; }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="container">
-            <a href="index.html" style="font-size: 1.2rem; font-weight: bold;">Seemab Analytics</a>
+            <div><strong>Seemab Analytics</strong></div>
             <a href="index.html">← Back to Projects</a>
         </div>
     </nav>
@@ -303,16 +311,14 @@
                 <h2>Executive Summary</h2>
                 <p>The Department of Health and Human Services Office of Inspector General reported $7.13 billion in expected recoveries and receivables in fiscal year 2024, highlighting the significant impact of healthcare fraud and improper payments. This research presents a comprehensive anomaly detection & program integrity system specifically targeting Medicare Part B injectable drug waste, a critical area of vulnerability following the implementation of CMS JW modifier requirements in 2017 and JZ modifier mandates in July 2023.</p>
                 
-                <div class="highlight-box">
-                    <p><strong>Key Achievement:</strong> Through advanced statistical analysis and machine learning techniques applied to official CMS public datasets, this system identifies $189.7 million in potential anomalous drug waste across 824 pharmaceutical codes analyzed with contextualization from 1.2 million provider records, achieving an 81.8% F1-score with a remarkable 1,328-fold return on investment. The concentration of 85.9% of waste dollars within just 11.2% of drugs reveals systematic anomaly patterns amenable to targeted intervention.</p>
-                </div>
+                <p><strong>Key Achievement:</strong> Through advanced statistical analysis and machine learning techniques applied to official CMS public datasets, this system identifies $189.7 million in potential anomalous drug waste across 824 pharmaceutical codes analyzed with contextualization from 1.2 million provider records, achieving an 81.8% F1-score with a remarkable 1,328-fold return on investment. The concentration of 85.9% of waste dollars within just 11.2% of drugs reveals systematic anomaly patterns amenable to targeted intervention.</p>
             </section>
             
             <section>
                 <h2>Medicare Waste Anomaly Risk Index Distribution</h2>
                 
                 <div class="figure-container">
-                    <img src="Project3_Fig_5.png" alt="Distribution of Anomaly Risk Scores Across Medicare Part B Drugs">
+                    <img src="Project3_Fig_1.png" alt="Distribution of Anomaly Risk Scores Across Medicare Part B Drugs">
                 </div>
                 
                 <p>The novel MWARI successfully stratifies 824 drugs into risk categories with strong discrimination:</p>
@@ -329,7 +335,7 @@
                 <h2>Temporal Analysis Framework (2017-2024 Capability)</h2>
                 
                 <div class="figure-container">
-                    <img src="Project3_Fig_1.png" alt="Temporal Trends in Medicare Drug Waste and Anomaly Detection">
+                    <img src="Project3_Fig_5.png" alt="Temporal Trends in Medicare Drug Waste and Anomaly Detection">
                 </div>
                 
                 <p>The framework is designed to analyze temporal patterns across the full JW modifier (2017) and JZ modifier (2023) implementation periods. Primary analysis conducted on 2023 CMS data identified $1.87 billion in total drug waste. The framework demonstrates capability for longitudinal pattern detection across multiple policy implementation periods.</p>
@@ -510,12 +516,6 @@
             
             <section>
                 <h2>Policy Implications</h2>
-                
-                <h3>Federal Alignment</h3>
-                <div class="highlight-box">
-                    <p><strong>CMS Center for Program Integrity Strategic Plan 2023-2027:</strong> The MWARI framework operationalizes Goal 2.3 by providing validated algorithms achieving 81.8% F1-score, exceeding the 75% target threshold. The system's $132.8 million annual recovery contributes 18% toward the plan's $750 million recovery goal.</p>
-                    <p><strong>Inflation Reduction Act:</strong> By quantifying manufacturer-specific waste patterns, this research enables Section 11001 implementation, potentially generating $67 million in manufacturer refunds for excessive waste rates exceeding 10% on high-cost biologics.</p>
-                </div>
                 
                 <h3>Immediate Policy Recommendations</h3>
                 <ul>
