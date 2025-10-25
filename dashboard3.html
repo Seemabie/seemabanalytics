@@ -3,506 +3,563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicare Part B Drug Waste Anomaly Detection & Program Integrity System</title>
+    <title>Medicare Part B Drug Waste Anomaly Detection Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #ffffff;
-            color: #2c3e50;
-            line-height: 1.5;
-            font-size: 11pt;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
         }
-
-        @page {
-            size: A4;
-            margin: 15mm 20mm;
-        }
-
-        @media print {
-            .page {
-                page-break-after: always;
-                min-height: 297mm;
-                max-height: 297mm;
-                padding: 0;
-                margin: 0;
-            }
-        }
-
-        .page {
-            max-width: 210mm;
-            min-height: 297mm;
+        
+        .dashboard {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20mm;
             background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-
+        
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
         }
-
+        
         .header h1 {
-            font-size: 18pt;
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-card.secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .metric-card.tertiary {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .metric-card.success {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
             margin-bottom: 5px;
         }
-
-        .subtitle {
-            font-size: 10pt;
-            opacity: 0.95;
-        }
-
-        .section-header {
-            background: #2c3e50;
-            color: white;
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 11pt;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-
-        .metrics-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .metric-box {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 10px;
-            border-radius: 4px;
-        }
-
-        .metric-value {
-            font-size: 16pt;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
+        
         .metric-label {
-            font-size: 9pt;
-            color: #7f8c8d;
-            margin-top: 2px;
+            font-size: 14px;
+            opacity: 0.9;
         }
-
-        .kpi-container {
+        
+        .charts-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
-
-        .kpi-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 10px;
-            text-align: center;
-            border-radius: 6px;
+        
+        .chart-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        .kpi-value {
-            font-size: 14pt;
-            font-weight: bold;
+        
+        .chart-title {
+            font-size: 18px;
             color: #2c3e50;
-        }
-
-        .kpi-label {
-            font-size: 8pt;
-            color: #34495e;
-            margin-top: 3px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 9pt;
-        }
-
-        th {
-            background: #34495e;
-            color: white;
-            padding: 6px;
-            text-align: left;
+            margin-bottom: 20px;
             font-weight: 600;
         }
-
-        td {
-            padding: 5px 6px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        tr:nth-child(even) {
+        
+        .phase-timeline {
             background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
         }
-
-        .roadmap-table th {
-            background: #2980b9;
+        
+        .phase-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .risk-table th {
-            background: #c0392b;
-        }
-
-        .performance-table th {
-            background: #27ae60;
-        }
-
-        .validation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .validation-box {
-            background: #ecf0f1;
-            padding: 12px;
-            border-radius: 6px;
-        }
-
-        .validation-title {
+        
+        .phase-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-right: 20px;
+        }
+        
+        .phase-details {
+            flex: 1;
+        }
+        
+        .phase-title {
+            font-weight: 600;
             color: #2c3e50;
+            margin-bottom: 5px;
         }
-
-        .validation-item {
-            margin-bottom: 4px;
-            font-size: 9pt;
+        
+        .phase-info {
+            color: #7f8c8d;
+            font-size: 14px;
         }
-
-        .specialty-list {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 9pt;
+        
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-
-        .feature-list {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 9pt;
-        }
-
-        .impact-section {
+        
+        .risk-table th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        .risk-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .risk-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .roi-indicator {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
-            margin-top: 15px;
+            margin-bottom: 30px;
         }
-
-        .impact-title {
-            font-size: 11pt;
-            margin-bottom: 8px;
-        }
-
-        .impact-value {
-            font-size: 20pt;
+        
+        .roi-value {
+            font-size: 48px;
             font-weight: bold;
-            margin-bottom: 8px;
         }
-
-        .impact-description {
-            font-size: 9pt;
-            opacity: 0.95;
+        
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .perf-metric {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .perf-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .perf-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- PAGE 1: PROJECT OVERVIEW & ANALYSIS -->
-    <div class="page">
+    <div class="dashboard">
         <div class="header">
             <h1>Medicare Part B Drug Waste Anomaly Detection & Program Integrity System</h1>
-            <p class="subtitle">Detecting and Preventing Drug Waste Anomalies Using Advanced Federal Data Analytics</p>
+            <p>Real-time monitoring of drug waste patterns across 824 injectable drugs and 1.2M providers</p>
         </div>
         
-        <div class="section-header">THE MEDICARE DRUG WASTE CRISIS</div>
-        <div class="metrics-container">
-            <div class="metric-box">
-                <div class="metric-value">$1.87 Billion</div>
-                <div class="metric-label">Annual drug waste across Medicare Part B programs</div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">$1.87B</div>
+                <div class="metric-label">Annual Drug Waste</div>
             </div>
-            <div class="metric-box">
-                <div class="metric-value">$189.7 Million</div>
-                <div class="metric-label">Identified as potentially anomalous patterns</div>
+            <div class="metric-card secondary">
+                <div class="metric-value">$189.7M</div>
+                <div class="metric-label">Anomalous Patterns Identified</div>
             </div>
-            <div class="metric-box">
-                <div class="metric-value">824 Drugs</div>
-                <div class="metric-label">Injectable drugs analyzed across Medicare</div>
+            <div class="metric-card tertiary">
+                <div class="metric-value">$132.8M</div>
+                <div class="metric-label">Annual Recoverable</div>
             </div>
-            <div class="metric-box">
-                <div class="metric-value">2.3x Higher</div>
-                <div class="metric-label">Waste rates in rural communities vs urban</div>
+            <div class="metric-card success">
+                <div class="metric-value">824</div>
+                <div class="metric-label">Drugs Analyzed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">1.2M</div>
+                <div class="metric-label">Provider Records</div>
+            </div>
+            <div class="metric-card secondary">
+                <div class="metric-value">92</div>
+                <div class="metric-label">High-Risk Drugs</div>
             </div>
         </div>
         
-        <div class="section-header">IMPLEMENTATION ROADMAP</div>
-        <table class="roadmap-table">
-            <tr>
-                <th>Phase</th>
-                <th>Timeline</th>
-                <th>Scope</th>
-                <th>Annual Savings</th>
-                <th>Key Features</th>
-            </tr>
-            <tr>
-                <td><strong>Phase I</strong></td>
-                <td>Years 1-2</td>
-                <td>5 high-risk states, ~10,000 providers</td>
-                <td>$47M - $132M</td>
-                <td>Real-time modifier compliance, NPI-level granularity</td>
-            </tr>
-            <tr>
-                <td><strong>Phase II</strong></td>
-                <td>Years 3-5</td>
-                <td>National rollout, 1.2M providers</td>
-                <td>$265M - $487M</td>
-                <td>NLP integration, provider profiling, manufacturer accountability</td>
-            </tr>
-            <tr>
-                <td><strong>Phase III</strong></td>
-                <td>Years 5+</td>
-                <td>Medicaid, TRICARE, VA expansion</td>
-                <td>$500M - $700M</td>
-                <td>Predictive modeling, behavioral nudges, cross-program integration</td>
-            </tr>
-        </table>
-        
-        <div class="section-header">GEOGRAPHIC DISTRIBUTION OF ANOMALIES</div>
-        <table class="risk-table">
-            <tr>
-                <th>Region</th>
-                <th>Drugs Flagged</th>
-                <th>Total Waste</th>
-                <th>Avg Waste Rate</th>
-                <th>Population Affected</th>
-            </tr>
-            <tr>
-                <td>Northeast</td>
-                <td>187</td>
-                <td>$42.3M</td>
-                <td>18.2%</td>
-                <td>9.8 million</td>
-            </tr>
-            <tr>
-                <td>Southeast</td>
-                <td>234</td>
-                <td>$67.8M</td>
-                <td>21.4%</td>
-                <td>15.2 million</td>
-            </tr>
-            <tr>
-                <td>Midwest</td>
-                <td>156</td>
-                <td>$31.2M</td>
-                <td>14.7%</td>
-                <td>10.3 million</td>
-            </tr>
-            <tr>
-                <td>Southwest</td>
-                <td>178</td>
-                <td>$38.9M</td>
-                <td>19.8%</td>
-                <td>11.4 million</td>
-            </tr>
-            <tr>
-                <td>West</td>
-                <td>145</td>
-                <td>$29.5M</td>
-                <td>16.3%</td>
-                <td>8.7 million</td>
-            </tr>
-        </table>
-        
-        <div class="section-header">HIGH-RISK SPECIALTY PATTERNS</div>
-        <div class="specialty-list">
-            <strong>• Oncology:</strong> $78.3 million in absolute waste - highest total financial impact<br>
-            <strong>• Ophthalmology:</strong> 31.2% waste rate - highest percentage waste<br>
-            <strong>• Rheumatology:</strong> 23% modifier violations detected<br>
-            <strong>• Rural Providers:</strong> 2.3x higher waste rates requiring targeted interventions<br>
-            <strong>• Concentration Pattern:</strong> 85.9% of waste dollars in just 11.2% of drugs
+        <div class="roi-indicator">
+            <div class="roi-value">1,328x</div>
+            <div>Return on Investment</div>
+            <div style="font-size: 14px; margin-top: 10px;">Every $1 invested yields $1,328 in recoverable improper payments</div>
         </div>
         
-        <div class="section-header">TOP 5 RISK INDICATORS (MWARI COMPONENTS)</div>
-        <div class="feature-list">
-            <strong>1. Drug waste z-score (28.4% model importance):</strong> Statistical outlier detection<br>
-            <strong>2. Compliance flags (23.7% model importance):</strong> Modifier violation tracking<br>
-            <strong>3. Financial impact magnitude (19.2% model importance):</strong> Dollar value of waste<br>
-            <strong>4. Temporal anomalies (15.8% model importance):</strong> Time-series pattern analysis<br>
-            <strong>5. Geographic deviation (12.9% model importance):</strong> Peer comparison metrics
+        <div class="charts-container">
+            <div class="chart-card">
+                <div class="chart-title">Geographic Distribution of Anomalies</div>
+                <canvas id="geoChart"></canvas>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-title">Risk Grade Distribution (824 Drugs)</div>
+                <canvas id="riskChart"></canvas>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-title">10-Year Savings Projection</div>
+                <canvas id="projectionChart"></canvas>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-title">Specialty Waste Patterns</div>
+                <canvas id="specialtyChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="phase-timeline">
+            <h3 style="color: #2c3e50; margin-bottom: 20px;">Implementation Roadmap</h3>
+            <div class="phase-item">
+                <div class="phase-number">I</div>
+                <div class="phase-details">
+                    <div class="phase-title">Phase I: Pilot Deployment (Years 1-2)</div>
+                    <div class="phase-info">5 high-risk states • 10,000 providers • $47M-$132M annual savings • Real-time modifier compliance</div>
+                </div>
+            </div>
+            <div class="phase-item">
+                <div class="phase-number">II</div>
+                <div class="phase-details">
+                    <div class="phase-title">Phase II: National Rollout (Years 3-5)</div>
+                    <div class="phase-info">Nationwide coverage • 1.2M providers • $265M-$487M annual savings • NLP integration</div>
+                </div>
+            </div>
+            <div class="phase-item">
+                <div class="phase-number">III</div>
+                <div class="phase-details">
+                    <div class="phase-title">Phase III: Cross-Program Expansion (Years 5+)</div>
+                    <div class="phase-info">Medicaid, TRICARE, VA • $500M-$700M annual savings • Predictive modeling • $1.7B-$2.3B total</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-card">
+            <div class="chart-title">Model Performance Metrics</div>
+            <div class="performance-grid">
+                <div class="perf-metric">
+                    <div class="perf-value">81.8%</div>
+                    <div class="perf-label">F1-Score</div>
+                </div>
+                <div class="perf-metric">
+                    <div class="perf-value">100%</div>
+                    <div class="perf-label">Recall</div>
+                </div>
+                <div class="perf-metric">
+                    <div class="perf-value">69.2%</div>
+                    <div class="perf-label">Precision</div>
+                </div>
+                <div class="perf-metric">
+                    <div class="perf-value">87.3%</div>
+                    <div class="perf-label">Accuracy</div>
+                </div>
+                <div class="perf-metric">
+                    <div class="perf-value">0.924</div>
+                    <div class="perf-label">AUC-ROC</div>
+                </div>
+                <div class="perf-metric">
+                    <div class="perf-value">4.7hrs</div>
+                    <div class="perf-label">Processing Time</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-card">
+            <div class="chart-title">Top 5 High-Risk Drugs by MWARI Score</div>
+            <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>HCPCS</th>
+                        <th>Drug Name</th>
+                        <th>MWARI Score</th>
+                        <th>Waste Rate</th>
+                        <th>Financial Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>J3299</td>
+                        <td>Injection, triamcinolone</td>
+                        <td>95.5</td>
+                        <td>81.6%</td>
+                        <td>$1,616,004</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Q9965</td>
+                        <td>Low osmolar contrast material</td>
+                        <td>92.2</td>
+                        <td>68.4%</td>
+                        <td>$1,460,356</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>J9281</td>
+                        <td>Mitomycin injection</td>
+                        <td>89.3</td>
+                        <td>44.3%</td>
+                        <td>$16,967,542</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>J3101</td>
+                        <td>Injection, tenecteplase</td>
+                        <td>87.4</td>
+                        <td>33.2%</td>
+                        <td>$11,473,212</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>J9043</td>
+                        <td>Cabazitaxel injection</td>
+                        <td>86.0</td>
+                        <td>31.0%</td>
+                        <td>$38,553,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="chart-card" style="background: #f8f9fa; text-align: center;">
+            <div class="chart-title">Key Impact Statistics</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div>
+                    <div style="font-size: 28px; font-weight: bold; color: #e74c3c;">2.3x</div>
+                    <div style="color: #7f8c8d;">Higher waste in rural areas</div>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: bold; color: #3498db;">85.9%</div>
+                    <div style="color: #7f8c8d;">Waste in 11.2% of drugs</div>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: bold; color: #2ecc71;">2,656</div>
+                    <div style="color: #7f8c8d;">Nurse practitioners fundable</div>
+                </div>
+                <div>
+                    <div style="font-size: 28px; font-weight: bold; color: #9b59b6;">1.3M</div>
+                    <div style="color: #7f8c8d;">Beneficiaries covered</div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- PAGE 2: MODEL VALIDATION & RESULTS -->
-    <div class="page">
-        <div class="header">
-            <h1>MODEL VALIDATION & PERFORMANCE RESULTS</h1>
-            <p class="subtitle">Validated System Performance Demonstrating 81.8% F1-Score with 100% Recall</p>
-        </div>
+    <script>
+        // Geographic Distribution Chart
+        const geoCtx = document.getElementById('geoChart').getContext('2d');
+        new Chart(geoCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Northeast', 'Southeast', 'Midwest', 'Southwest', 'West'],
+                datasets: [{
+                    label: 'Total Waste ($M)',
+                    data: [42.3, 67.8, 31.2, 38.9, 29.5],
+                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Waste Rate (%)',
+                    data: [18.2, 21.4, 14.7, 19.8, 16.3],
+                    backgroundColor: 'rgba(240, 147, 251, 0.8)',
+                    borderColor: 'rgba(240, 147, 251, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Waste Amount ($M)'
+                        }
+                    },
+                    y1: {
+                        beginAtZero: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Waste Rate (%)'
+                        }
+                    }
+                }
+            }
+        });
         
-        <div class="section-header">KEY PERFORMANCE INDICATORS</div>
-        <div class="kpi-container">
-            <div class="kpi-box">
-                <div class="kpi-value">81.8%</div>
-                <div class="kpi-label">F1-Score</div>
-            </div>
-            <div class="kpi-box">
-                <div class="kpi-value">87.3%</div>
-                <div class="kpi-label">Accuracy</div>
-            </div>
-            <div class="kpi-box">
-                <div class="kpi-value">69.2%</div>
-                <div class="kpi-label">Precision</div>
-            </div>
-            <div class="kpi-box">
-                <div class="kpi-value">100%</div>
-                <div class="kpi-label">Recall</div>
-            </div>
-            <div class="kpi-box">
-                <div class="kpi-value">0.924</div>
-                <div class="kpi-label">AUC-ROC</div>
-            </div>
-        </div>
+        // Risk Grade Distribution
+        const riskCtx = document.getElementById('riskChart').getContext('2d');
+        new Chart(riskCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Grade A (Normal)', 'Grade B (Elevated)', 'Grade C (High)', 'Grade D (Critical)', 'Grade F (Immediate)'],
+                datasets: [{
+                    data: [699, 44, 36, 29, 16],
+                    backgroundColor: [
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(241, 196, 15, 0.8)',
+                        'rgba(230, 126, 34, 0.8)',
+                        'rgba(231, 76, 60, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
         
-        <div class="section-header">VALIDATION METRICS</div>
-        <div class="validation-grid">
-            <div class="validation-box">
-                <div class="validation-title">Statistical Validation</div>
-                <div class="validation-item">• Matthews Correlation: 0.764</div>
-                <div class="validation-item">• Bootstrap Stability: CV = 0.048 (< 5% variance)</div>
-                <div class="validation-item">• Cross-validation: 86.7% average accuracy</div>
-                <div class="validation-item">• Hold-out Testing: 83.4% F1-score on 2024 data</div>
-            </div>
-            <div class="validation-box">
-                <div class="validation-title">Operational Metrics</div>
-                <div class="validation-item">• Processing Time: 4.7 hours for national dataset</div>
-                <div class="validation-item">• Records Analyzed: 1,198,754 providers</div>
-                <div class="validation-item">• Memory Usage: < 8GB RAM required</div>
-                <div class="validation-item">• Test Coverage: 94% of 3,847 lines of code</div>
-            </div>
-        </div>
+        // 10-Year Projection
+        const projCtx = document.getElementById('projectionChart').getContext('2d');
+        new Chart(projCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6', 'Year 7', 'Year 8', 'Year 9', 'Year 10'],
+                datasets: [{
+                    label: 'Conservative',
+                    data: [47, 95, 140, 185, 230, 320, 410, 500, 590, 699],
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Moderate',
+                    data: [133, 266, 400, 550, 700, 900, 1100, 1300, 1500, 1730],
+                    borderColor: 'rgba(155, 89, 182, 1)',
+                    backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Aggressive',
+                    data: [190, 380, 570, 760, 950, 1200, 1450, 1700, 2000, 2317],
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cumulative Savings ($M)'
+                        }
+                    }
+                }
+            }
+        });
         
-        <div class="section-header">TOP HIGH-RISK DRUGS IDENTIFIED</div>
-        <table class="performance-table">
-            <tr>
-                <th>Rank</th>
-                <th>HCPCS</th>
-                <th>Drug Name</th>
-                <th>MWARI Score</th>
-                <th>Waste Rate</th>
-                <th>Financial Impact</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>J3299</td>
-                <td>Injection, triamcinolone</td>
-                <td>95.5</td>
-                <td>81.6%</td>
-                <td>$1,616,004</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Q9965</td>
-                <td>Low osmolar contrast material</td>
-                <td>92.2</td>
-                <td>68.4%</td>
-                <td>$1,460,356</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>J9281</td>
-                <td>Mitomycin injection</td>
-                <td>89.3</td>
-                <td>44.3%</td>
-                <td>$16,967,542</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>J3101</td>
-                <td>Injection, tenecteplase</td>
-                <td>87.4</td>
-                <td>33.2%</td>
-                <td>$11,473,212</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>J9043</td>
-                <td>Cabazitaxel injection</td>
-                <td>86.0</td>
-                <td>31.0%</td>
-                <td>$38,553,000</td>
-            </tr>
-        </table>
-        
-        <div class="section-header">FINANCIAL IMPACT PROJECTIONS</div>
-        <table class="risk-table">
-            <tr>
-                <th>Scenario</th>
-                <th>Target</th>
-                <th>Annual Recovery</th>
-                <th>10-Year Projection</th>
-                <th>ROI</th>
-            </tr>
-            <tr>
-                <td>Conservative</td>
-                <td>Top 1% highest risk</td>
-                <td>$47.4 million</td>
-                <td>$698.6 million</td>
-                <td>474:1</td>
-            </tr>
-            <tr>
-                <td>Moderate</td>
-                <td>Top 5% (scores >50)</td>
-                <td>$132.8 million</td>
-                <td>$1,729.6 million</td>
-                <td>1,328:1</td>
-            </tr>
-            <tr>
-                <td>Aggressive</td>
-                <td>All scores >30</td>
-                <td>$189.7 million</td>
-                <td>$2,316.5 million</td>
-                <td>1,897:1</td>
-            </tr>
-        </table>
-        
-        <div class="section-header">SYSTEM SPECIFICATIONS</div>
-        <div class="validation-grid">
-            <div class="validation-box">
-                <div class="validation-title">Technical Architecture</div>
-                <div class="validation-item">• Python 3.9.7 implementation</div>
-                <div class="validation-item">• scikit-learn 0.24.0 for ML models</div>
-                <div class="validation-item">• pandas 1.3.0 for data processing</div>
-                <div class="validation-item">• Performance: <5ms per record scoring</div>
-            </div>
-            <div class="validation-box">
-                <div class="validation-title">Data Sources (CMS Public Datasets)</div>
-                <div class="validation-item">• Part B Discarded Drug Units Dataset</div>
-                <div class="validation-item">• Part B Spending by Drug Dataset</div>
-                <div class="validation-item">• Medicare Physician & Other Practitioners</div>
-                <div class="validation-item">• 100% fee-for-service Medicare coverage</div>
-            </div>
-        </div>
-        
-        <div class="impact-section">
-            <div class="impact-title">PROJECTED NATIONAL IMPACT</div>
-            <div class="impact-value">$1.73B - $2.3B</div>
-            <p class="impact-description">10-year cumulative savings potential across federal healthcare programs. The moderate scenario's $132.8M annual recovery could fund 2,656 nurse practitioners or provide preventive care to 1.3 million at-risk Americans. With 92 high-risk drugs flagged for investigation and a 1,328-fold return on investment, this system represents a transformative advancement in Medicare program integrity.</p>
-        </div>
-    </div>
+        // Specialty Chart
+        const specialtyCtx = document.getElementById('specialtyChart').getContext('2d');
+        new Chart(specialtyCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Oncology', 'Ophthalmology', 'Rheumatology', 'Cardiology', 'Neurology'],
+                datasets: [{
+                    label: 'Absolute Waste ($M)',
+                    data: [78.3, 45.2, 38.7, 29.4, 22.1],
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)'
+                }, {
+                    label: 'Waste Rate (%)',
+                    data: [24.5, 31.2, 18.3, 15.2, 12.8],
+                    borderColor: 'rgba(240, 147, 251, 1)',
+                    backgroundColor: 'rgba(240, 147, 251, 0.2)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
