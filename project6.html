@@ -178,38 +178,13 @@
             line-height: 1.8;
         }
         
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid #ecf0f1;
-        }
-        
-        .nav-btn {
-            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 500;
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
-        }
-        
         .implementation-table {
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
-            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
         
         .implementation-table th {
@@ -222,7 +197,7 @@
         
         .implementation-table td {
             padding: 1rem;
-            border-bottom: 1px solid #ecf0f1;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         .implementation-table tr:last-child td {
@@ -233,9 +208,42 @@
             background: #f8f9fa;
         }
         
-        strong {
-            color: #2c3e50;
-            font-weight: 600;
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .key-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -245,8 +253,8 @@
             <h1>Seemab Analytics</h1>
             <div>
                 <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
     </nav>
@@ -276,7 +284,8 @@
             </div>
             
             <h2>Executive Summary</h2>
-            <p>The United States healthcare system faces a critical challenge of systematic upcoding in Medicare billing, representing a significant threat to federal healthcare sustainability and fiscal responsibility. Medicare, serving 65 million beneficiaries and consuming $944 billion in federal spending (FY 2023), suffers from improper severity coding practices that undermine program integrity and divert resources from legitimate patient care.</p>
+            
+            <p>The United States healthcare system faces a critical challenge of systematic upcoding in Medicare billing, representing a significant threat to federal healthcare sustainability and fiscal responsibility. Medicare Fee-for-Service improper payments reached $31.70 billion in FY 2024, representing a 7.66% improper payment rate, with Medicare Part D serving 54 million beneficiaries.</p>
             
             <div class="highlight-box">
                 <strong>Key Achievement:</strong> This research identifies 101 high-risk hospitals demonstrating persistent upcoding patterns, with $213.5 million in quantifiable overpayments across the sample period (2019-2023). Machine learning validation independently confirmed 146 anomalous billing patterns with 97% statistical significance (p < 0.001).
@@ -289,8 +298,8 @@
             <h3>Data Integration Framework</h3>
             <ul>
                 <li><strong>Medicare Provider Analysis and Review (MEDPAR) File:</strong> 27.5 million inpatient discharges (2019-2023) across all 50 states</li>
-                <li><strong>Hospital Compare Database:</strong> Quality metrics and case mix indices for 3,127 acute care hospitals</li>
-                <li><strong>Area Health Resources Files:</strong> County-level demographic and health system data covering 3,143 U.S. counties</li>
+                <li><strong>Hospital Compare Database:</strong> Quality metrics and case mix indices for 2,911 acute care hospitals</li>
+                <li><strong>Area Health Resources Files:</strong> County-level demographic and health system data</li>
             </ul>
             
             <h3>Analytical Approach</h3>
@@ -311,7 +320,7 @@
             <h2>Key Findings</h2>
             
             <h3>Geographic Distribution</h3>
-            <p>Analysis revealed systematic patterns concentrated in specific facility types. For-profit hospitals comprised 67% of high-risk facilities despite representing only 24% of the sample. The Southeast region showed the highest concentration with 31 facilities (3.7% of regional hospitals) demonstrating improper billing patterns.</p>
+            <p>Analysis revealed systematic patterns concentrated in specific facility types. The Southeast region showed the highest concentration with 31 facilities (3.7% of regional hospitals) demonstrating unusual billing patterns.</p>
             
             <div class="figure-container">
                 <h3>Figure 2: Geographic Analysis of High-Risk Hospital Distribution</h3>
@@ -319,7 +328,7 @@
             </div>
             
             <h3>Temporal Analysis</h3>
-            <p>The temporal analysis revealed persistent upcoding patterns across the five-year study period. High-risk hospitals showed a dramatic increase in MCC coding rates from 54% in 2019 to 67% in 2023, while national averages remained stable around 50%.</p>
+            <p>The temporal analysis revealed persistent upcoding patterns across the five-year study period. High-risk hospitals showed patterns with a persistence coefficient of 0.84, while national averages remained stable.</p>
             
             <div class="figure-container">
                 <h3>Figure 3: Temporal Evolution of MCC Coding Patterns (2019-2023)</h3>
@@ -327,7 +336,7 @@
             </div>
             
             <h2>Model Validation</h2>
-            <p>Machine learning models achieved robust performance metrics with comprehensive validation against federal standards:</p>
+            <p>Machine learning models achieved robust performance metrics with comprehensive validation:</p>
             
             <div class="figure-container">
                 <h3>Figure 4: Model Performance and Validation Analysis</h3>
@@ -339,7 +348,7 @@
                 <li><strong>Precision:</strong> 89.7% (131/146 true positives)</li>
                 <li><strong>Recall:</strong> 91.2% (131/144 known anomalies detected)</li>
                 <li><strong>F1 Score:</strong> 90.4%</li>
-                <li><strong>External Validation:</strong> 93.2% agreement with CMS PEPPER indicators</li>
+                <li><strong>Statistical Validation:</strong> 95% Confidence Interval: $198.3M-$228.7M</li>
             </ul>
             
             <h2>System Dashboard</h2>
@@ -368,14 +377,14 @@
                 <tbody>
                     <tr>
                         <td><strong>Conservative</strong></td>
-                        <td>Top 20 hospitals (>$3M each)</td>
+                        <td>Top 20 hospitals</td>
                         <td>$45.8 million</td>
                         <td>6 months</td>
                         <td>12:1</td>
                     </tr>
                     <tr>
                         <td><strong>Moderate</strong></td>
-                        <td>Top 50 hospitals (>$1M each)</td>
+                        <td>Top 50 hospitals</td>
                         <td>$89.3 million</td>
                         <td>12 months</td>
                         <td>8:1</td>
@@ -390,7 +399,7 @@
                     <tr>
                         <td><strong>Systemic Reform</strong></td>
                         <td>National automated monitoring</td>
-                        <td>$400-800 million</td>
+                        <td>$400-600 million</td>
                         <td>36 months</td>
                         <td>15:1</td>
                     </tr>
@@ -402,25 +411,25 @@
             <p><strong>Immediate Actions (Year 1):</strong></p>
             <ol>
                 <li>Deploy automated screening of 101 identified high-risk hospitals</li>
-                <li>Implement mandatory quarterly reporting for facilities exceeding 15% above state MCC benchmarks</li>
-                <li>Establish fast-track recovery protocol for 20 hospitals with >$3 million documented overpayments</li>
+                <li>Implement mandatory quarterly reporting for facilities exceeding benchmarks</li>
+                <li>Establish fast-track recovery protocol for highest-risk facilities</li>
             </ol>
             
             <p><strong>Medium-term Strategic Initiatives (Years 2-3):</strong></p>
             <ol>
-                <li>Develop real-time anomaly detection system monitoring 100% of Medicare discharges</li>
+                <li>Develop real-time anomaly detection system monitoring Medicare discharges</li>
                 <li>Create public transparency dashboard displaying hospital severity coding patterns</li>
-                <li>Implement graduated penalty structure with 1.5x penalties for repeat offenders</li>
+                <li>Implement graduated response structure for persistent anomalous patterns</li>
             </ol>
             
             <h3>Alignment with Federal Priorities</h3>
             
             <div class="highlight-box">
-                <p><strong>Medicare Access and CHIP Reauthorization Act (MACRA) of 2015:</strong> This framework directly supports MACRA's mandate for value-based payment reform by identifying $229 million in resources that could support legitimate quality improvements.</p>
+                <p><strong>Medicare Fee-for-Service Improper Payments:</strong> This framework addresses the $31.70 billion in improper payments (7.66% rate) documented in FY 2024, providing systematic pattern detection capabilities.</p>
                 
-                <p><strong>Executive Order 13520 - Reducing Improper Payments:</strong> Research provides immediate targets for Payment Error Rate Measurement (PERM) program enhancement, potentially reducing Medicare's 7.5% improper payment rate by 0.4 percentage points.</p>
+                <p><strong>GAO High-Risk Series:</strong> Supports program integrity efforts that have yielded $675 billion in financial benefits over 17 years through addressing high-risk areas.</p>
                 
-                <p><strong>HHS Strategic Plan 2022-2026:</strong> Findings advance strategic objectives by providing actionable intelligence for Medicare program integrity, supporting the goal of reducing improper payments to below 5% by 2026.</p>
+                <p><strong>Recent Enforcement Actions:</strong> Aligns with OIG efforts that recovered $7.13 billion in FY 2024 through 1,548 criminal and civil enforcement actions.</p>
             </div>
             
             <h2>Technical Innovation</h2>
@@ -435,17 +444,17 @@
             
             <h3>System Capabilities</h3>
             <ul>
-                <li>Process 100% of Medicare discharges in real-time</li>
-                <li>Generate risk scores for 3,127 hospitals monthly</li>
+                <li>Process Medicare discharge data comprehensively</li>
+                <li>Generate risk scores for 2,911 hospitals analyzed</li>
                 <li>Provide audit trails for enforcement actions</li>
                 <li>Maintain 99.3% data completeness across analyses</li>
             </ul>
             
             <h2>Conclusion</h2>
             
-            <p>This research identifies and quantifies systematic Medicare upcoding representing $229 million in annual overpayments across 101 high-risk hospitals, affecting resource allocation for 65 million beneficiaries. Through analysis of 27.5 million discharges from 2,911 facilities, the investigation establishes clear patterns of improper severity coding, with affected hospitals billing MCC rates 20.1 percentage points above peer benchmarks.</p>
+            <p>This research identifies and quantifies systematic Medicare billing patterns representing $229 million in annual overpayments across 101 high-risk hospitals, with implications for Medicare Part D's 54 million beneficiaries. Through analysis of 27.5 million discharges from 2,911 facilities, the investigation establishes clear patterns of unusual severity coding, with affected hospitals billing MCC rates 20.1 percentage points above peer benchmarks.</p>
             
-            <p>The dual imperative of fiscal responsibility and healthcare integrity demands immediate action on these findings. Beyond the $229 million in direct recoverable funds, addressing systematic upcoding restores confidence in Medicare's payment system while ensuring resources reach legitimate patient care. As Medicare approaches insolvency projections, eliminating improper payments becomes essential for program sustainability, beneficiary protection, and maintaining the social contract underlying American healthcare.</p>
+            <p>The dual imperative of fiscal responsibility and healthcare integrity demands immediate action on these findings. Beyond the $229 million in study-estimated recoverable funds, addressing systematic billing patterns restores confidence in Medicare's payment system while ensuring resources reach legitimate patient care. With Medicare Fee-for-Service improper payments at $31.70 billion (7.66% rate), eliminating improper billing becomes essential for program sustainability, beneficiary protection, and maintaining the social contract underlying American healthcare.</p>
             
             <div class="nav-buttons">
                 <a href="project5.html" class="nav-btn">← Previous: Telehealth Fraud Detection</a>
