@@ -179,10 +179,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
-            background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            overflow: hidden;
         }
         
         .implementation-table th {
@@ -194,43 +191,61 @@
         
         .implementation-table td {
             padding: 1rem;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         .implementation-table tr:hover {
             background: #f8f9fa;
         }
         
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
         .nav-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid #f0f0f0;
+            gap: 1rem;
         }
         
         .nav-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 1rem 2rem;
-            border-radius: 10px;
             text-decoration: none;
+            border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
         }
         
         .nav-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
         
-        ul {
-            margin-left: 2rem;
-            margin-top: 1rem;
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .key-metrics {
+                grid-template-columns: 1fr;
+            }
         }
         
-        li {
-            margin-bottom: 0.5rem;
+        .disclaimer-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #856404;
         }
     </style>
 </head>
@@ -240,8 +255,8 @@
             <h2>Seemab Analytics</h2>
             <div>
                 <a href="index.html">Home</a>
-                <a href="index.html#projects">Projects</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
     </nav>
@@ -278,7 +293,7 @@
                     <strong>Key Achievement:</strong> Identified $4.66 billion in potential annual improper DME payments through analysis of 44,918 suppliers across three years of Medicare claims data. The system flagged 2,246 high-risk suppliers (5% of total) exhibiting extreme billing anomalies, including suppliers charging up to 1,166 times the state median payment per beneficiary.
                 </div>
                 
-                <p>Validation against the Office of Inspector General (OIG) exclusion database identified three potential matches using fuzzy name matching with 85% similarity threshold, while all identified patterns align with established federal improper payment typologies. The methodology achieves a conservative program integrity analytics rate of 4.58%, consistent with Government Accountability Office estimates of 3-5% healthcare improper payment prevalence.</p>
+                <p>Validation against the Office of Inspector General (OIG) exclusion database identified three potential matches using fuzzy name matching with 85% similarity threshold, while all identified patterns align with established federal improper payment typologies. The methodology achieves a conservative detection rate of 4.58%, falling within the range of CMS-reported Medicare improper payment rates of 3.70% (Part D) to 7.66% (Fee-for-Service).</p>
             </div>
 
             <div class="section">
@@ -334,6 +349,9 @@
                 <div class="figure-container">
                     <img src="Project4_Fig_4.png" alt="Top 10 High-Risk DME Suppliers">
                     <p class="figure-caption">Figure 4: Top 10 high-risk suppliers showing payment per beneficiary ratios exceeding state medians by up to 1,166x, with total excess billing of $791.7M</p>
+                </div>
+                <div class="disclaimer-note">
+                    <strong>Important Note:</strong> These represent statistical outliers identified through pattern analysis of CMS public data (2021-2023). All flagged suppliers require investigation by appropriate authorities to determine whether billing patterns represent fraud, waste, abuse, or legitimate specialized medical care. The top-ranked supplier (Novocure Inc.) manufactures FDA-approved brain cancer treatment devices; extreme billing may reflect legitimate high-cost medical care requiring investigation rather than presumed improper billing.
                 </div>
             </div>
 
@@ -435,7 +453,7 @@
                         <h3>External Validation</h3>
                         <ul style="margin-left: 0; list-style-position: inside;">
                             <li>OIG Database: Fuzzy matching at 85% threshold</li>
-                            <li>GAO Benchmark: 4.58% detection rate</li>
+                            <li>CMS Benchmark: 4.58% detection rate aligned with CMS-reported improper payment rates</li>
                             <li>3 potential matches identified</li>
                             <li>Pattern Consistency: 100% alignment</li>
                         </ul>
@@ -456,9 +474,9 @@
                 <h2>Conclusion</h2>
                 <p>This research successfully develops and validates a comprehensive DME Program Integrity Analytics System identifying $4.66 billion in annual improper billing across 2,246 high-risk suppliers. The multi-dimensional analytical framework combines statistical outlier detection, machine learning anomaly identification, and systematic validation against federal databases to provide actionable intelligence for Medicare program integrity efforts.</p>
                 
-                <p>The dual benefit of this system addresses both the moral imperative of protecting vulnerable Medicare beneficiaries and the fiscal opportunity to recover billions in taxpayer funds. By preventing improper payments, legitimate suppliers can compete fairly while ensuring critical medical equipment reaches the 2.76 million affected beneficiaries.</p>
+                <p>The dual benefit of this system addresses both the moral imperative of protecting vulnerable Medicare beneficiaries and the fiscal opportunity to recover billions in taxpayer funds. By preventing improper payments, legitimate suppliers can compete fairly while ensuring critical medical equipment reaches up to 4 million Medicare beneficiaries.</p>
                 
-                <p>The framework's 1,000:1 return on investment demonstrates exceptional value for federal resources while establishing reproducible methodologies for systematic improper payment prevention across all Medicare sectors, potentially preventing $200+ billion in healthcare improper payments over the next decade.</p>
+                <p>The framework's 1,000:1 return on investment demonstrates exceptional value for federal resources while establishing reproducible methodologies for systematic improper payment prevention. With projected savings of $46.6 billion over ten years from Medicare DME alone, and potential expansion to other federal healthcare programs projecting up to $100 billion in savings over the decade, this system provides a validated pathway to strengthen Medicare's financial integrity while ensuring beneficiary access to legitimate medical equipment.</p>
             </div>
 
             <div class="nav-buttons">
