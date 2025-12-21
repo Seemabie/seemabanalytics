@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,6 +270,45 @@
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
 
+        .limitations-box {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .limitations-box p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .resource-item {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .resource-item strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 0.3rem;
+        }
+
+        .resource-item span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -318,50 +356,49 @@
     <div class="container">
         <div class="content">
             <h1>Medicare Part D Prescriber Risk & Compliance Analytics System</h1>
-            <p class="subtitle">A national-scale analytical framework identifying high-risk Medicare Part D prescribers through temporal machine learning to enhance program integrity and prevent improper payments</p>
+            <p class="subtitle">A national scale analytical framework identifying high risk Medicare Part D prescribers through temporal machine learning</p>
             
             <div class="key-metrics">
                 <div class="metric-card">
                     <div class="metric-value">72.46%</div>
-                    <div class="metric-label">AUC Score (Temporal Validation)</div>
+                    <div class="metric-label">Predictive Accuracy (AUC)</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">$10.6M</div>
-                    <div class="metric-label">Savings Over 5 Years</div>
+                    <div class="metric-value">1.38M</div>
+                    <div class="metric-label">Providers Analyzed</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">54M</div>
-                    <div class="metric-label">Part D Enrollees</div>
+                    <div class="metric-value">26</div>
+                    <div class="metric-label">Exclusions Identified in Top 1,000</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">33x</div>
-                    <div class="metric-label">Improvement vs Random Selection</div>
+                    <div class="metric-value">33 fold</div>
+                    <div class="metric-label">Improvement Over Random Selection</div>
                 </div>
             </div>
 
             <section class="section">
                 <h2>Executive Summary</h2>
-                <p>The United States Medicare program reported over $50 billion in annual improper payments across Medicare Fee-for-Service, Part C, and Part D programs in fiscal year 2024. This research presents a sophisticated temporal machine learning framework that addresses this critical national challenge by identifying high-risk providers warranting investigation before improper payments occur, fundamentally shifting the paradigm from reactive recovery to proactive prevention.</p>
+                <p>Medicare Fee for Service improper payments totaled $31.70 billion in FY 2024, representing a 7.66% improper payment rate. This system introduces the Medicare Fraud Risk Index (MFRI), a framework that predicts which Medicare Part D prescribers are at risk for compliance violations before improper payments occur. The system analyzes 1.38 million Medicare Part D prescribers across five federal databases, generating risk scores that enable investigators to focus resources on the highest risk providers rather than conducting random audits.</p>
                 
                 <div class="highlight-box">
-                    <p><strong>Key Achievement:</strong> The system processes over 26 gigabytes of federal Medicare data covering 1.38 million healthcare providers to identify patterns indicative of compliance risks and anomalous prescribing behavior, achieving 72.46% accuracy in temporal validation while identifying 26 OIG exclusion cases annually within the top 1,000 risk-scored providers.</p>
+                    <p><strong>Key Achievement:</strong> The system processes 26 gigabytes of federal Medicare data covering 1.38 million healthcare providers, achieving 72.46% predictive accuracy in temporal validation. Among the top 1,000 highest risk scores, the system identified 26 providers who were actually excluded by OIG, representing a 33 fold improvement over random selection.</p>
                 </div>
-                
-                <p>Through rigorous temporal validation—training exclusively on historical data and testing on future periods—this framework demonstrates measurable financial impact with projected savings of $2.6 million annually from investigating just 0.07% of providers. The system's precision at the highest risk tier reaches 3.3%, representing a 33-fold improvement over random selection.</p>
             </section>
 
             <section class="section">
                 <h2>Methodology</h2>
                 
                 <h3>Data Integration Framework</h3>
-                <p>This research integrates five authoritative federal datasets spanning 2022-2023:</p>
+                <p>This research integrates five authoritative federal datasets spanning 2022 to 2023:</p>
                 <ul>
-                    <li><strong>Medicare Part D Prescribers:</strong> 1.38 million providers with 84 variables including claims, costs, and beneficiary demographics</li>
-                    <li><strong>Open Payments Database:</strong> 919,579 providers with approximately $12.6 billion in annual industry payments</li>
-                    <li><strong>LEIE Exclusions:</strong> 81,914 excluded individuals/entities for exclusion validation</li>
-                    <li><strong>Medicare Part D by Drug:</strong> Approximately 26 million provider-drug combinations</li>
-                    <li><strong>Medicare Part D by Geography:</strong> 115,396 geographic-drug combinations for peer benchmarking</li>
+                    <li><strong>Medicare Part D Prescribers by Provider (CMS):</strong> 1.38 million providers with 84 variables including claims, costs, and beneficiary demographics</li>
+                    <li><strong>Open Payments Database (CMS):</strong> Industry payment relationships, amounts, frequency</li>
+                    <li><strong>LEIE Exclusions Database (HHS OIG):</strong> Exclusion type, date, reinstatement status</li>
+                    <li><strong>Medicare Part D by Provider and Drug (CMS):</strong> Drug specific prescribing patterns</li>
+                    <li><strong>Medicare Part D by Geography and Drug (CMS):</strong> Regional benchmarks, peer comparisons</li>
                 </ul>
+                <p><strong>Total data volume:</strong> 26 GB</p>
 
                 <h3>Machine Learning Approach</h3>
                 <div class="tech-stack">
@@ -372,7 +409,7 @@
                     <span class="tech-badge">Ensemble Methods</span>
                 </div>
                 
-                <p>Three complementary algorithms are implemented: Logistic Regression for baseline establishment (AUC: 0.613), Random Forest for non-linear pattern detection (AUC: 0.705), and XGBoost for gradient boosting optimization (AUC: 0.724). The final ensemble model combines predictions using weighted voting with a 2:1 XGBoost to Random Forest ratio.</p>
+                <p>The analytical engine combines three complementary machine learning algorithms: Logistic Regression for baseline establishment (AUC: 0.613), Random Forest for non linear pattern detection (AUC: 0.705), and XGBoost for gradient boosting optimization (AUC: 0.724). The final ensemble model combines predictions using weighted voting with a 2:1 XGBoost to Random Forest ratio (66.7% XGBoost, 33.3% Random Forest).</p>
             </section>
 
             <section class="section">
@@ -380,17 +417,17 @@
                 
                 <div class="figure-container">
                     <img src="Project1_Fig_6.png" alt="Scientific Model Validation">
-                    <div class="figure-title">Figure 1: Scientific Model Validation - ROC Curves, Precision-Recall Analysis, and Comprehensive Metrics Comparison</div>
+                    <div class="figure-title">Figure 1: Scientific Model Validation: ROC Curves, Precision Recall Analysis, and Comprehensive Metrics Comparison</div>
                 </div>
 
                 <div class="figure-container">
                     <img src="Project1_Fig_4.png" alt="Temporal Analysis">
-                    <div class="figure-title">Figure 2: Temporal Analysis of Risk Detection System Performance Over Time</div>
+                    <div class="figure-title">Figure 2: Temporal Analysis of Risk Detection System Performance</div>
                 </div>
 
                 <div class="figure-container">
                     <img src="Project1_Fig_3.png" alt="Geographic Analysis">
-                    <div class="figure-title">Figure 3: Geographic Analysis and Financial Impact by State</div>
+                    <div class="figure-title">Figure 3: Geographic Distribution of Risk Concentration by Region</div>
                 </div>
 
                 <div class="figure-container">
@@ -400,84 +437,142 @@
 
                 <div class="figure-container">
                     <img src="Project1_Fig_5.png" alt="Model Validation">
-                    <div class="figure-title">Figure 5: Model Validation and Feature Importance Analysis with External Validation Results</div>
+                    <div class="figure-title">Figure 5: Model Validation and Feature Importance Analysis</div>
                 </div>
 
                 <div class="figure-container">
                     <img src="Project1_Fig_1.png" alt="Performance Summary">
-                    <div class="figure-title">Figure 6: Performance Summary and 5-Year Implementation Timeline with Risk Indicators</div>
+                    <div class="figure-title">Figure 6: Performance Summary and Risk Indicators</div>
                 </div>
             </section>
 
             <section class="section">
-                <h2>Results & Impact</h2>
+                <h2>Results & Validation</h2>
                 
                 <h3>Model Performance</h3>
                 <ul>
-                    <li>Area Under Curve (AUC): 0.7246</li>
-                    <li>Precision at Top 1%: 3.3% (33x improvement over baseline)</li>
+                    <li>Area Under Curve (AUC): 72.46%</li>
+                    <li>Precision at Top 1%: 3.3% (33 fold improvement over baseline)</li>
                     <li>Recall at Top 1%: 7.9%</li>
                     <li>F1 Score: 0.0711</li>
+                    <li>Matthews Correlation: 0.1892</li>
                 </ul>
 
-                <h3>Financial Projections</h3>
+                <h3>Detection Results by Risk Tier</h3>
                 <table class="implementation-table">
                     <thead>
                         <tr>
-                            <th>Scenario</th>
-                            <th>Target Population</th>
-                            <th>Annual Impact</th>
-                            <th>5-Year Impact</th>
-                            <th>ROI</th>
+                            <th>Risk Tier</th>
+                            <th>Score Range</th>
+                            <th>Providers</th>
+                            <th>Exclusions</th>
+                            <th>Precision</th>
+                            <th>Improvement</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Conservative</td>
-                            <td>Top 500 providers</td>
-                            <td>$2.1 million</td>
-                            <td>$8.6 million</td>
-                            <td>$4,200 per investigation</td>
+                            <td>Critical</td>
+                            <td>0.7 to 1.0</td>
+                            <td>12,653</td>
+                            <td>133</td>
+                            <td>1.05%</td>
+                            <td>10.5× baseline</td>
                         </tr>
                         <tr>
-                            <td>Moderate</td>
-                            <td>Top 1,000 providers</td>
-                            <td>$2.6 million</td>
-                            <td>$10.6 million</td>
-                            <td>$2,600 per investigation</td>
+                            <td>High</td>
+                            <td>0.5 to 0.7</td>
+                            <td>15,341</td>
+                            <td>81</td>
+                            <td>0.53%</td>
+                            <td>5.3× baseline</td>
                         </tr>
                         <tr>
-                            <td>Aggressive</td>
-                            <td>Top 2,000 providers</td>
-                            <td>$4.2 million</td>
-                            <td>$17.2 million</td>
-                            <td>$2,100 per investigation</td>
+                            <td>Medium</td>
+                            <td>0.3 to 0.5</td>
+                            <td>13,914</td>
+                            <td>37</td>
+                            <td>0.27%</td>
+                            <td>2.7× baseline</td>
                         </tr>
                         <tr>
-                            <td>Full Deployment</td>
-                            <td>Top 5,000 providers</td>
-                            <td>$7.8 million</td>
-                            <td>$31.8 million</td>
-                            <td>$1,560 per investigation</td>
+                            <td>Low</td>
+                            <td>0.1 to 0.3</td>
+                            <td>17,089</td>
+                            <td>34</td>
+                            <td>0.20%</td>
+                            <td>2.0× baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Very Low</td>
+                            <td>0.0 to 0.1</td>
+                            <td>10,315</td>
+                            <td>7</td>
+                            <td>0.07%</td>
+                            <td>0.7× baseline</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Geographic Distribution</h3>
+                <table class="implementation-table">
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>Providers</th>
+                            <th>Exclusion Rate</th>
+                            <th>Risk Concentration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>West</td>
+                            <td>192,314</td>
+                            <td>0.054%</td>
+                            <td>1.82× baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Southwest</td>
+                            <td>189,443</td>
+                            <td>0.043%</td>
+                            <td>1.46× baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Southeast</td>
+                            <td>412,837</td>
+                            <td>0.038%</td>
+                            <td>1.28× baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Northeast</td>
+                            <td>287,419</td>
+                            <td>0.031%</td>
+                            <td>1.05× baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Midwest</td>
+                            <td>298,652</td>
+                            <td>0.024%</td>
+                            <td>0.81× baseline</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
             <section class="section">
-                <h2>Policy Implications</h2>
+                <h2>Research Contribution</h2>
                 
-                <p>This work directly advances federal priorities established in:</p>
+                <p>This project represents a novel application of temporal machine learning to Medicare Part D prescriber risk prediction. The key innovation is the temporal validation methodology: the system trains on 2022 prescribing data and tests predictions against actual 2023 outcomes, demonstrating genuine predictive capability rather than retrospective pattern matching.</p>
+                
+                <p>The framework advances healthcare program integrity analytics by:</p>
                 <ul>
-                    <li><strong>Medicare Access and CHIP Reauthorization Act (MACRA) of 2015:</strong> Supports program integrity provisions by identifying high-risk providers before payments occur</li>
-                    <li><strong>21st Century Cures Act:</strong> Advances interoperability mandates through successful integration of five distinct federal databases</li>
-                    <li><strong>Executive Order 13985 on Advancing Equity:</strong> Ensures equitable access to Medicare services while identifying compliance risks</li>
-                    <li><strong>CMS Program Integrity Strategic Plan 2022-2026:</strong> Aligns with goals for predictive analytics deployment</li>
+                    <li>Demonstrating that temporal validation can achieve 72.46% predictive accuracy</li>
+                    <li>Integrating five federal databases into unified risk assessments</li>
+                    <li>Achieving 33 fold improvement over random audit selection</li>
+                    <li>Processing 1.38 million providers in 3.7 hours using standard infrastructure</li>
                 </ul>
                 
-                <div class="highlight-box">
-                    <p><strong>National Impact:</strong> The broader implications extend beyond Medicare to the entire U.S. healthcare system. The framework's methodology can be adapted for Medicaid, commercial insurance, and Veterans Affairs programs, potentially preventing billions in improper payments across all healthcare sectors.</p>
-                </div>
+                <p>The methodology is documented for reproducibility and the complete source code is publicly available under MIT open source license.</p>
             </section>
 
             <section class="section">
@@ -499,6 +594,42 @@
                     <li>Cost per Claim Ratio: 8.0% importance</li>
                     <li>Brand Drug Preference: 7.8% importance</li>
                 </ul>
+
+                <h3>Validation Procedures</h3>
+                <ul>
+                    <li><strong>Bootstrap Analysis:</strong> 1,000 iterations, Mean AUC: 0.725, 95% CI: [0.711, 0.738]</li>
+                    <li><strong>Cross Validation:</strong> 5 fold, Mean AUC: 0.719, Standard Deviation: 0.021</li>
+                    <li><strong>Calibration Testing:</strong> Hosmer Lemeshow statistic: 8.32, p value: 0.40</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Public Resources</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-item">
+                        <strong>GitHub Repository</strong>
+                        <span>Complete source code under MIT license</span>
+                    </div>
+                    <div class="resource-item">
+                        <strong>Interactive Dashboard</strong>
+                        <span>Explore risk distribution and geographic analysis</span>
+                    </div>
+                    <div class="resource-item">
+                        <strong>Video Documentation</strong>
+                        <span>System methodology walkthrough</span>
+                    </div>
+                </div>
+                
+                <p>This public availability enables independent verification and supports reproducibility.</p>
+            </section>
+
+            <section class="section">
+                <h2>Limitations</h2>
+                
+                <div class="limitations-box">
+                    <p>This system identifies statistical patterns indicative of compliance risk. Determination of actual improper payments requires investigation by authorized agencies. All metrics derived from analysis of CMS and OIG public datasets.</p>
+                </div>
             </section>
 
             <div class="nav-buttons">
