@@ -189,54 +189,6 @@
             font-weight: 600;
         }
         
-        .timeline {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-        
-        .timeline-item {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-        
-        .timeline-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            right: -50%;
-            width: 100%;
-            height: 2px;
-            background: #e0e0e0;
-            z-index: -1;
-        }
-        
-        .timeline-dot {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .timeline-label {
-            font-size: 12px;
-            color: #7f8c8d;
-        }
-        
-        .timeline-value {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
         .table-container {
             overflow-x: auto;
         }
@@ -278,6 +230,7 @@
         .risk-critical { background: #fee; color: #d00; }
         .risk-high { background: #fff3cd; color: #856404; }
         .risk-elevated { background: #cce5ff; color: #004085; }
+        .risk-low { background: #d4edda; color: #155724; }
         
         .footer {
             margin-top: 30px;
@@ -287,31 +240,38 @@
             color: #7f8c8d;
             font-size: 12px;
         }
+        
+        .limitations {
+            font-size: 11px;
+            color: #95a5a6;
+            margin-top: 10px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="header">
             <h1>Medicare Part D Prescriber Risk & Compliance Analytics System</h1>
-            <p>National-scale analytical framework identifying high-risk Medicare Part D prescribers through temporal machine learning</p>
+            <p>National scale analytical framework identifying high risk Medicare Part D prescribers through temporal machine learning</p>
         </div>
         
         <div class="metrics-row">
             <div class="metric-card danger">
-                <div class="metric-value">$50B+</div>
-                <div class="metric-label">Annual Improper Payments</div>
+                <div class="metric-value">$31.70B</div>
+                <div class="metric-label">FY 2024 Improper Payments</div>
             </div>
             <div class="metric-card">
                 <div class="metric-value">72.46%</div>
                 <div class="metric-label">Predictive Accuracy (AUC)</div>
             </div>
             <div class="metric-card success">
-                <div class="metric-value">33×</div>
-                <div class="metric-label">Improvement vs Random</div>
+                <div class="metric-value">33 fold</div>
+                <div class="metric-label">Improvement Over Random</div>
             </div>
             <div class="metric-card warning">
-                <div class="metric-value">$10.6M</div>
-                <div class="metric-label">5-Year Savings (Moderate)</div>
+                <div class="metric-value">26</div>
+                <div class="metric-label">Exclusions in Top 1,000</div>
             </div>
             <div class="metric-card">
                 <div class="metric-value">1.38M</div>
@@ -358,7 +318,7 @@
                     <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 10px;">Key Achievements</div>
                     <div style="display: flex; justify-content: space-between; font-size: 12px;">
                         <div><strong>26</strong> Exclusions in Top 1,000</div>
-                        <div><strong>99.9%</strong> Legitimate Provider Accuracy</div>
+                        <div><strong>0.1892</strong> Matthews Correlation</div>
                     </div>
                 </div>
             </div>
@@ -379,7 +339,7 @@
                 </div>
                 <div class="bar">
                     <div class="bar-fill" style="width: 86%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <span class="bar-label">Beneficiary Age</span>
+                        <span class="bar-label">Beneficiary Risk Score</span>
                     </div>
                     <span class="bar-value">8.6%</span>
                 </div>
@@ -444,7 +404,7 @@
                                 <td>298,652</td>
                                 <td>71</td>
                                 <td>0.024%</td>
-                                <td><span class="risk-badge" style="background: #d4edda; color: #155724;">0.81× baseline</span></td>
+                                <td><span class="risk-badge risk-low">0.81× baseline</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -452,7 +412,7 @@
             </div>
             
             <div class="chart-card">
-                <div class="chart-title">High-Risk Specialties</div>
+                <div class="chart-title">High Risk Specialties</div>
                 <div class="bar">
                     <div class="bar-fill" style="width: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                         <span class="bar-label">Pain Management</span>
@@ -482,58 +442,96 @@
             </div>
             
             <div class="chart-card" style="grid-column: 1 / -1;">
-                <div class="chart-title">Implementation Roadmap & Financial Impact</div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot">I</div>
-                        <div class="timeline-label">Phase I (Years 1-2)</div>
-                        <div class="timeline-value">$2.6-7.8M</div>
-                        <div style="font-size: 11px; color: #95a5a6; margin-top: 5px;">Real-time API, FHIR/HL7</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot">II</div>
-                        <div class="timeline-label">Phase II (Years 3-5)</div>
-                        <div class="timeline-value">$26M</div>
-                        <div style="font-size: 11px; color: #95a5a6; margin-top: 5px;">Network analysis, Adaptive learning</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot">III</div>
-                        <div class="timeline-label">Phase III (Years 5+)</div>
-                        <div class="timeline-value">Billions</div>
-                        <div style="font-size: 11px; color: #95a5a6; margin-top: 5px;">Full integration: Medicare, VA, TRICARE</div>
-                    </div>
+                <div class="chart-title">Risk Stratification Performance</div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Risk Tier</th>
+                                <th>Score Range</th>
+                                <th>Providers</th>
+                                <th>Exclusions</th>
+                                <th>Precision</th>
+                                <th>Improvement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="risk-badge risk-critical">Critical</span></td>
+                                <td>0.7 to 1.0</td>
+                                <td>12,653</td>
+                                <td>133</td>
+                                <td>1.05%</td>
+                                <td>10.5× baseline</td>
+                            </tr>
+                            <tr>
+                                <td><span class="risk-badge risk-high">High</span></td>
+                                <td>0.5 to 0.7</td>
+                                <td>15,341</td>
+                                <td>81</td>
+                                <td>0.53%</td>
+                                <td>5.3× baseline</td>
+                            </tr>
+                            <tr>
+                                <td><span class="risk-badge risk-elevated">Medium</span></td>
+                                <td>0.3 to 0.5</td>
+                                <td>13,914</td>
+                                <td>37</td>
+                                <td>0.27%</td>
+                                <td>2.7× baseline</td>
+                            </tr>
+                            <tr>
+                                <td><span class="risk-badge" style="background: #e2e3e5; color: #383d41;">Low</span></td>
+                                <td>0.1 to 0.3</td>
+                                <td>17,089</td>
+                                <td>34</td>
+                                <td>0.20%</td>
+                                <td>2.0× baseline</td>
+                            </tr>
+                            <tr>
+                                <td><span class="risk-badge risk-low">Very Low</span></td>
+                                <td>0.0 to 0.1</td>
+                                <td>10,315</td>
+                                <td>7</td>
+                                <td>0.07%</td>
+                                <td>0.7× baseline</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 30px;">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px;">
                     <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Conservative</div>
-                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">$8.6M</div>
-                        <div style="font-size: 11px; color: #95a5a6;">5-year / Top 500</div>
+                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Total Providers</div>
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">69,312</div>
+                        <div style="font-size: 11px; color: #95a5a6;">Validation Set</div>
+                    </div>
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Total Exclusions</div>
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">292</div>
+                        <div style="font-size: 11px; color: #95a5a6;">2023 Testing Data</div>
                     </div>
                     <div style="padding: 15px; background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-radius: 8px; text-align: center;">
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Moderate</div>
-                        <div style="font-size: 20px; font-weight: bold; color: #667eea;">$10.6M</div>
-                        <div style="font-size: 11px; color: #95a5a6;">5-year / Top 1,000</div>
+                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Top 1% Precision</div>
+                        <div style="font-size: 20px; font-weight: bold; color: #667eea;">3.3%</div>
+                        <div style="font-size: 11px; color: #95a5a6;">33 fold improvement</div>
                     </div>
                     <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Aggressive</div>
-                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">$17.2M</div>
-                        <div style="font-size: 11px; color: #95a5a6;">5-year / Top 2,000</div>
-                    </div>
-                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Full Deploy</div>
-                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">$31.8M</div>
-                        <div style="font-size: 11px; color: #95a5a6;">5-year / Top 5,000</div>
+                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">Baseline Rate</div>
+                        <div style="font-size: 20px; font-weight: bold; color: #2c3e50;">0.10%</div>
+                        <div style="font-size: 11px; color: #95a5a6;">Random Selection</div>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <strong>Key Statistics:</strong> FY2024 Medicare FFS Improper Payment Rate: 7.66% ($31.70B) | 
-            Medicare Part D Enrollees: 54 Million | 
-            June 2025 Fraud Takedown: 324 defendants, $14.6B alleged fraud | 
-            System Processing: 26GB federal data, 5 CMS/OIG databases
+            <strong>Data Sources:</strong> CMS Medicare Part D Prescriber Data, Open Payments Database, HHS OIG LEIE Exclusions | 
+            <strong>Analysis Period:</strong> 2022 to 2023 | 
+            <strong>Total Data Volume:</strong> 26 GB across 5 federal databases | 
+            <strong>FY 2024 Medicare FFS Improper Payments:</strong> $31.70B (7.66%)
+            <div class="limitations">
+                Note: This system identifies statistical patterns indicative of compliance risk. Determination of actual improper payments requires investigation by authorized agencies.
+            </div>
         </div>
     </div>
 </body>
