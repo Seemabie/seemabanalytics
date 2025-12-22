@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 2: Medicare Part D Opioid Prescribing Integrity Analytics - Seemab Analytics</title>
+    <title>Project 2: Medicare Part D Opioid Prescribing Integrity Analytics | Seemab Analytics</title>
     <style>
         * {
             margin: 0;
@@ -299,6 +299,16 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            color: #856404;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 6rem 1rem 2rem;
@@ -344,12 +354,12 @@
     <div class="container">
         <div class="content">
             <h1>Project 2: Medicare Part D Opioid Prescribing Integrity Analytics</h1>
-            <p class="subtitle">Identifying High-Risk Patterns Through Machine Learning and Peer Benchmarking</p>
+            <p class="subtitle">Peer Normalized Risk Scoring Through Machine Learning and Statistical Validation</p>
 
             <div class="key-metrics">
                 <div class="metric-card">
                     <div class="metric-value">$1.22B</div>
-                    <div class="metric-label">Excess Medicare Costs Identified</div>
+                    <div class="metric-label">Excess Costs Quantified</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">1.03M</div>
@@ -357,7 +367,7 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">51,660</div>
-                    <div class="metric-label">High-Risk Prescribers</div>
+                    <div class="metric-label">High Risk Identified</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">61.6%</div>
@@ -367,179 +377,218 @@
 
             <section class="section">
                 <h2>Executive Summary</h2>
-                <p>The United States faces a critical public health and economic challenge with inappropriate opioid prescribing patterns contributing to both the ongoing overdose crisis and unsustainable healthcare costs. This research addresses a fundamental inefficiency in the Medicare Part D prescription drug program, where statistical outliers in opioid prescribing patterns represent both patient safety risks and substantial unnecessary federal expenditures.</p>
+                <p>The Medicare Part D Opioid Prescribing Integrity Analytics system provides a peer normalized analytical framework for identifying high risk opioid prescribing patterns through integrated machine learning and statistical validation methods. The system addresses a fundamental limitation in existing detection approaches: the absence of appropriate benchmarks that account for legitimate variation across medical specialties and geographic regions.</p>
                 
                 <div class="highlight-box">
-                    <p><strong>Key Achievement:</strong> Through analysis of 1.38 million Medicare Part D prescribers (reduced to 1.03 million after data cleaning and exclusions), this project develops a comprehensive framework for identifying and quantifying high-risk prescribing behaviors that deviate significantly from peer norms, identifying $1.22 billion in excess Medicare Part D costs annually.</p>
+                    <p><strong>Key Achievement:</strong> Analysis of 1.38 million Medicare Part D prescribers (reduced to 1.03 million after data quality filtering and clinical exclusions) identified 51,660 prescribers (5.0%) exhibiting statistically anomalous opioid prescribing patterns associated with $1.22 billion in quantified excess costs (95% CI: $1.21 to $1.24 billion).</p>
                 </div>
                 
-                <p>The analysis achieves 61.6% concordance between machine learning and statistical methods, with 63% two-year persistence in high-risk classifications (projected based on literature), demonstrating robust methodology. Conservative projections indicate $2.57 billion in potential national healthcare savings when extrapolated beyond Medicare, affecting approximately 28.1 million excess prescriptions annually.</p>
+                <p>The methodology creates 2,020 specialty state peer groups covering 196 medical specialties across 61 U.S. jurisdictions, enabling evaluation of prescribers only against colleagues treating similar patient populations. Triple validation achieves 61.6% concordance between machine learning and statistical methods, with 2.3% bootstrap stability and 98.7% subsample correlation.</p>
+            </section>
+
+            <section class="section">
+                <h2>Problem Context</h2>
+                <p>Medicare Part D provides prescription drug coverage to over 54 million beneficiaries through payments totaling $128.2 billion annually. The Centers for Medicare & Medicaid Services reports improper payment rates of 3.70% in Part D, representing $3.58 billion annually. The Government Accountability Office designates Medicare Program and Improper Payments as a high risk area requiring enhanced monitoring and oversight mechanisms.</p>
+                
+                <p>Within this program, opioid prescribing patterns present particular oversight challenges. Federal assessments have identified specific gaps in Medicare's oversight capacity, including the absence of peer normalized benchmarks that account for legitimate specialty and geographic variation. This project addresses that documented gap through systematic peer group benchmarking.</p>
             </section>
 
             <section class="section">
                 <h2>Methodology</h2>
                 
                 <h3>Data Integration Framework</h3>
-                <p>This research integrates four authoritative federal datasets:</p>
+                <p>This system integrates four authoritative federal datasets:</p>
                 <ul>
-                    <li><strong>Medicare Part D Prescriber Public Use File:</strong> 1,380,665 prescribers across 61 U.S. jurisdictions</li>
+                    <li><strong>Medicare Part D Prescriber Public Use File:</strong> 1,380,665 prescribers across 61 U.S. jurisdictions with 84 variables</li>
                     <li><strong>OIG List of Excluded Individuals/Entities:</strong> 81,914 excluded healthcare providers</li>
-                    <li><strong>CDC National Vital Statistics System:</strong> Overdose deaths by state and drug category</li>
-                    <li><strong>Medicare Part D Drug Spending Data:</strong> Comprehensive spending and utilization data</li>
+                    <li><strong>CDC National Vital Statistics System:</strong> 50 states plus territories</li>
+                    <li><strong>Part D Drug Spending Data:</strong> Drug formulations and cost benchmarking</li>
                 </ul>
 
                 <h3>Analytical Approach</h3>
                 <div class="tech-stack">
                     <span class="tech-badge">Isolation Forest</span>
-                    <span class="tech-badge">Statistical Z-Score</span>
+                    <span class="tech-badge">Z Score Analysis</span>
                     <span class="tech-badge">Peer Benchmarking</span>
                     <span class="tech-badge">Bootstrap Validation</span>
                     <span class="tech-badge">IQR Analysis</span>
                 </div>
                 
-                <p>The framework employs robust statistical measures resistant to outliers, utilizing median and interquartile range (IQR) rather than mean and standard deviation. Machine learning implementation uses Isolation Forest algorithm to detect multivariate anomalies with contamination parameter of 0.05, validated through systematic sensitivity analysis.</p>
+                <p>The framework employs robust statistical measures resistant to outliers, utilizing median and interquartile range (IQR) rather than mean and standard deviation. Machine learning implementation uses Isolation Forest algorithm with contamination parameter of 0.05, validated through systematic sensitivity analysis across the 0.01 to 0.10 range.</p>
+
+                <h3>Combined Risk Score Framework</h3>
+                <p>The weighted integration enables prioritization based on multiple risk dimensions:</p>
+                <ul>
+                    <li><strong>Peer Deviation:</strong> 30% weight</li>
+                    <li><strong>Absolute Volume:</strong> 20% weight</li>
+                    <li><strong>Prescribing Rate:</strong> 20% weight</li>
+                    <li><strong>Intensity Ratio:</strong> 15% weight</li>
+                    <li><strong>Cost Metrics:</strong> 15% weight</li>
+                </ul>
+
+                <h3>Clinical Safeguards</h3>
+                <p>A total of 7,701 prescribers in oncology, palliative care, and hospice specialties were excluded from high risk classification. These specialties legitimately prescribe opioids at higher rates due to patient populations with cancer pain and end of life care needs. The 2,020 specialty state peer group structure itself functions as an additional clinical safeguard by ensuring fair comparison within practice contexts.</p>
             </section>
 
             <section class="section">
                 <h2>Key Visualizations</h2>
                 
                 <div class="figure-container">
-                    <img src="Project2_Fig_4.png" alt="Implementation Strategy and ROI">
-                    <div class="figure-title">Figure 1: Phased Implementation Strategy and Return on Investment Analysis</div>
-                </div>
-
-                <div class="figure-container">
-                    <img src="Project2_Fig_3.png" alt="Model Validation Metrics">
-                    <div class="figure-title">Figure 2: Model Validation and Performance Metrics</div>
+                    <img src="Project2_Fig_1.png" alt="Risk Score Distribution">
+                    <div class="figure-title">Figure 1: Distribution of Risk Scores Across 1.03M Medicare Part D Prescribers</div>
                 </div>
 
                 <div class="figure-container">
                     <img src="Project2_Fig_2.png" alt="Geographic Distribution">
-                    <div class="figure-title">Figure 3: Geographic Distribution of High-Risk Opioid Prescribing Patterns</div>
+                    <div class="figure-title">Figure 2: Geographic Distribution of High Risk Opioid Prescribing Patterns</div>
                 </div>
 
                 <div class="figure-container">
-                    <img src="Project2_Fig_1.png" alt="Risk Score Distribution">
-                    <div class="figure-title">Figure 4: Distribution of Risk Scores Across 1.03M Medicare Part D Prescribers</div>
+                    <img src="Project2_Fig_3.png" alt="Model Validation Metrics">
+                    <div class="figure-title">Figure 3: Model Validation and Performance Metrics</div>
                 </div>
             </section>
 
             <section class="section">
-                <h2>Results & Impact</h2>
+                <h2>Results</h2>
                 
                 <h3>Risk Score Distribution</h3>
                 <div class="stat-grid">
                     <div class="stat-item">
                         <div class="stat-number">99.6%</div>
-                        <div class="stat-label">Low Risk (0-25)</div>
+                        <div class="stat-label">Low Risk (0 to 25)</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">0.40%</div>
-                        <div class="stat-label">Medium Risk (26-50)</div>
+                        <div class="stat-label">Medium Risk (26 to 50)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">&lt;0.01%</div>
+                        <div class="stat-label">High Risk (51 to 75)</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">0.00%</div>
-                        <div class="stat-label">High Risk (51-75)</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">0.00%</div>
-                        <div class="stat-label">Critical Risk (76-100)</div>
+                        <div class="stat-label">Critical Risk (76 to 100)</div>
                     </div>
                 </div>
 
-                <h3>Financial Impact Scenarios</h3>
-                <table class="implementation-table">
+                <h3>Geographic Distribution (Top 5 States)</h3>
+                <table>
                     <thead>
                         <tr>
-                            <th>Scenario</th>
-                            <th>Target Population</th>
-                            <th>Annual Impact</th>
-                            <th>Implementation Time</th>
-                            <th>ROI</th>
+                            <th>State</th>
+                            <th>Prescribers</th>
+                            <th>Anomalies</th>
+                            <th>Rate</th>
+                            <th>Excess Cost</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Conservative</td>
-                            <td>Top 100 prescribers</td>
-                            <td>$46.4 million</td>
-                            <td>6 months</td>
-                            <td>12:1</td>
+                            <td>Florida</td>
+                            <td>52,847</td>
+                            <td>2,470</td>
+                            <td>4.67%</td>
+                            <td>$101.8M</td>
                         </tr>
                         <tr>
-                            <td>Moderate</td>
-                            <td>Top 5% (2,500)</td>
-                            <td>$584 million</td>
-                            <td>12 months</td>
-                            <td>28:1</td>
+                            <td>California</td>
+                            <td>89,234</td>
+                            <td>4,327</td>
+                            <td>4.85%</td>
+                            <td>$80.2M</td>
                         </tr>
                         <tr>
-                            <td>Comprehensive</td>
-                            <td>All anomalies (51,660)</td>
-                            <td>$1.22 billion</td>
-                            <td>24 months</td>
-                            <td>45:1</td>
+                            <td>Texas</td>
+                            <td>45,623</td>
+                            <td>2,208</td>
+                            <td>4.84%</td>
+                            <td>$69.7M</td>
                         </tr>
                         <tr>
-                            <td>National Scale</td>
-                            <td>Medicare + Commercial</td>
-                            <td>$2.57 billion</td>
-                            <td>36 months</td>
-                            <td>62:1</td>
+                            <td>North Carolina</td>
+                            <td>28,456</td>
+                            <td>2,063</td>
+                            <td>7.25%</td>
+                            <td>$56.3M</td>
+                        </tr>
+                        <tr>
+                            <td>Georgia</td>
+                            <td>22,789</td>
+                            <td>1,102</td>
+                            <td>4.83%</td>
+                            <td>$49.5M</td>
                         </tr>
                     </tbody>
                 </table>
+                <p>Southern states exhibit elevated anomaly rates (mean 6.2%) compared to the national average (4.1%). Urban areas demonstrate 3.2 times more anomalies in absolute numbers but lower rates (4.6%) compared to rural regions (5.8%).</p>
             </section>
 
             <section class="section">
-                <h2>Policy Implications</h2>
+                <h2>Validation Results</h2>
                 
-                <p>The findings directly align with federal priorities established in:</p>
+                <h3>Triple Validation Framework</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Validation Method</th>
+                            <th>Result</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Method Concordance</td>
+                            <td>61.6%</td>
+                            <td>ML and statistical methods reach similar conclusions</td>
+                        </tr>
+                        <tr>
+                            <td>Bootstrap Stability</td>
+                            <td>2.3% std error</td>
+                            <td>Results consistent across 100 iterations</td>
+                        </tr>
+                        <tr>
+                            <td>Subsample Correlation</td>
+                            <td>98.7%</td>
+                            <td>Random 10% samples produce nearly identical findings</td>
+                        </tr>
+                        <tr>
+                            <td>CMS Audit Alignment</td>
+                            <td>72% overlap</td>
+                            <td>Consistency with prior manual Medicare reviews</td>
+                        </tr>
+                        <tr>
+                            <td>Temporal Persistence</td>
+                            <td>63% (projected)</td>
+                            <td>High risk patterns expected to persist across years</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Technical Specifications</h3>
                 <ul>
-                    <li><strong>SUPPORT for Patients and Communities Act (2018):</strong> Advances Section 6052 requirements for improving prescription drug monitoring</li>
-                    <li><strong>Executive Order 13784:</strong> Provides data infrastructure for enhanced prescription monitoring and provider accountability</li>
-                    <li><strong>HHS 5-Point Strategy to Combat the Opioid Crisis:</strong> Supports Point 2 (Data and Evidence) through reproducible metrics</li>
-                    <li><strong>CMS Program Integrity Initiatives:</strong> Enables targeted interventions preserving legitimate access</li>
+                    <li><strong>Isolation Forest Anomaly Detection:</strong> 51,660 flagged (5.0% of analyzed population)</li>
+                    <li><strong>Processing Time:</strong> 47.3 seconds for complete prescriber population</li>
+                    <li><strong>Peer Groups Generated:</strong> 2,020 specialty state combinations</li>
+                    <li><strong>Clinical Exclusions Applied:</strong> 7,701 oncology and palliative care providers</li>
+                    <li><strong>Random Seed:</strong> Fixed at 42 for reproducibility</li>
                 </ul>
-                
-                <div class="highlight-box">
-                    <p><strong>National Impact:</strong> Full implementation addressing all 51,660 identified anomalies projects steady-state savings of $1.22 billion annually by year 5. Ten-year projection indicates $1.2-2.4 billion in cumulative recoveries, sufficient to fund Part D coverage for 24,000-48,000 additional beneficiaries annually.</p>
+
+                <div class="disclaimer">
+                    <strong>Important Note:</strong> This system identifies statistical anomalies warranting further investigation, not confirmed fraud or abuse. As the Centers for Medicare & Medicaid Services notes, not all improper payments represent fraud or abuse. Actual recoverable amounts depend on subsequent investigation and enforcement capacity.
                 </div>
             </section>
 
             <section class="section">
-                <h2>Technical Implementation</h2>
+                <h2>Scalability</h2>
+                <p>The methodology demonstrates scalability for systematic analysis of the complete Medicare Part D prescriber population. Processing efficiency of 47.3 seconds for 1.38 million prescribers enables real time application impossible through manual review methods, which face resource constraints limiting coverage to a fraction of providers annually.</p>
                 
-                <h3>Model Validation Metrics</h3>
-                <ul>
-                    <li><strong>Isolation Forest Anomaly Detection:</strong> 51,660 flagged (5.0% contamination rate)</li>
-                    <li><strong>Statistical Z-score Baseline:</strong> 443,988 flagged (3 standard deviation threshold)</li>
-                    <li><strong>Method Agreement:</strong> 61.6% concordance</li>
-                    <li><strong>Bootstrap Validation:</strong> 100 iterations, 2.3% standard error</li>
-                </ul>
-
-                <h3>Feature Importance</h3>
-                <ul>
-                    <li>Peer deviation: 34%</li>
-                    <li>Total claims: 24%</li>
-                    <li>Prescribing rate: 18%</li>
-                    <li>Intensity ratio: 14%</li>
-                    <li>Cost metrics: 10%</li>
-                </ul>
-
-                <h3>External Validation</h3>
-                <ul>
-                    <li>OIG Database Concordance: Confirmed matches with enforcement actions</li>
-                    <li>CMS Audit Alignment: 72% overlap with manual reviews</li>
-                    <li>Temporal Persistence: 63% two-year stability (projected based on literature)</li>
-                    <li>Subsample Correlation: 98.7% consistency on random 10% samples</li>
-                    <li>Clinical Exclusions: 7,701 prescribers excluded (oncology/palliative)</li>
-                </ul>
+                <p>The complete analytical pipeline utilizes open source Python libraries with fixed random seeds ensuring deterministic results. All configuration parameters are stored in version controlled files, enabling exact reproduction of findings by independent parties using the same public data sources.</p>
             </section>
 
             <div class="nav-buttons">
-                <a href="project1.html" class="nav-btn">← Previous Project</a>
-                <a href="project3.html" class="nav-btn">Next Project →</a>
+                <a href="project1.html" class="nav-btn">Previous Project</a>
+                <a href="project3.html" class="nav-btn">Next Project</a>
             </div>
         </div>
     </div>
