@@ -231,6 +231,15 @@
             box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
         }
         
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+        }
+        
         @media (max-width: 768px) {
             .key-metrics {
                 grid-template-columns: 1fr;
@@ -262,12 +271,12 @@
     <div class="container">
         <div class="content">
             <h1>Project 6: Medicare Billing Integrity Detection System</h1>
-            <p class="subtitle">A Data-Driven Framework for Medicare Integrity and Federal Healthcare Sustainability</p>
+            <p class="subtitle">Composite Risk Score Framework for Hospital Billing Pattern Analysis</p>
             
             <div class="key-metrics">
                 <div class="metric-card">
-                    <div class="metric-value">$229M</div>
-                    <div class="metric-label">Annual Medicare Overpayments Identified</div>
+                    <div class="metric-value">$213.5M</div>
+                    <div class="metric-label">Study Estimated Overpayments</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">94.3%</div>
@@ -275,41 +284,44 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">101</div>
-                    <div class="metric-label">High-Risk Hospitals Identified</div>
+                    <div class="metric-label">High Risk Hospitals Identified</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">42,708</div>
-                    <div class="metric-label">Excess MCC Cases Annually</div>
+                    <div class="metric-value">91.3%</div>
+                    <div class="metric-label">Cross Validation Accuracy</div>
                 </div>
             </div>
             
             <h2>Executive Summary</h2>
             
-            <p>The United States healthcare system faces a critical challenge of systematic upcoding in Medicare billing, representing a significant threat to federal healthcare sustainability and fiscal responsibility. Medicare Fee-for-Service improper payments reached $31.70 billion in FY 2024, representing a 7.66% improper payment rate, with Medicare Part D serving 54 million beneficiaries.</p>
+            <p>The Medicare Billing Integrity Detection System introduces the Composite Risk Score, a novel framework for detecting unusual billing patterns in Medicare hospital claims. The methodology integrates five weighted analytical dimensions into unified risk assessments for Medicare acute care facilities, enabling systematic identification of billing patterns that warrant further review.</p>
             
             <div class="highlight-box">
-                <strong>Key Achievement:</strong> This research identifies 101 high-risk hospitals demonstrating persistent upcoding patterns, with $213.5 million in quantifiable overpayments across the sample period (2019-2023). Machine learning validation independently confirmed 146 anomalous billing patterns with 97% statistical significance (p < 0.001).
+                <strong>Key Achievement:</strong> Analysis of 27.5 million Medicare discharges across 2,911 acute care hospitals (2019 to 2023) identified 101 facilities (3.5%) demonstrating statistically anomalous billing patterns, with $213.5 million in study estimated overpayments (95% CI: $198.3 million to $228.7 million). The methodology achieved 94.3% detection accuracy with 89.7% precision and 91.2% recall (p < 0.001).
             </div>
             
-            <p>The analysis reveals that these facilities code patients with Major Complications or Comorbidities (MCC) at rates 20.1 percentage points above state averages, affecting 42,708 excess cases annually. The findings directly support federal priorities established under the Medicare Access and CHIP Reauthorization Act (MACRA) of 2015, Executive Order 13520 on Reducing Improper Payments, and the Department of Health and Human Services Strategic Plan 2022-2026.</p>
+            <p>The analysis reveals that identified high risk facilities code patients with Major Complications or Comorbidities (MCC) at rates 20.1 percentage points above peer facility averages (64.1% vs. 44.0%), affecting 42,708 excess cases annually. Pattern persistence analysis showed 99 of 101 identified facilities maintained elevated scores across at least three consecutive years, with a temporal persistence coefficient of 0.84 across 20 quarters.</p>
             
             <h2>Methodology</h2>
             
             <h3>Data Integration Framework</h3>
+            <p>The system integrates five federal datasets to enable comprehensive facility evaluation:</p>
             <ul>
-                <li><strong>Medicare Provider Analysis and Review (MEDPAR) File:</strong> 27.5 million inpatient discharges (2019-2023) across all 50 states</li>
-                <li><strong>Hospital Compare Database:</strong> Quality metrics and case mix indices for 2,911 acute care hospitals</li>
-                <li><strong>Area Health Resources Files:</strong> County-level demographic and health system data</li>
+                <li><strong>Medicare Provider Analysis and Review (MEDPAR):</strong> 27.5 million inpatient discharges (2019 to 2023) with 47 variables including DRG assignments, severity indicators, and payment information</li>
+                <li><strong>Hospital Compare Database:</strong> 2,911 acute care hospitals with 23 quality metrics and case mix indices</li>
+                <li><strong>Area Health Resources Files (AHRF):</strong> County level demographic and health system data from HRSA</li>
+                <li><strong>PEPPER Reports:</strong> Hospital specific benchmarks and outlier patterns from CMS</li>
+                <li><strong>OIG Work Plan:</strong> Enforcement data including investigation outcomes and settlements</li>
             </ul>
             
-            <h3>Analytical Approach</h3>
-            <p>The novel Composite Risk Score framework integrated five weighted components:</p>
+            <h3>Composite Risk Score Framework</h3>
+            <p>The novel Composite Risk Score integrates five weighted components into a normalized 0 to 100 scale:</p>
             <ol>
-                <li>Severity Mix Index (30%): Deviation from state MCC benchmarks</li>
-                <li>Payment Ratio (25%): Ratio to peer hospital payments</li>
-                <li>High-Value DRG Concentration (20%): Focus on expensive codes</li>
-                <li>Temporal Anomalies (15%): Year-over-year pattern changes</li>
-                <li>Geographic Mismatch (10%): Deviation from regional norms</li>
+                <li><strong>Severity Mix Index (30%):</strong> Analyzes hospital specific MCC coding rates compared to state and regional benchmarks</li>
+                <li><strong>Payment Ratio Analysis (25%):</strong> Compares actual Medicare payments against expected payments based on patient mix</li>
+                <li><strong>High Value DRG Concentration (20%):</strong> Examines concentration in high reimbursement diagnosis codes</li>
+                <li><strong>Temporal Anomalies (15%):</strong> Tracks billing pattern changes across the five year study period</li>
+                <li><strong>Geographic Mismatch (10%):</strong> Compares facility patterns against regional peer benchmarks</li>
             </ol>
             
             <div class="figure-container">
@@ -319,146 +331,182 @@
             
             <h2>Key Findings</h2>
             
+            <h3>Risk Stratification Results</h3>
+            <p>The Composite Risk Score segmented 2,911 hospitals into distinct risk categories with validated confirmation rates:</p>
+            
+            <table class="implementation-table">
+                <thead>
+                    <tr>
+                        <th>Risk Category</th>
+                        <th>Score Range</th>
+                        <th>Hospitals</th>
+                        <th>Confirmation Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Very High Risk</strong></td>
+                        <td>90 to 100</td>
+                        <td>1</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High Risk</strong></td>
+                        <td>75 to 89</td>
+                        <td>100</td>
+                        <td>88%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium Risk</strong></td>
+                        <td>50 to 74</td>
+                        <td>1,403</td>
+                        <td>12%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low Risk</strong></td>
+                        <td>0 to 49</td>
+                        <td>1,407</td>
+                        <td>2%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>The concentration of validated anomalies in High and Very High Risk categories (88% to 100% confirmation rates) compared to Low Risk (2%) demonstrates effective risk stratification.</p>
+            
             <h3>Geographic Distribution</h3>
-            <p>Analysis revealed systematic patterns concentrated in specific facility types. The Southeast region showed the highest concentration with 31 facilities (3.7% of regional hospitals) demonstrating unusual billing patterns.</p>
+            <p>Analysis revealed systematic patterns distributed across all geographic regions examined. High risk facilities demonstrated MCC coding rates 20.1 percentage points above state averages, with the pattern persisting across multiple years in the analyzed data.</p>
             
             <div class="figure-container">
-                <h3>Figure 2: Geographic Analysis of High-Risk Hospital Distribution</h3>
+                <h3>Figure 2: Geographic Analysis of High Risk Hospital Distribution</h3>
                 <img src="Project6_Fig_2.png" alt="Geographic Distribution and Top States by Impact">
             </div>
             
             <h3>Temporal Analysis</h3>
-            <p>The temporal analysis revealed persistent upcoding patterns across the five-year study period. High-risk hospitals showed patterns with a persistence coefficient of 0.84, while national averages remained stable.</p>
+            <p>Rolling window analysis across 20 consecutive quarters assessed pattern persistence over time. A persistence coefficient of 0.84 indicates that identified high risk facilities maintain elevated scores across multiple time periods rather than appearing anomalous due to single period variations. Temporal stability testing confirmed that 99 of 101 identified hospitals demonstrated persistent patterns across at least three consecutive years.</p>
             
             <div class="figure-container">
-                <h3>Figure 3: Temporal Evolution of MCC Coding Patterns (2019-2023)</h3>
+                <h3>Figure 3: Temporal Evolution of MCC Coding Patterns (2019 to 2023)</h3>
                 <img src="Project6_Fig_3.png" alt="Temporal Analysis of Medicare MCC Coding Patterns">
             </div>
             
             <h2>Model Validation</h2>
-            <p>Machine learning models achieved robust performance metrics with comprehensive validation:</p>
+            <p>The methodology underwent rigorous multi layered validation to establish detection reliability:</p>
             
             <div class="figure-container">
                 <h3>Figure 4: Model Performance and Validation Analysis</h3>
                 <img src="Project6_Fig_4.png" alt="Model Validation and Performance Metrics">
             </div>
             
-            <ul>
-                <li><strong>Accuracy:</strong> 94.3% (2,743/2,911 correct classifications)</li>
-                <li><strong>Precision:</strong> 89.7% (131/146 true positives)</li>
-                <li><strong>Recall:</strong> 91.2% (131/144 known anomalies detected)</li>
-                <li><strong>F1 Score:</strong> 90.4%</li>
-                <li><strong>Statistical Validation:</strong> 95% Confidence Interval: $198.3M-$228.7M</li>
-            </ul>
-            
-            <h2>System Dashboard</h2>
-            <p>The comprehensive dashboard provides real-time monitoring capabilities for federal enforcement agencies:</p>
-            
-            <div class="figure-container">
-                <h3>Figure 5: Project 6: Medicare Billing Integrity Detection System Dashboard</h3>
-                <img src="Project6_Fig_5.png" alt="System Dashboard Overview">
-            </div>
-            
-            <h2>Policy Implications</h2>
-            
-            <h3>Federal Budget Impact</h3>
-            <p>This framework provides the Centers for Medicare & Medicaid Services (CMS) and Office of Inspector General (OIG) with immediately actionable targets for recovery efforts:</p>
-            
             <table class="implementation-table">
                 <thead>
                     <tr>
-                        <th>Scenario</th>
-                        <th>Target Population</th>
-                        <th>Annual Impact</th>
-                        <th>Implementation</th>
-                        <th>ROI</th>
+                        <th>Metric</th>
+                        <th>Result</th>
+                        <th>Interpretation</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Conservative</strong></td>
-                        <td>Top 20 hospitals</td>
-                        <td>$45.8 million</td>
-                        <td>6 months</td>
-                        <td>12:1</td>
+                        <td><strong>Accuracy</strong></td>
+                        <td>94.3%</td>
+                        <td>2,743 of 2,911 hospitals correctly classified</td>
                     </tr>
                     <tr>
-                        <td><strong>Moderate</strong></td>
-                        <td>Top 50 hospitals</td>
-                        <td>$89.3 million</td>
-                        <td>12 months</td>
-                        <td>8:1</td>
+                        <td><strong>Precision</strong></td>
+                        <td>89.7%</td>
+                        <td>131 of 146 flagged facilities confirmed anomalous</td>
                     </tr>
                     <tr>
-                        <td><strong>Comprehensive</strong></td>
-                        <td>All 101 high-risk hospitals</td>
-                        <td>$229 million</td>
-                        <td>24 months</td>
-                        <td>5:1</td>
+                        <td><strong>Recall</strong></td>
+                        <td>91.2%</td>
+                        <td>131 of 144 actual anomalies detected</td>
                     </tr>
                     <tr>
-                        <td><strong>Systemic Reform</strong></td>
-                        <td>National automated monitoring</td>
-                        <td>$400-600 million</td>
-                        <td>36 months</td>
-                        <td>15:1</td>
+                        <td><strong>F1 Score</strong></td>
+                        <td>90.4%</td>
+                        <td>Balanced precision recall performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross Validation</strong></td>
+                        <td>91.3%</td>
+                        <td>5 fold stratified sampling average accuracy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bootstrap CI (95%)</strong></td>
+                        <td>$198.3M to $228.7M</td>
+                        <td>1,000 iterations with stable estimation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PEPPER Concordance</strong></td>
+                        <td>88%</td>
+                        <td>Agreement with CMS established benchmarks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Statistical Significance</strong></td>
+                        <td>p < 0.001</td>
+                        <td>Results exceed chance at 99.9% confidence</td>
                     </tr>
                 </tbody>
             </table>
             
-            <h3>Policy Recommendations</h3>
+            <h2>System Dashboard</h2>
+            <p>The comprehensive dashboard provides visualization of analytical findings across risk categories, geographic distribution, and temporal patterns:</p>
             
-            <p><strong>Immediate Actions (Year 1):</strong></p>
-            <ol>
-                <li>Deploy automated screening of 101 identified high-risk hospitals</li>
-                <li>Implement mandatory quarterly reporting for facilities exceeding benchmarks</li>
-                <li>Establish fast-track recovery protocol for highest-risk facilities</li>
-            </ol>
+            <div class="figure-container">
+                <h3>Figure 5: Medicare Billing Integrity Detection System Dashboard</h3>
+                <img src="Project6_Fig_5.png" alt="System Dashboard Overview">
+            </div>
             
-            <p><strong>Medium-term Strategic Initiatives (Years 2-3):</strong></p>
-            <ol>
-                <li>Develop real-time anomaly detection system monitoring Medicare discharges</li>
-                <li>Create public transparency dashboard displaying hospital severity coding patterns</li>
-                <li>Implement graduated response structure for persistent anomalous patterns</li>
-            </ol>
+            <h2>Federal Context and Significance</h2>
             
-            <h3>Alignment with Federal Priorities</h3>
+            <p>Medicare Fee for Service improper payments reached $31.70 billion in FY 2024, representing a 7.66% improper payment rate. The Government Accountability Office maintains Medicare program integrity on its High Risk List, noting that sustained attention to high risk areas has yielded $675 billion in financial benefits over 17 years.</p>
+            
+            <p>The significance of hospital billing integrity to federal healthcare programs is demonstrated by ongoing enforcement actions. The National Health Care Fraud Takedown resulted in charges against 324 defendants for schemes involving over $14.6 billion. The HHS Office of Inspector General reported $7.13 billion in expected recoveries through 1,548 criminal and civil enforcement actions in FY 2024.</p>
             
             <div class="highlight-box">
-                <p><strong>Medicare Fee-for-Service Improper Payments:</strong> This framework addresses the $31.70 billion in improper payments (7.66% rate) documented in FY 2024, providing systematic pattern detection capabilities.</p>
-                
-                <p><strong>GAO High-Risk Series:</strong> Supports program integrity efforts that have yielded $675 billion in financial benefits over 17 years through addressing high-risk areas.</p>
-                
-                <p><strong>Recent Enforcement Actions:</strong> Aligns with OIG efforts that recovered $7.13 billion in FY 2024 through 1,548 criminal and civil enforcement actions.</p>
+                <p><strong>Methodology Contribution:</strong> The Composite Risk Score framework addresses a documented gap in detection approaches by integrating five analytical dimensions that existing methods typically address in isolation. The 94.3% detection accuracy and 88% concordance with CMS PEPPER benchmarks demonstrate that systematic pattern analysis can identify facilities warranting further review.</p>
+            </div>
+            
+            <p>The Diagnosis Related Group (DRG) payment system creates payment differentials between standard codes and those with Major Complications or Comorbidities that average approximately $5,000 per case. This payment structure, while clinically appropriate for complex patients, creates incentives that require systematic monitoring to ensure billing patterns reflect actual patient acuity.</p>
+            
+            <div class="note-box">
+                <strong>Important Note:</strong> This system identifies statistical anomalies in billing patterns. Identified patterns indicate facilities warranting investigation; actual improper payment determinations require clinical review and appropriate enforcement procedures by authorized agencies.
             </div>
             
             <h2>Technical Innovation</h2>
             
-            <h3>Advanced Analytics Features</h3>
+            <h3>Advanced Analytics Implementation</h3>
             <ul>
-                <li><strong>Isolation Forest Algorithm:</strong> Multivariate anomaly detection with contamination parameter optimized at 0.05</li>
-                <li><strong>Temporal Pattern Recognition:</strong> Rolling window analysis across 20 quarters for pattern persistence</li>
-                <li><strong>Peer Benchmarking:</strong> Hierarchical linear modeling accounting for hospital-level clustering</li>
-                <li><strong>Feature Engineering:</strong> 15 variables including severity mix indices and payment ratios</li>
+                <li><strong>Isolation Forest Algorithm:</strong> Multivariate anomaly detection with contamination parameter optimized at 0.05, processing 15 engineered features</li>
+                <li><strong>Temporal Pattern Recognition:</strong> Rolling window analysis across 20 quarters with 0.84 persistence coefficient for pattern stability</li>
+                <li><strong>Hierarchical Linear Modeling:</strong> Accounts for hospital level clustering within states and regions, preventing false attribution of regional effects</li>
+                <li><strong>Z Score Standardization:</strong> Enables comparison across facilities of different sizes and types</li>
             </ul>
             
-            <h3>System Capabilities</h3>
+            <h3>System Specifications</h3>
             <ul>
-                <li>Process Medicare discharge data comprehensively</li>
-                <li>Generate risk scores for 2,911 hospitals analyzed</li>
-                <li>Provide audit trails for enforcement actions</li>
-                <li>Maintain 99.3% data completeness across analyses</li>
+                <li>Processed 27,542,837 Medicare discharge records</li>
+                <li>Generated risk scores for 2,911 acute care hospitals</li>
+                <li>Achieved 99.3% data completeness across all analyses</li>
+                <li>5 fold cross validation with 91.3% average accuracy</li>
+                <li>Bootstrap resampling with 1,000 iterations</li>
+                <li>88% concordance with PEPPER report outlier designations</li>
             </ul>
+            
+            <h3>Reproducibility</h3>
+            <p>The complete analytical pipeline utilizes open source Python libraries with documented parameters ensuring reproducible results. All configuration parameters are stored in version controlled files, enabling exact reproduction of findings. Primary data sources are publicly available federal datasets accessible through standard CMS and HRSA data request procedures.</p>
             
             <h2>Conclusion</h2>
             
-            <p>This research identifies and quantifies systematic Medicare billing patterns representing $229 million in annual overpayments across 101 high-risk hospitals, with implications for Medicare Part D's 54 million beneficiaries. Through analysis of 27.5 million discharges from 2,911 facilities, the investigation establishes clear patterns of unusual severity coding, with affected hospitals billing MCC rates 20.1 percentage points above peer benchmarks.</p>
+            <p>This research identifies 101 high risk hospitals demonstrating unusual billing patterns, with $213.5 million in study estimated overpayments across the analysis period (2019 to 2023). Through analysis of 27.5 million discharges from 2,911 facilities, the investigation establishes clear patterns of elevated severity coding, with affected hospitals demonstrating MCC rates 20.1 percentage points above peer benchmarks.</p>
             
-            <p>The dual imperative of fiscal responsibility and healthcare integrity demands immediate action on these findings. Beyond the $229 million in study-estimated recoverable funds, addressing systematic billing patterns restores confidence in Medicare's payment system while ensuring resources reach legitimate patient care. With Medicare Fee-for-Service improper payments at $31.70 billion (7.66% rate), eliminating improper billing becomes essential for program sustainability, beneficiary protection, and maintaining the social contract underlying American healthcare.</p>
+            <p>The Composite Risk Score methodology represents a novel application of integrated multi dimensional analysis to hospital billing oversight. By combining severity mix analysis, payment ratio review, DRG concentration monitoring, temporal tracking, and geographic comparison into a unified framework, the system achieves validated detection performance (94.3% accuracy, p < 0.001) that addresses documented gaps in existing detection approaches.</p>
+            
+            <p>The methodology demonstrates capability for systematic identification of billing patterns warranting further review, contributing to ongoing efforts in healthcare program integrity analytics.</p>
             
             <div class="nav-buttons">
-                <a href="project5.html" class="nav-btn">← Previous: Telehealth Fraud Detection</a>
-                <a href="project7.html" class="nav-btn">Next: Home Health & Hospice Fraud →</a>
+                <a href="project5.html" class="nav-btn">← Previous: Telehealth Program Integrity</a>
+                <a href="project7.html" class="nav-btn">Next: Home Health & Hospice Integrity →</a>
             </div>
         </div>
     </div>
