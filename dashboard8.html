@@ -3,568 +3,935 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicare Program Integrity & Healthcare Equity Analytics Dashboard</title>
+    <title>Healthcare Equity Analytics Dashboard | Seemab Hassan</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            padding: 20px;
+            min-height: 100vh;
             color: #2c3e50;
         }
-        
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
         .dashboard-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
+            text-align: center;
+            padding: 40px 30px;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
         }
-        
+
         .dashboard-header h1 {
-            font-size: 2.5em;
+            font-size: 2rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
-        
+
         .dashboard-header p {
-            font-size: 1.2em;
-            opacity: 0.95;
+            opacity: 0.9;
+            font-size: 1rem;
         }
-        
+
+        /* Metric Cards */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .metric-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
         }
-        
+
         .metric-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
         }
-        
-        .metric-card.primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .metric-card.success {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            color: #0c5460;
-        }
-        
-        .metric-card.warning {
-            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-            color: white;
-        }
-        
-        .metric-card.danger {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-        
-        .metric-value {
-            font-size: 2.5em;
+
+        .metric-card .value {
+            font-size: 2.5rem;
             font-weight: bold;
-            margin: 10px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .metric-label {
-            font-size: 1.1em;
-            opacity: 0.9;
-            font-weight: 500;
+
+        .metric-card .label {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-top: 5px;
+            font-weight: 600;
         }
-        
-        .metric-sublabel {
-            font-size: 0.9em;
-            opacity: 0.7;
+
+        .metric-card .sublabel {
+            font-size: 0.75rem;
+            color: #7f8c8d;
             margin-top: 5px;
         }
-        
-        .chart-container {
+
+        /* Colored Metric Cards */
+        .metric-card.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .metric-card.primary .value,
+        .metric-card.primary .label,
+        .metric-card.primary .sublabel {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .metric-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .metric-card.success .value,
+        .metric-card.success .label,
+        .metric-card.success .sublabel {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .metric-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .metric-card.warning .value,
+        .metric-card.warning .label,
+        .metric-card.warning .sublabel {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        .metric-card.danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .metric-card.danger .value,
+        .metric-card.danger .label,
+        .metric-card.danger .sublabel {
+            color: white;
+            -webkit-text-fill-color: white;
+        }
+
+        /* Grid Layouts */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .grid-3-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Cards */
+        .card {
             background: white;
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
         }
-        
-        .chart-title {
-            font-size: 1.5em;
+
+        .card h3 {
+            font-size: 1.1rem;
             margin-bottom: 20px;
             color: #2c3e50;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-        }
-        
-        .progress-bar {
-            background: #e9ecef;
-            border-radius: 10px;
-            height: 30px;
-            overflow: hidden;
-            margin: 10px 0;
-            position: relative;
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            height: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
+            gap: 10px;
+        }
+
+        .card h3::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            width: 100px;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 0.8rem;
             font-weight: bold;
-            transition: width 1s ease;
+            color: white;
+            transition: width 0.5s ease;
         }
-        
-        .table-container {
-            overflow-x: auto;
-            margin: 20px 0;
+
+        /* Progress Bars for Validation Metrics */
+        .progress-item {
+            margin-bottom: 15px;
         }
-        
-        table {
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .progress-label {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .progress-value {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+        }
+
+        /* Tables */
+        .data-table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
-        
-        th {
-            background: #667eea;
+
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: left;
+            font-size: 0.85rem;
             font-weight: 600;
         }
-        
-        td {
-            padding: 12px 15px;
+
+        .data-table td {
+            padding: 12px;
             border-bottom: 1px solid #e9ecef;
+            font-size: 0.85rem;
+            color: #2c3e50;
         }
-        
-        tr:hover {
+
+        .data-table tr:hover {
             background: #f8f9fa;
         }
-        
+
+        /* Badges */
         .badge {
             display: inline-block;
-            padding: 5px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
-        
-        .badge.success {
-            background: #d4edda;
-            color: #155724;
+
+        .badge-success {
+            background: rgba(17, 153, 142, 0.15);
+            color: #11998e;
         }
-        
-        .badge.warning {
-            background: #fff3cd;
-            color: #856404;
+
+        .badge-warning {
+            background: rgba(241, 196, 15, 0.15);
+            color: #d4a017;
         }
-        
-        .badge.danger {
-            background: #f8d7da;
-            color: #721c24;
+
+        .badge-danger {
+            background: rgba(235, 51, 73, 0.15);
+            color: #eb3349;
         }
-        
-        .grid-2-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+
+        .badge-info {
+            background: rgba(102, 126, 234, 0.15);
+            color: #667eea;
         }
-        
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: 200px;
-            margin: 20px 0;
-        }
-        
-        .bar {
-            flex: 1;
-            margin: 0 5px;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-            border-radius: 5px 5px 0 0;
+
+        /* State Rankings */
+        .state-list {
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .state-item {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            color: white;
-            font-weight: bold;
-            padding: 10px 5px;
-            position: relative;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
         }
-        
-        .bar-label {
-            margin-top: 10px;
+
+        .state-name {
+            font-size: 0.9rem;
             color: #2c3e50;
-            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .state-score {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .state-score.high {
+            color: #11998e;
+        }
+
+        .state-score.low {
+            color: #eb3349;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
+            color: white;
         }
-        
-        .icon {
-            font-size: 3em;
-            opacity: 0.1;
-            position: absolute;
-            right: 20px;
-            top: 20px;
+
+        .formula-box h4 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
         }
-        
-        @media (max-width: 768px) {
-            .grid-2-col {
-                grid-template-columns: 1fr;
+
+        .formula-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+            background: white;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .formula-range {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Disparity Cards */
+        .disparity-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .disparity-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .disparity-card .stat {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #eb3349;
+            margin-bottom: 5px;
+        }
+
+        .disparity-card .title {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .disparity-card .detail {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        /* Context Stats */
+        .context-stat {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .context-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .context-stat .number.green {
+            color: #11998e;
+        }
+
+        .context-stat .number.yellow {
+            color: #d4a017;
+        }
+
+        .context-stat .number.red {
+            color: #eb3349;
+        }
+
+        .context-stat .label {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-top: 5px;
+        }
+
+        .context-stat .sublabel {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+        }
+
+        /* Footer */
+        .dashboard-footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .dashboard-footer p {
+            margin-bottom: 5px;
+        }
+
+        .dashboard-footer .disclaimer {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
+            .grid-3-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
             .metrics-grid {
                 grid-template-columns: 1fr;
             }
-            
+            .grid-2-col {
+                grid-template-columns: 1fr;
+            }
+            .grid-3-col {
+                grid-template-columns: 1fr;
+            }
             .dashboard-header h1 {
-                font-size: 1.8em;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-header">
-        <h1>Medicare Program Integrity & Healthcare Equity Analytics</h1>
-        <p>National-scale framework identifying high-risk counties through ML-based modeling</p>
-    </div>
+    <div class="dashboard">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Medicare Program Integrity and Healthcare Equity Analytics</h1>
+            <p>County Level Healthcare Disparity Assessment Framework | Data Period: 2019 to 2022</p>
+        </div>
 
-    <!-- Key Performance Metrics -->
-    <div class="metrics-grid">
-        <div class="metric-card primary">
-            <div class="icon">$</div>
-            <div class="metric-label">Potential Annual Savings</div>
-            <div class="metric-value">$20.8-36.7B</div>
-            <div class="metric-sublabel">Validated federal savings</div>
+        <!-- First Row: Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="value">3,198</div>
+                <div class="label">Counties Analyzed</div>
+                <div class="sublabel">Complete national coverage</div>
+            </div>
+            <div class="metric-card primary">
+                <div class="value">99.1%</div>
+                <div class="label">Model Accuracy</div>
+                <div class="sublabel">Validated classification performance</div>
+            </div>
+            <div class="metric-card warning">
+                <div class="value">255</div>
+                <div class="label">High Risk Counties</div>
+                <div class="sublabel">8% of counties analyzed</div>
+            </div>
+            <div class="metric-card danger">
+                <div class="value">2.5M</div>
+                <div class="label">Underserved Beneficiaries</div>
+                <div class="sublabel">In high risk counties</div>
+            </div>
         </div>
-        
-        <div class="metric-card success">
-            <div class="icon">✓</div>
-            <div class="metric-label">Model Accuracy</div>
-            <div class="metric-value">99.1%</div>
-            <div class="metric-sublabel">High-risk county identification</div>
-        </div>
-        
-        <div class="metric-card warning">
-            <div class="icon">⚠</div>
-            <div class="metric-label">High-Risk Counties</div>
-            <div class="metric-value">255</div>
-            <div class="metric-sublabel">8% of 3,198 total counties</div>
-        </div>
-        
-        <div class="metric-card danger">
-            <div class="icon">!</div>
-            <div class="metric-label">Underserved Beneficiaries</div>
-            <div class="metric-value">2.5M</div>
-            <div class="metric-sublabel">Requiring immediate intervention</div>
-        </div>
-    </div>
 
-    <!-- System Performance Metrics -->
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-label">Medicare Beneficiaries Analyzed</div>
-            <div class="metric-value">29.5M</div>
-            <div class="metric-sublabel">52% of total Medicare population</div>
+        <!-- Second Row: Additional Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="value">29.5M</div>
+                <div class="label">Medicare Beneficiaries</div>
+                <div class="sublabel">52% of total Medicare population</div>
+            </div>
+            <div class="metric-card success">
+                <div class="value">98.4%</div>
+                <div class="label">HRSA Concordance</div>
+                <div class="sublabel">251 of 255 counties confirmed</div>
+            </div>
+            <div class="metric-card">
+                <div class="value">18.4 hrs</div>
+                <div class="label">Processing Time</div>
+                <div class="sublabel">For complete national analysis</div>
+            </div>
+            <div class="metric-card success">
+                <div class="value">r = 0.94</div>
+                <div class="label">Temporal Stability</div>
+                <div class="sublabel">Across four year period</div>
+            </div>
         </div>
-        
-        <div class="metric-card">
-            <div class="metric-label">HRSA Concordance</div>
-            <div class="metric-value">98.4%</div>
-            <div class="metric-sublabel">Federal designation alignment</div>
-        </div>
-        
-        <div class="metric-card">
-            <div class="metric-label">Processing Time</div>
-            <div class="metric-value">18.4 hrs</div>
-            <div class="metric-sublabel">vs months for manual review</div>
-        </div>
-        
-        <div class="metric-card">
-            <div class="metric-label">Return on Investment</div>
-            <div class="metric-value">178-461%</div>
-            <div class="metric-sublabel">Payback: 2.2-6.3 months</div>
-        </div>
-    </div>
 
-    <div class="grid-2-col">
-        <!-- Geographic Distribution -->
-        <div class="chart-container">
-            <h2 class="chart-title">Geographic Distribution of 255 High-Risk Counties</h2>
-            <div class="bar-chart">
-                <div>
-                    <div class="bar" style="height: 100%">89<br>(35%)</div>
-                    <div class="bar-label">Southeast</div>
+        <!-- Geographic Distribution and State Grades -->
+        <div class="grid-2-col">
+            <!-- Geographic Distribution -->
+            <div class="card">
+                <h3>Geographic Distribution of High Risk Counties</h3>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <span class="bar-label">Southeast</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 100%;">89 (35%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Southwest</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 65%;">58 (23%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Midwest</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 57%;">51 (20%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Northeast</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 38%;">34 (13%)</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <span class="bar-label">Northwest</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 26%;">23 (9%)</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="bar" style="height: 58%">52<br>(20%)</div>
-                    <div class="bar-label">Southwest</div>
-                </div>
-                <div>
-                    <div class="bar" style="height: 54%">48<br>(19%)</div>
-                    <div class="bar-label">Midwest</div>
-                </div>
-                <div>
-                    <div class="bar" style="height: 43%">38<br>(15%)</div>
-                    <div class="bar-label">Northeast</div>
-                </div>
-                <div>
-                    <div class="bar" style="height: 31%">28<br>(11%)</div>
-                    <div class="bar-label">Northwest</div>
-                </div>
             </div>
-        </div>
 
-        <!-- Healthcare Equity Index Grades -->
-        <div class="chart-container">
-            <h2 class="chart-title">State Healthcare Equity Index Distribution</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Grade</th>
-                        <th>Score Range</th>
-                        <th>States</th>
-                        <th>Percentage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge success">A</span></td>
-                        <td>80-100</td>
-                        <td>2</td>
-                        <td>3.9%</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge success">B</span></td>
-                        <td>70-79</td>
-                        <td>12</td>
-                        <td>23.5%</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge warning">C</span></td>
-                        <td>60-69</td>
-                        <td>20</td>
-                        <td>39.2%</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge warning">D</span></td>
-                        <td>50-59</td>
-                        <td>12</td>
-                        <td>23.5%</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge danger">F</span></td>
-                        <td><50</td>
-                        <td>5</td>
-                        <td>9.8%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Feature Importance Analysis -->
-    <div class="chart-container">
-        <h2 class="chart-title">Random Forest Model - Top 9 Risk Indicators</h2>
-        <div style="margin: 20px 0;">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 36.3%">Vulnerability Score - 36.3%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 24.1%; background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%)">Emergency Dept Utilization - 24.1%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 17.7%; background: linear-gradient(90deg, #ffd89b 0%, #19547b 100%)">Hospital Readmission Rate - 17.7%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 10.7%; background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%)">Dual Eligibility % - 10.7%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 5.3%">Rural-Urban Classification - 5.3%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 3.2%">Provider Density - 3.2%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 1.8%">Preventable Hospitalizations - 1.8%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0.7%">Standardized Spending - 0.7%</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0.2%">Demographic Diversity - 0.2%</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-2-col">
-        <!-- Implementation Scenarios -->
-        <div class="chart-container">
-            <h2 class="chart-title">Implementation Scenarios & ROI</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Scenario</th>
-                        <th>Annual Savings</th>
-                        <th>ROI</th>
-                        <th>Payback</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge success">Conservative</span></td>
-                        <td><strong>$20.8B</strong></td>
-                        <td>461%</td>
-                        <td>2.2 months</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge warning">Moderate</span></td>
-                        <td><strong>$26.5B</strong></td>
-                        <td>347%</td>
-                        <td>3.5 months</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge danger">Aggressive</span></td>
-                        <td><strong>$36.7B</strong></td>
-                        <td>178%</td>
-                        <td>6.3 months</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 10px;">
-                <strong style="color: #1565c0;">10-Year Cumulative Impact:</strong><br>
-                <span style="font-size: 1.5em; color: #0d47a1;">$208B - $367B</span><br>
-                <small style="color: #5e92f3;">Potential Medicare Trust Fund extension: 1-2 years</small>
-            </div>
-        </div>
-
-        <!-- Top/Bottom Performing States -->
-        <div class="chart-container">
-            <h2 class="chart-title">State Performance Rankings</h2>
-            <div style="margin-bottom: 20px;">
-                <h3 style="color: #28a745; margin-bottom: 10px;">Top 5 Performing States</h3>
-                <table>
+            <!-- State Grade Distribution -->
+            <div class="card">
+                <h3>State Healthcare Equity Index Distribution</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Grade</th>
+                            <th>Score Range</th>
+                            <th>States</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td>1. Utah</td><td style="text-align: right;"><strong>84.7</strong></td></tr>
-                        <tr><td>2. Rhode Island</td><td style="text-align: right;"><strong>83.7</strong></td></tr>
-                        <tr><td>3. Idaho</td><td style="text-align: right;"><strong>76.6</strong></td></tr>
-                        <tr><td>4. Hawaii</td><td style="text-align: right;"><strong>76.4</strong></td></tr>
-                        <tr><td>5. Montana</td><td style="text-align: right;"><strong>75.1</strong></td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <h3 style="color: #dc3545; margin-bottom: 10px;">Bottom 5 Performing States</h3>
-                <table>
-                    <tbody>
-                        <tr><td>47. Connecticut</td><td style="text-align: right;"><strong>46.6</strong></td></tr>
-                        <tr><td>48. Vermont</td><td style="text-align: right;"><strong>44.7</strong></td></tr>
-                        <tr><td>49. Maine</td><td style="text-align: right;"><strong>42.5</strong></td></tr>
-                        <tr><td>50. Mississippi</td><td style="text-align: right;"><strong>42.4</strong></td></tr>
-                        <tr><td>51. District of Columbia</td><td style="text-align: right;"><strong>36.0</strong></td></tr>
+                        <tr>
+                            <td>A</td>
+                            <td>80 to 100</td>
+                            <td>2</td>
+                            <td><span class="badge badge-success">Excellent</span></td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>70 to 79</td>
+                            <td>12</td>
+                            <td><span class="badge badge-success">Good</span></td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>60 to 69</td>
+                            <td>20</td>
+                            <td><span class="badge badge-warning">Average</span></td>
+                        </tr>
+                        <tr>
+                            <td>D</td>
+                            <td>50 to 59</td>
+                            <td>12</td>
+                            <td><span class="badge badge-warning">Below Average</span></td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>Below 50</td>
+                            <td>5</td>
+                            <td><span class="badge badge-danger">Critical</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
 
-    <!-- Critical Statistics -->
-    <div class="chart-container">
-        <h2 class="chart-title">Critical Healthcare Disparities</h2>
-        <div class="metrics-grid" style="margin-top: 20px;">
-            <div style="padding: 20px; background: #fee; border-radius: 10px; border-left: 5px solid #f5576c;">
-                <strong>Provider Shortage Impact</strong><br>
-                <span style="font-size: 1.8em; color: #c00;">1,704</span><br>
-                Counties with severe shortages (HPSA >15)<br>
-                <small>Affecting 20.4 million beneficiaries</small>
+        <!-- Validation Metrics and State Rankings -->
+        <div class="grid-2-col">
+            <!-- Validation Metrics -->
+            <div class="card">
+                <h3>Model Validation Metrics</h3>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Model Accuracy</span>
+                        <span class="progress-value">99.1%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 99.1%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">HRSA Concordance</span>
+                        <span class="progress-value">98.4%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 98.4%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Precision</span>
+                        <span class="progress-value">97%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 97%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Recall</span>
+                        <span class="progress-value">95%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">Cross Validation (10 fold)</span>
+                        <span class="progress-value">91.3%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 91.3%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">MedPAC Consistency</span>
+                        <span class="progress-value">91%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 91%;"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span class="progress-label">CMS Alignment</span>
+                        <span class="progress-value">85.7%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 85.7%;"></div>
+                    </div>
+                </div>
             </div>
-            <div style="padding: 20px; background: #fff3e0; border-radius: 10px; border-left: 5px solid #ff9800;">
-                <strong>Emergency Room Utilization</strong><br>
-                <span style="font-size: 1.8em; color: #e65100;">35% Higher</span><br>
-                In underserved areas<br>
-                <small>Dual-eligible: 15% higher (812 vs 706/1,000)</small>
-            </div>
-            <div style="padding: 20px; background: #e8f5e9; border-radius: 10px; border-left: 5px solid #4caf50;">
-                <strong>Rural vs Urban Disparity</strong><br>
-                <span style="font-size: 1.8em; color: #2e7d32;">20 Points</span><br>
-                Higher vulnerability score in rural areas<br>
-                <small>78.5 vs 58.2 average score</small>
-            </div>
-            <div style="padding: 20px; background: #e3f2fd; border-radius: 10px; border-left: 5px solid #2196f3;">
-                <strong>Spending Variation</strong><br>
-                <span style="font-size: 1.8em; color: #1565c0;">64%</span><br>
-                Per-beneficiary cost variation<br>
-                <small>$8,295 to $13,644 annually</small>
+
+            <!-- State Rankings -->
+            <div class="card">
+                <h3>State Performance Examples</h3>
+                <p style="font-size: 0.85rem; color: #7f8c8d; margin-bottom: 15px;">Healthcare Equity Index scores range from 36.0 to 84.7 across 51 jurisdictions</p>
+                
+                <h4 style="font-size: 0.9rem; color: #11998e; margin-bottom: 10px; font-weight: 600;">Top Performing States (Grade A)</h4>
+                <div class="state-list" style="margin-bottom: 20px;">
+                    <div class="state-item">
+                        <span class="state-name">Utah</span>
+                        <span class="state-score high">84.7</span>
+                    </div>
+                    <div class="state-item">
+                        <span class="state-name">Minnesota</span>
+                        <span class="state-score high">82.3</span>
+                    </div>
+                </div>
+
+                <h4 style="font-size: 0.9rem; color: #eb3349; margin-bottom: 10px; font-weight: 600;">Lowest Performing States (Grade F)</h4>
+                <div class="state-list">
+                    <div class="state-item">
+                        <span class="state-name">District of Columbia</span>
+                        <span class="state-score low">36.0</span>
+                    </div>
+                    <div class="state-item">
+                        <span class="state-name">West Virginia</span>
+                        <span class="state-score low">Grade F</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Implementation Roadmap -->
-    <div class="chart-container">
-        <h2 class="chart-title">Implementation Roadmap</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Phase</th>
-                    <th>Timeline</th>
-                    <th>Scope</th>
-                    <th>Financial Impact</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="badge success">Phase I</span></td>
-                    <td>Years 1-2</td>
-                    <td>Pilot Expansion: Medicare Advantage integration, sub-county analysis</td>
-                    <td><strong>$10-15B annually</strong></td>
-                </tr>
-                <tr>
-                    <td><span class="badge warning">Phase II</span></td>
-                    <td>Years 3-5</td>
-                    <td>National Rollout: All 3,198 counties, Medicaid pilots in 5 states</td>
-                    <td><strong>$26.5B annually</strong></td>
-                </tr>
-                <tr>
-                    <td><span class="badge danger">Phase III</span></td>
-                    <td>Years 5+</td>
-                    <td>Cross-Program Integration: Medicare, Medicaid, VA, TRICARE via APIs</td>
-                    <td><strong>$36.7B annually</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- External Validation and Formula -->
+        <div class="grid-2-col">
+            <!-- External Validation Table -->
+            <div class="card">
+                <h3>External Validation Results</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>External Source</th>
+                            <th>Concordance</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HRSA HPSA Database</td>
+                            <td><span class="badge badge-success">98.4%</span></td>
+                            <td>251 of 255 high risk counties confirmed</td>
+                        </tr>
+                        <tr>
+                            <td>CMS High Cost Regions</td>
+                            <td><span class="badge badge-success">85.7%</span></td>
+                            <td>Identifies 6 of 7 known regions</td>
+                        </tr>
+                        <tr>
+                            <td>MedPAC Geographic Analysis</td>
+                            <td><span class="badge badge-success">91%</span></td>
+                            <td>Consistent with Congressional patterns</td>
+                        </tr>
+                        <tr>
+                            <td>Medicare Trustees Report</td>
+                            <td><span class="badge badge-info">Within 5%</span></td>
+                            <td>Aligns with actuarial projections</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <!-- Footer -->
-    <div style="text-align: center; margin-top: 40px; padding: 20px; color: #6c757d;">
-        <p><strong>Medicare Program Integrity & Healthcare Equity Analytics Framework</strong></p>
-        <p>Validated against federal benchmarks • 98.4% HRSA concordance • 99.1% model accuracy</p>
-        <p>Data source: CMS Medicare Geographic Variation Files, HRSA, AHRF, U.S. Census (2019-2024)</p>
+            <!-- Formula Box -->
+            <div class="card">
+                <h3>Healthcare Equity Index Formula</h3>
+                <div class="formula-box">
+                    <h4>Composite Scoring Methodology</h4>
+                    <div class="formula-text">HEI = 0.30(Access) + 0.30(Quality) + 0.40(Equity)</div>
+                    <div class="formula-range">Score Range: 36.0 to 84.7 across 51 U.S. jurisdictions</div>
+                    <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.8;">
+                        Normalized to 0 to 100 scale using min max normalization
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p style="font-size: 0.85rem; color: #2c3e50; margin-bottom: 10px; font-weight: 600;">Component Weights:</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span class="badge badge-info">Access: 30%</span>
+                        <span class="badge badge-info">Quality: 30%</span>
+                        <span class="badge badge-success">Equity: 40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Healthcare Disparities -->
+        <div class="grid-3-col">
+            <div class="disparity-card">
+                <div class="icon">🏥</div>
+                <div class="stat">1,704</div>
+                <div class="title">Severe Provider Shortage Counties</div>
+                <div class="detail">HPSA score greater than 15 on 25 point scale</div>
+            </div>
+            <div class="disparity-card">
+                <div class="icon">👥</div>
+                <div class="stat">20.4M</div>
+                <div class="title">Beneficiaries Lacking Access</div>
+                <div class="detail">Inadequate primary care availability</div>
+            </div>
+            <div class="disparity-card">
+                <div class="icon">🌾</div>
+                <div class="stat">20 pts</div>
+                <div class="title">Rural vs Urban Disparity</div>
+                <div class="detail">Vulnerability scores: 78.5 vs 58.2</div>
+            </div>
+        </div>
+
+        <!-- Methodology Summary -->
+        <div class="grid-2-col">
+            <div class="card">
+                <h3>Data Sources Integrated</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Coverage</th>
+                            <th>Variables</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CMS Geographic Variation</td>
+                            <td>29.5M beneficiaries</td>
+                            <td>247 metrics</td>
+                        </tr>
+                        <tr>
+                            <td>HRSA HPSA Database</td>
+                            <td>3,016 counties</td>
+                            <td>Shortage indicators</td>
+                        </tr>
+                        <tr>
+                            <td>Area Health Resources Files</td>
+                            <td>All U.S. counties</td>
+                            <td>4,300+ variables</td>
+                        </tr>
+                        <tr>
+                            <td>Census ACS</td>
+                            <td>National</td>
+                            <td>Demographics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Machine Learning Configuration</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Model Type</td>
+                            <td>Random Forest Classifier</td>
+                        </tr>
+                        <tr>
+                            <td>Decision Trees</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>Maximum Depth</td>
+                            <td>10 levels</td>
+                        </tr>
+                        <tr>
+                            <td>Feature Inputs</td>
+                            <td>9 features</td>
+                        </tr>
+                        <tr>
+                            <td>Training Split</td>
+                            <td>70% (n = 2,238 counties)</td>
+                        </tr>
+                        <tr>
+                            <td>Validation Split</td>
+                            <td>30% (n = 960 counties)</td>
+                        </tr>
+                        <tr>
+                            <td>County Year Observations</td>
+                            <td>12,792</td>
+                        </tr>
+                        <tr>
+                            <td>Bootstrap Iterations</td>
+                            <td>1,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Spending Variation Context -->
+        <div class="card" style="margin-bottom: 30px;">
+            <h3>Medicare Spending Variation Context</h3>
+            <div class="grid-3-col" style="margin-bottom: 0;">
+                <div class="context-stat">
+                    <div class="number green">64%</div>
+                    <div class="label">Spending Variation</div>
+                    <div class="sublabel">$8,295 to $13,644 per beneficiary</div>
+                </div>
+                <div class="context-stat">
+                    <div class="number yellow">50%</div>
+                    <div class="label">MedPAC Regional Variation</div>
+                    <div class="sublabel">Without quality improvement</div>
+                </div>
+                <div class="context-stat">
+                    <div class="number red">3,016</div>
+                    <div class="label">HPSA Designated Counties</div>
+                    <div class="sublabel">Active shortage designations</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="dashboard-footer">
+            <p><strong>Medicare Program Integrity and Healthcare Equity Analytics Framework</strong></p>
+            <p>Data Period: 2019 to 2022 | Analysis: 29.5 million beneficiaries across 3,198 counties</p>
+            <p class="disclaimer">Note: This framework identifies statistical patterns in healthcare access and delivery. County classifications reflect systematic analysis of federal data and require confirmation through appropriate agency review.</p>
+        </div>
     </div>
 </body>
 </html>
