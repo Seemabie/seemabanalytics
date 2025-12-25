@@ -149,7 +149,7 @@
             font-size: 13px;
             border-bottom: 1px solid #f1f3f5;
         }
-        .amount {
+        .count {
             font-weight: bold;
             color: #e74c3c;
         }
@@ -222,32 +222,32 @@
             font-weight: bold;
             color: #2c3e50;
         }
-        .roi-grid {
+        .risk-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin-top: 15px;
         }
-        .roi-card {
+        .risk-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
         }
-        .roi-label {
+        .risk-label {
             font-size: 10px;
             opacity: 0.9;
             margin-bottom: 5px;
             text-transform: uppercase;
         }
-        .roi-value {
+        .risk-value {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 3px;
         }
-        .roi-amount {
-            font-size: 14px;
+        .risk-range {
+            font-size: 12px;
             opacity: 0.9;
         }
         .footer {
@@ -279,13 +279,19 @@
             text-transform: uppercase;
             margin-top: 3px;
         }
+        .disclaimer {
+            font-size: 10px;
+            color: #95a5a6;
+            margin-top: 10px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="header">
             <h1>Medicare Program Integrity Analytics Dashboard</h1>
-            <p>National Scale Home Health & Hospice Fraud Detection System</p>
+            <p>Home Health & Hospice Services: Composite Risk Score Analytics</p>
         </div>
 
         <div class="content">
@@ -299,13 +305,13 @@
                     <div class="metric-value">12,112</div>
                     <div class="metric-label">Providers Analyzed</div>
                 </div>
-                <div class="metric-card info">
-                    <div class="metric-value">$4.5-6.1M</div>
-                    <div class="metric-label">Recoverable Funds</div>
+                <div class="metric-card" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; border: none;">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">High Risk Providers Identified (0.1%)</div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-value" style="color: #f39c12;">45x</div>
-                    <div class="metric-label">ROI (Conservative)</div>
+                <div class="metric-card info">
+                    <div class="metric-value">469,402</div>
+                    <div class="metric-label">Quality Measures Processed</div>
                 </div>
             </div>
 
@@ -327,7 +333,7 @@
                     </div>
                     <div class="perf-card">
                         <div class="perf-value">0.94</div>
-                        <div class="perf-label">AUC-ROC</div>
+                        <div class="perf-label">AUC ROC</div>
                     </div>
                     <div class="perf-card">
                         <div class="perf-value">4.3 min</div>
@@ -345,46 +351,40 @@
                             <tr>
                                 <th>State</th>
                                 <th>Providers</th>
-                                <th>High-Risk</th>
+                                <th>High Risk</th>
                                 <th>Risk %</th>
-                                <th>Est. Excess</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><strong>Texas</strong></td>
                                 <td>1,867</td>
-                                <td>5</td>
+                                <td class="count">5</td>
                                 <td>0.27%</td>
-                                <td class="amount">$837,000</td>
                             </tr>
                             <tr>
                                 <td><strong>Florida</strong></td>
                                 <td>1,089</td>
-                                <td>2</td>
+                                <td class="count">2</td>
                                 <td>0.18%</td>
-                                <td class="amount">$302,250</td>
                             </tr>
                             <tr>
                                 <td><strong>Massachusetts</strong></td>
                                 <td>294</td>
-                                <td>2</td>
+                                <td class="count">2</td>
                                 <td>0.68%</td>
-                                <td class="amount">$209,250</td>
                             </tr>
                             <tr>
                                 <td><strong>California</strong></td>
                                 <td>2,914</td>
-                                <td>2</td>
+                                <td class="count">2</td>
                                 <td>0.07%</td>
-                                <td class="amount">$139,500</td>
                             </tr>
                             <tr>
                                 <td><strong>Ohio</strong></td>
                                 <td>815</td>
-                                <td>1</td>
+                                <td class="count">1</td>
                                 <td>0.12%</td>
-                                <td class="amount">$69,750</td>
                             </tr>
                         </tbody>
                     </table>
@@ -393,31 +393,39 @@
                             <div class="bar-label">Texas</div>
                             <div class="bar-container">
                                 <div class="bar-fill" style="width: 100%; background: linear-gradient(90deg, #e74c3c, #c0392b);">
-                                    $837K
+                                    5 high risk
                                 </div>
                             </div>
                         </div>
                         <div class="bar">
                             <div class="bar-label">Florida</div>
                             <div class="bar-container">
-                                <div class="bar-fill" style="width: 36%; background: linear-gradient(90deg, #e67e22, #d35400);">
-                                    $302K
+                                <div class="bar-fill" style="width: 40%; background: linear-gradient(90deg, #e67e22, #d35400);">
+                                    2 high risk
                                 </div>
                             </div>
                         </div>
                         <div class="bar">
                             <div class="bar-label">Mass.</div>
                             <div class="bar-container">
-                                <div class="bar-fill" style="width: 25%; background: linear-gradient(90deg, #f39c12, #e67e22);">
-                                    $209K
+                                <div class="bar-fill" style="width: 40%; background: linear-gradient(90deg, #f39c12, #e67e22);">
+                                    2 high risk
                                 </div>
                             </div>
                         </div>
                         <div class="bar">
                             <div class="bar-label">California</div>
                             <div class="bar-container">
-                                <div class="bar-fill" style="width: 17%; background: linear-gradient(90deg, #3498db, #2980b9);">
-                                    $140K
+                                <div class="bar-fill" style="width: 40%; background: linear-gradient(90deg, #3498db, #2980b9);">
+                                    2 high risk
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bar">
+                            <div class="bar-label">Ohio</div>
+                            <div class="bar-container">
+                                <div class="bar-fill" style="width: 20%; background: linear-gradient(90deg, #9b59b6, #8e44ad);">
+                                    1 high risk
                                 </div>
                             </div>
                         </div>
@@ -425,67 +433,67 @@
                 </div>
 
                 <div class="data-box">
-                    <div class="section-title">Risk Detection Features</div>
+                    <div class="section-title">Composite Risk Score Weights</div>
                     <div class="feature-grid">
                         <div class="feature-item">
                             <div class="feature-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
-                                Q
+                                S
                             </div>
                             <div class="feature-details">
-                                <div class="feature-name">Quality Rating</div>
-                                <div class="feature-percent">35%</div>
+                                <div class="feature-name">Statistical Analysis</div>
+                                <div class="feature-percent">40%</div>
                             </div>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-                                S
+                                M
                             </div>
                             <div class="feature-details">
-                                <div class="feature-name">Satisfaction Score</div>
-                                <div class="feature-percent">28%</div>
+                                <div class="feature-name">Machine Learning</div>
+                                <div class="feature-percent">30%</div>
                             </div>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-                                G
+                                Q
                             </div>
                             <div class="feature-details">
-                                <div class="feature-name">Geographic Outlier</div>
-                                <div class="feature-percent">18%</div>
+                                <div class="feature-name">Quality Indicators</div>
+                                <div class="feature-percent">30%</div>
                             </div>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
-                                T
+                                E
                             </div>
                             <div class="feature-details">
-                                <div class="feature-name">Temporal Stability</div>
-                                <div class="feature-percent">11%</div>
+                                <div class="feature-name">Ensemble Agreement</div>
+                                <div class="feature-percent">87%</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="section-title" style="margin-top: 20px;">Implementation ROI Scenarios</div>
-                    <div class="roi-grid">
-                        <div class="roi-card">
-                            <div class="roi-label">Conservative</div>
-                            <div class="roi-value">45x</div>
-                            <div class="roi-amount">$4.5M</div>
+                    <div class="section-title" style="margin-top: 20px;">Risk Stratification Results</div>
+                    <div class="risk-grid">
+                        <div class="risk-card" style="background: linear-gradient(135deg, #eb3b5a, #fc5c65);">
+                            <div class="risk-label">Critical</div>
+                            <div class="risk-value">4</div>
+                            <div class="risk-range">95 to 100 score</div>
                         </div>
-                        <div class="roi-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-                            <div class="roi-label">Moderate</div>
-                            <div class="roi-value">182x</div>
-                            <div class="roi-amount">$18.2M</div>
+                        <div class="risk-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <div class="risk-label">High</div>
+                            <div class="risk-value">1</div>
+                            <div class="risk-range">90 to 94 score</div>
                         </div>
-                        <div class="roi-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
-                            <div class="roi-label">Aggressive</div>
-                            <div class="roi-value">455x</div>
-                            <div class="roi-amount">$45.5M</div>
+                        <div class="risk-card" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                            <div class="risk-label">Medium</div>
+                            <div class="risk-value">7</div>
+                            <div class="risk-range">75 to 89 score</div>
                         </div>
-                        <div class="roi-card" style="background: linear-gradient(135deg, #fa709a, #fee140);">
-                            <div class="roi-label">National</div>
-                            <div class="roi-value">1,500x</div>
-                            <div class="roi-amount">$150-200M</div>
+                        <div class="risk-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                            <div class="risk-label">Low</div>
+                            <div class="risk-value">12,100</div>
+                            <div class="risk-range">0 to 74 score</div>
                         </div>
                     </div>
 
@@ -495,8 +503,8 @@
                             <div class="val-label">OIG Concordance</div>
                         </div>
                         <div class="val-stat">
-                            <div class="val-value">100%</div>
-                            <div class="val-label">Statistical Validation</div>
+                            <div class="val-value">91.2%</div>
+                            <div class="val-label">Cross Validation</div>
                         </div>
                         <div class="val-stat">
                             <div class="val-value">2,000</div>
@@ -504,15 +512,16 @@
                         </div>
                         <div class="val-stat">
                             <div class="val-value">12</div>
-                            <div class="val-label">High-Risk Identified</div>
+                            <div class="val-label">High Risk Identified</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="footer">
-                <strong>Data Sources:</strong> CMS Home Health Compare (96 variables) | HHCAHPS Surveys (38.4% response rate) | Hospice Compare (7,007 providers) | OIG LEIE Database | Medicare Geographic Variation (3,142 counties)<br>
-                <strong>Implementation:</strong> Processing Time: 4.3 minutes | Memory Usage: 1.2GB | Implementation Cost: $300,000 | Providers Analyzed: 12,112
+                <strong>Data Sources:</strong> CMS Home Health Compare (12,112 providers, 96 variables) | HHCAHPS Surveys (38.4% response rate) | Hospice Compare (7,007 providers, 469,402 records) | OIG LEIE Database | Medicare Geographic Variation (3,142 counties) | CMS Program Statistics<br>
+                <strong>Technical Specifications:</strong> Processing Time: 4.3 minutes | Memory Usage: 1.2GB | Providers Analyzed: 12,112 | Federal Datasets: 6 | Isolation Forest: 300 estimators
+                <div class="disclaimer">Note: This system identifies statistical anomalies for further investigation, not confirmed improper payments.</div>
             </div>
         </div>
     </div>
