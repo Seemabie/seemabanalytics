@@ -137,21 +137,6 @@
             color: #2c3e50;
         }
         
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 4px;
-        }
-        
         .gauge-container {
             display: flex;
             justify-content: space-around;
@@ -233,31 +218,45 @@
             color: #7f8c8d;
             font-size: 14px;
         }
+        
+        .disclaimer-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+            font-size: 13px;
+            color: #856404;
+        }
+        
+        .disclaimer-box strong {
+            color: #664d03;
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-header">
         <h1>Medicare Billing Integrity Detection System</h1>
-        <p>Detecting Systematic Medicare Billing Manipulation Through Advanced Analytics</p>
+        <p>Composite Risk Score Framework for Hospital Billing Pattern Analysis</p>
     </div>
 
     <!-- Key Metrics -->
     <div class="metrics-grid">
         <div class="metric-card">
             <div class="metric-value">$31.70B</div>
-            <div class="metric-label">Improper Payments FY2024</div>
-            <div class="metric-sublabel">7.66% rate</div>
+            <div class="metric-label">Medicare FFS Improper Payments</div>
+            <div class="metric-sublabel">FY 2024 (7.66% rate)</div>
         </div>
         
         <div class="metric-card">
-            <div class="metric-value">54M</div>
-            <div class="metric-label">Part D Beneficiaries</div>
-            <div class="metric-sublabel">Affected population</div>
+            <div class="metric-value">27.5M</div>
+            <div class="metric-label">Medicare Discharges Analyzed</div>
+            <div class="metric-sublabel">2019 to 2023</div>
         </div>
         
         <div class="metric-card">
             <div class="metric-value">101</div>
-            <div class="metric-label">High-Risk Hospitals</div>
+            <div class="metric-label">High Risk Hospitals</div>
             <div class="metric-sublabel">3.5% of 2,911 examined</div>
         </div>
         
@@ -270,13 +269,13 @@
         <div class="metric-card">
             <div class="metric-value">42,708</div>
             <div class="metric-label">Excess MCC Cases</div>
-            <div class="metric-sublabel">Annually detected</div>
+            <div class="metric-sublabel">Annually identified</div>
         </div>
         
         <div class="metric-card">
             <div class="metric-value">$213.5M</div>
-            <div class="metric-label">Identified in Sample</div>
-            <div class="metric-sublabel">101 hospitals</div>
+            <div class="metric-label">Study Estimated Overpayments</div>
+            <div class="metric-sublabel">101 hospitals (95% CI: $198.3M to $228.7M)</div>
         </div>
     </div>
 
@@ -289,111 +288,113 @@
         </div>
         
         <div class="gauge-item">
-            <div class="chart-title">Cross-Validation</div>
+            <div class="chart-title">Cross Validation</div>
             <canvas id="gaugeCrossVal" width="120" height="120"></canvas>
             <div style="margin-top: 10px; font-size: 20px; font-weight: bold; color: #2c3e50;">91.3%</div>
         </div>
         
         <div class="gauge-item">
-            <div class="chart-title">False Positive Rate</div>
-            <canvas id="gaugeFalsePos" width="120" height="120"></canvas>
-            <div style="margin-top: 10px; font-size: 20px; font-weight: bold; color: #2c3e50;"><10%</div>
+            <div class="chart-title">Precision</div>
+            <canvas id="gaugePrecision" width="120" height="120"></canvas>
+            <div style="margin-top: 10px; font-size: 20px; font-weight: bold; color: #2c3e50;">89.7%</div>
         </div>
         
         <div class="gauge-item">
-            <div class="chart-title">Processing Time</div>
-            <canvas id="gaugeProcess" width="120" height="120"></canvas>
-            <div style="margin-top: 10px; font-size: 20px; font-weight: bold; color: #2c3e50;"><24 hrs</div>
+            <div class="chart-title">Recall</div>
+            <canvas id="gaugeRecall" width="120" height="120"></canvas>
+            <div style="margin-top: 10px; font-size: 20px; font-weight: bold; color: #2c3e50;">91.2%</div>
         </div>
     </div>
 
     <!-- Charts -->
     <div class="charts-grid">
         <div class="chart-container">
-            <div class="chart-title">Geographic Distribution of Identified Facilities</div>
+            <div class="chart-title">Risk Stratification Distribution (2,911 Hospitals)</div>
+            <canvas id="riskChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">Composite Risk Score Components</div>
+            <canvas id="componentsChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">Geographic Distribution of High Risk Facilities</div>
             <canvas id="geoChart"></canvas>
         </div>
         
         <div class="chart-container">
-            <div class="chart-title">Financial Impact Projections</div>
-            <canvas id="impactChart"></canvas>
-        </div>
-        
-        <div class="chart-container">
-            <div class="chart-title">Implementation Roadmap Financial Impact</div>
-            <canvas id="phaseChart"></canvas>
-        </div>
-        
-        <div class="chart-container">
-            <div class="chart-title">Model Comparison Results</div>
-            <canvas id="comparisonChart"></canvas>
+            <div class="chart-title">Model Performance Metrics</div>
+            <canvas id="performanceChart"></canvas>
         </div>
     </div>
 
-    <!-- Implementation Roadmap Table -->
+    <!-- Risk Stratification Table -->
     <div class="table-container">
-        <div class="chart-title">Implementation Roadmap</div>
+        <div class="chart-title">Risk Stratification Results</div>
         <table>
             <thead>
                 <tr>
-                    <th>Phase</th>
-                    <th>Timeline</th>
-                    <th>Scope</th>
-                    <th>Financial Impact</th>
-                    <th>Status</th>
+                    <th>Risk Category</th>
+                    <th>Score Range</th>
+                    <th>Hospitals</th>
+                    <th>Confirmation Rate</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Phase I: Pilot</strong></td>
-                    <td>Years 1-2</td>
-                    <td>20-30 hospitals</td>
-                    <td>$40M-$60M annually</td>
-                    <td><span class="status-badge status-high">Planning</span></td>
+                    <td><strong>Very High Risk</strong></td>
+                    <td>90 to 100</td>
+                    <td>1</td>
+                    <td><span class="status-badge status-high">100%</span></td>
                 </tr>
                 <tr>
-                    <td><strong>Phase II: Regional</strong></td>
-                    <td>Years 3-5</td>
-                    <td>300-1,500 hospitals</td>
-                    <td>$100M-$180M by Year 5</td>
-                    <td><span class="status-badge status-medium">Projected</span></td>
+                    <td><strong>High Risk</strong></td>
+                    <td>75 to 89</td>
+                    <td>100</td>
+                    <td><span class="status-badge status-high">88%</span></td>
                 </tr>
                 <tr>
-                    <td><strong>Phase III: National</strong></td>
-                    <td>Years 6+</td>
-                    <td>Broader coverage</td>
-                    <td>$200M-$600M annually</td>
-                    <td><span class="status-badge status-low">Future</span></td>
+                    <td><strong>Medium Risk</strong></td>
+                    <td>50 to 74</td>
+                    <td>1,403</td>
+                    <td><span class="status-badge status-medium">12%</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Low Risk</strong></td>
+                    <td>0 to 49</td>
+                    <td>1,407</td>
+                    <td><span class="status-badge status-low">2%</span></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Risk Indicators -->
+    <!-- Key Findings -->
     <div class="table-container">
-        <div class="chart-title">High-Risk Billing Patterns & Indicators</div>
+        <div class="chart-title">Key Billing Pattern Indicators</div>
         <table>
             <thead>
                 <tr>
                     <th>Metric</th>
                     <th>Value</th>
-                    <th>Severity</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Major Complications Rate</td>
-                    <td>20.1 percentage points above peers</td>
-                    <td><span class="status-badge status-high">High</span></td>
+                    <td>MCC Rate Excess</td>
+                    <td>20.1 percentage points above peers (64.1% vs 44.0%)</td>
+                    <td><span class="status-badge status-high">Significant</span></td>
                 </tr>
                 <tr>
-                    <td>Pattern Persistence Score</td>
-                    <td>0.84</td>
-                    <td><span class="status-badge status-high">High</span></td>
+                    <td>Temporal Persistence</td>
+                    <td>0.84 coefficient (99 of 101 facilities across 3+ years)</td>
+                    <td><span class="status-badge status-high">Persistent</span></td>
                 </tr>
                 <tr>
-                    <td>Confidence Interval</td>
-                    <td>$198.3M-$228.7M (95% CI)</td>
+                    <td>Bootstrap Confidence Interval</td>
+                    <td>$198.3M to $228.7M (95% CI, 1,000 iterations)</td>
                     <td><span class="status-badge status-low">Validated</span></td>
                 </tr>
                 <tr>
@@ -401,84 +402,78 @@
                     <td>p < 0.001</td>
                     <td><span class="status-badge status-low">Strong</span></td>
                 </tr>
+                <tr>
+                    <td>PEPPER Concordance</td>
+                    <td>88% agreement with CMS benchmarks</td>
+                    <td><span class="status-badge status-low">Validated</span></td>
+                </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Financial Scenarios -->
+    <!-- Validation Metrics -->
     <div class="table-container">
-        <div class="chart-title">Financial Impact Scenarios</div>
+        <div class="chart-title">Model Validation Metrics</div>
         <table>
             <thead>
                 <tr>
-                    <th>Scenario</th>
-                    <th>Analytical Basis</th>
-                    <th>Projected Impact</th>
-                    <th>Progress</th>
+                    <th>Metric</th>
+                    <th>Result</th>
+                    <th>Interpretation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Conservative (Top 20)</td>
-                    <td>Highest risk in sample</td>
-                    <td>$45.8M</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 20%;"></div>
-                        </div>
-                    </td>
+                    <td><strong>Accuracy</strong></td>
+                    <td>94.3%</td>
+                    <td>2,743 of 2,911 hospitals correctly classified</td>
                 </tr>
                 <tr>
-                    <td>Moderate (Top 50)</td>
-                    <td>Extended sample</td>
-                    <td>$89.3M</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 39%;"></div>
-                        </div>
-                    </td>
+                    <td><strong>Precision</strong></td>
+                    <td>89.7%</td>
+                    <td>131 of 146 flagged facilities confirmed anomalous</td>
                 </tr>
                 <tr>
-                    <td>Comprehensive (All 101)</td>
-                    <td>Full identified set</td>
-                    <td>$229M annually</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 100%;"></div>
-                        </div>
-                    </td>
+                    <td><strong>Recall</strong></td>
+                    <td>91.2%</td>
+                    <td>131 of 144 actual anomalies detected</td>
                 </tr>
                 <tr>
-                    <td>Ten-Year Potential</td>
-                    <td>Cumulative projection</td>
-                    <td>$2B-$4B</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%;"></div>
-                        </div>
-                    </td>
+                    <td><strong>F1 Score</strong></td>
+                    <td>90.4%</td>
+                    <td>Balanced precision recall performance</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross Validation</strong></td>
+                    <td>91.3%</td>
+                    <td>5 fold stratified sampling average accuracy</td>
+                </tr>
+                <tr>
+                    <td><strong>Bootstrap CI</strong></td>
+                    <td>$198.3M to $228.7M</td>
+                    <td>1,000 iterations with stable estimation</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Key Statistics -->
+    <!-- Key Analysis Statistics -->
     <div class="timeline-container">
         <div class="chart-title">Key Analysis Statistics</div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-title">Data Analysis</div>
-            <div class="timeline-desc">27.5 million Medicare discharges analyzed (2019-2023)</div>
+            <div class="timeline-desc">27.5 million Medicare discharges analyzed (2019 to 2023)</div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-title">Facilities Examined</div>
-            <div class="timeline-desc">2,911 facilities comprehensively evaluated</div>
+            <div class="timeline-desc">2,911 acute care hospitals comprehensively evaluated</div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-title">Validation Method</div>
-            <div class="timeline-desc">Bootstrap Resampling (n=1,000) with 5-fold Cross-Validation</div>
+            <div class="timeline-desc">Bootstrap Resampling (n=1,000) with 5 fold Cross Validation</div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
@@ -488,19 +483,94 @@
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-title">GAO Impact</div>
-            <div class="timeline-desc">$675B financial benefits from addressing high-risk areas over 17 years</div>
+            <div class="timeline-desc">$675B financial benefits from addressing high risk areas over 17 years</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-title">Data Sources</div>
+            <div class="timeline-desc">MEDPAR (47 variables), Hospital Compare (23 metrics), AHRF, PEPPER Reports, OIG Work Plan</div>
         </div>
     </div>
 
+    <!-- Disclaimer -->
+    <div class="disclaimer-box">
+        <strong>Important Note:</strong> This system identifies statistical anomalies in billing patterns. Identified patterns indicate facilities warranting further investigation; actual improper payment determinations require clinical review and appropriate enforcement procedures by authorized agencies.
+    </div>
+
     <script>
-        // Geographic Distribution Pie Chart
+        // Risk Stratification Doughnut Chart
+        const riskCtx = document.getElementById('riskChart').getContext('2d');
+        new Chart(riskCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Very High Risk (1)', 'High Risk (100)', 'Medium Risk (1,403)', 'Low Risk (1,407)'],
+                datasets: [{
+                    data: [1, 100, 1403, 1407],
+                    backgroundColor: [
+                        'rgba(192, 0, 0, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(102, 126, 234, 0.6)',
+                        'rgba(16, 185, 129, 0.6)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = 2911;
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': ' + context.parsed + ' (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Composite Risk Score Components Pie Chart
+        const componentsCtx = document.getElementById('componentsChart').getContext('2d');
+        new Chart(componentsCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Severity Mix Index (30%)', 'Payment Ratio (25%)', 'High Value DRG (20%)', 'Temporal Anomalies (15%)', 'Geographic Mismatch (10%)'],
+                datasets: [{
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.9)',
+                        'rgba(118, 75, 162, 0.9)',
+                        'rgba(147, 112, 219, 0.8)',
+                        'rgba(186, 85, 211, 0.7)',
+                        'rgba(221, 160, 221, 0.7)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Geographic Distribution Doughnut Chart
         const geoCtx = document.getElementById('geoChart').getContext('2d');
         new Chart(geoCtx, {
             type: 'doughnut',
             data: {
                 labels: ['Southeast Region (31)', 'Other Regions (70)'],
                 datasets: [{
-                    data: [30.7, 69.3],
+                    data: [31, 70],
                     backgroundColor: [
                         'rgba(102, 126, 234, 0.8)',
                         'rgba(118, 75, 162, 0.8)'
@@ -517,7 +587,9 @@
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return context.label + ': ' + context.parsed + '%';
+                                const total = 101;
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return context.label + ': ' + percentage + '% of high risk';
                             }
                         }
                     }
@@ -525,113 +597,15 @@
             }
         });
 
-        // Financial Impact Bar Chart
-        const impactCtx = document.getElementById('impactChart').getContext('2d');
-        new Chart(impactCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Conservative', 'Moderate', 'Comprehensive', 'Ten-Year'],
-                datasets: [{
-                    label: 'Projected Impact',
-                    data: [45.8, 89.3, 229, 3000],
-                    backgroundColor: [
-                        'rgba(102, 126, 234, 0.6)',
-                        'rgba(102, 126, 234, 0.7)',
-                        'rgba(102, 126, 234, 0.8)',
-                        'rgba(118, 75, 162, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgba(102, 126, 234, 1)',
-                        'rgba(102, 126, 234, 1)',
-                        'rgba(102, 126, 234, 1)',
-                        'rgba(118, 75, 162, 1)'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                if (value >= 1000) {
-                                    return '$' + (value/1000).toFixed(1) + 'B';
-                                }
-                                return '$' + value + 'M';
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-
-        // Phase Implementation Chart
-        const phaseCtx = document.getElementById('phaseChart').getContext('2d');
-        new Chart(phaseCtx, {
-            type: 'line',
-            data: {
-                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6+'],
-                datasets: [{
-                    label: 'Conservative Scenario',
-                    data: [40, 60, 100, 140, 180, 400],
-                    borderColor: 'rgba(102, 126, 234, 1)',
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                }, {
-                    label: 'Optimistic Scenario',
-                    data: [60, 60, 150, 180, 180, 600],
-                    borderColor: 'rgba(118, 75, 162, 1)',
-                    backgroundColor: 'rgba(118, 75, 162, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value + 'M';
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-
-        // Model Comparison Radar Chart
-        const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
-        new Chart(comparisonCtx, {
+        // Model Performance Radar Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
             type: 'radar',
             data: {
-                labels: ['Coverage', 'Detection Method', 'Accuracy', 'Implementation', 'Efficiency'],
+                labels: ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'Cross Validation'],
                 datasets: [{
-                    label: 'Current System',
-                    data: [30, 40, 50, 30, 35],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
-                }, {
-                    label: 'Study System',
-                    data: [100, 95, 94.3, 90, 95],
+                    label: 'Study System Performance',
+                    data: [94.3, 89.7, 91.2, 90.4, 91.3],
                     borderColor: 'rgba(102, 126, 234, 1)',
                     backgroundColor: 'rgba(102, 126, 234, 0.2)',
                     pointBackgroundColor: 'rgba(102, 126, 234, 1)',
@@ -645,7 +619,10 @@
                 scales: {
                     r: {
                         beginAtZero: true,
-                        max: 100
+                        max: 100,
+                        ticks: {
+                            stepSize: 20
+                        }
                     }
                 },
                 plugins: {
@@ -659,7 +636,6 @@
         // Create gauge charts
         function createGauge(canvasId, percentage, color) {
             const ctx = document.getElementById(canvasId).getContext('2d');
-            const angle = (percentage / 100) * Math.PI * 2;
             
             new Chart(ctx, {
                 type: 'doughnut',
@@ -687,8 +663,8 @@
 
         createGauge('gaugeComplete', 99.3, 'rgba(16, 185, 129, 0.8)');
         createGauge('gaugeCrossVal', 91.3, 'rgba(102, 126, 234, 0.8)');
-        createGauge('gaugeFalsePos', 90, 'rgba(16, 185, 129, 0.8)');
-        createGauge('gaugeProcess', 95, 'rgba(16, 185, 129, 0.8)');
+        createGauge('gaugePrecision', 89.7, 'rgba(118, 75, 162, 0.8)');
+        createGauge('gaugeRecall', 91.2, 'rgba(102, 126, 234, 0.8)');
     </script>
 </body>
 </html>
