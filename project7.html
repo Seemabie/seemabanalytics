@@ -36,6 +36,7 @@
         .nav-links { display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; }
         .nav-links a { color: #3498db; text-decoration: none; }
         .nav-links a:hover { text-decoration: underline; }
+        .disclaimer { background: #fff3cd; border: 1px solid #ffc107; padding: 1rem; border-radius: 8px; margin: 1.5rem 0; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -53,24 +54,24 @@
     <section class="hero">
         <div class="container">
             <h1>Medicare Program Integrity Analytics System</h1>
-            <p>Home Health & Hospice Services - Advanced Analytics for Medicare Program Integrity</p>
+            <p>Home Health & Hospice Services: Composite Risk Score Framework for Medicare Program Integrity</p>
             
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-number">$6.1M</div>
-                    <div>Anomalous Billing Identified</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">45x</div>
-                    <div>Return on Investment</div>
+                    <div class="stat-number">12,112</div>
+                    <div>Providers Analyzed</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">91.7%</div>
-                    <div>Detection Accuracy</div>
+                    <div>Detection Precision</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">12,112</div>
-                    <div>Providers Analyzed</div>
+                    <div class="stat-number">99.9%</div>
+                    <div>Specificity</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25%</div>
+                    <div>OIG Concordance</div>
                 </div>
             </div>
         </div>
@@ -79,14 +80,18 @@
     <section class="section">
         <div class="container">
             <h2>Executive Summary</h2>
-            <p>The United States Medicare program identified $31.70 billion in improper payments for Medicare Fee-for-Service in fiscal year 2024, representing 7.66% of program expenditures, with home health and hospice services representing particularly vulnerable sectors due to limited oversight and complex billing structures. This research addresses a critical national security and fiscal challenge by developing an advanced program integrity analytics system that identifies anomalous billing patterns among Medicare-certified home health agencies and hospice providers.</p>
+            <p>The Medicare Program Integrity Analytics System for Home Health & Hospice Services introduces the Composite Risk Score (CRS), a novel framework for detecting anomalous billing patterns among Medicare certified home health agencies. The system integrates quality metrics from CMS Home Health Compare, patient satisfaction data from HHCAHPS surveys, and clinical measures from Hospice Compare into unified risk assessments.</p>
             
             <div class="card" style="margin-top: 2rem;">
                 <h3>Key Achievement</h3>
-                <p>Analysis of 12,112 Medicare-certified providers across all 50 states identified 12 high-risk entities exhibiting statistical anomalies consistent with improper billing practices. The system achieved 100% validation through statistical methods and 25% concordance with Office of Inspector General (OIG) enforcement actions.</p>
+                <p>Analysis of 12,112 Medicare certified providers across all 50 states identified 12 high risk entities (0.1%) exhibiting statistical anomalies consistent with improper billing practices. The system achieved 91.7% precision with 99.9% specificity and 25% concordance with Office of Inspector General enforcement records, validated through 2,000 bootstrap iterations and 5 fold cross validation achieving 91.2% average accuracy.</p>
             </div>
             
-            <p style="margin-top: 2rem;">Conservative financial modeling estimates $4.5-6.1 million in annual recoverable funds within the analyzed sample, projecting to $8.2-10.5 million nationally when accounting for the complete provider universe. The methodology employs dual-validation through parametric and non-parametric statistical approaches, ensuring robust detection while minimizing false positives.</p>
+            <p style="margin-top: 2rem;">The methodology processed 469,402 quality measures across 6 federal datasets in 4.3 minutes. The Composite Risk Score framework integrates three weighted analytical dimensions: Statistical Analysis (40%), Machine Learning via Isolation Forest algorithms (30%), and Quality Indicators (30%). This multi method validation provides confidence that identified patterns represent genuine anomalies rather than methodological artifacts.</p>
+            
+            <div class="disclaimer">
+                <strong>Note:</strong> This system identifies statistical anomalies warranting further investigation, not confirmed fraud or abuse. Actual improper payment determinations require clinical review and appropriate enforcement procedures.
+            </div>
         </div>
     </section>
 
@@ -96,7 +101,7 @@
             <div class="figure">
                 <p><strong>Figure 1: Model Validation and Performance Analysis</strong></p>
                 <img src="Project7_Fig_5.png" alt="Model Validation and Performance Analysis">
-                <p class="figure-caption">Confusion matrix, performance metrics, sensitivity analysis, and financial impact with 95% confidence interval</p>
+                <p class="figure-caption">Confusion matrix, performance metrics, sensitivity analysis, and validation results with 95% confidence interval</p>
             </div>
         </div>
     </section>
@@ -108,10 +113,11 @@
             <h3>Data Integration Framework</h3>
             <ul style="margin: 1rem 0 2rem 2rem;">
                 <li><strong>Home Health Compare:</strong> 12,112 HHAs nationwide with 96 quality and satisfaction metrics</li>
-                <li><strong>HHCAHPS Survey Data:</strong> Patient experience ratings with 38.4% response rate</li>
+                <li><strong>HHCAHPS Survey Data:</strong> Patient experience ratings with 38.4% response rate, 26 variables</li>
                 <li><strong>Hospice Compare:</strong> 7,007 unique providers with 469,402 quality measure records</li>
-                <li><strong>OIG Exclusion Database:</strong> Sanctioned individuals/entities for validation</li>
+                <li><strong>OIG LEIE Database:</strong> Monthly updated exclusions for validation</li>
                 <li><strong>Geographic Variation Data:</strong> 3,142 counties across all states and territories</li>
+                <li><strong>CMS Program Statistics:</strong> National and state aggregate benchmarks</li>
             </ul>
             
             <div class="figure">
@@ -123,9 +129,9 @@
             <h3 style="margin-top: 2rem;">Analytical Approach</h3>
             <p>The novel Composite Risk Score (CRS) integrates multiple detection methods through weighted ensemble:</p>
             <ul style="margin: 1rem 0 0 2rem;">
-                <li><strong>Statistical Component (40%):</strong> Z-scores for quality, satisfaction, and payment metrics</li>
-                <li><strong>Machine Learning Component (30%):</strong> Isolation Forest anomaly scores</li>
-                <li><strong>Quality Indicators (30%):</strong> Direct quality/satisfaction ratings below critical thresholds</li>
+                <li><strong>Statistical Component (40%):</strong> Z score calculations identify providers exceeding 2 to 3 standard deviations from peer group means across quality, satisfaction, and billing metrics</li>
+                <li><strong>Machine Learning Component (30%):</strong> Isolation Forest with 300 estimators and 0.02 contamination rate for multivariate anomaly detection (AUC ROC: 0.94)</li>
+                <li><strong>Quality Indicators (30%):</strong> Direct quality and satisfaction ratings below 2.0 threshold on 5 point scale</li>
             </ul>
         </div>
     </section>
@@ -136,27 +142,72 @@
             
             <h3>Geographic Distribution</h3>
             <div class="figure">
-                <p><strong>Figure 3: Geographic Analysis of High-Risk Providers</strong></p>
-                <img src="Project7_Fig_3.png" alt="Geographic Analysis of High-Risk Providers">
-                <p class="figure-caption">Top 10 states by financial impact and high-risk provider distribution across key states</p>
+                <p><strong>Figure 3: Geographic Analysis of High Risk Providers</strong></p>
+                <img src="Project7_Fig_3.png" alt="Geographic Analysis of High Risk Providers">
+                <p class="figure-caption">High risk provider distribution across key states with documented enforcement activity</p>
             </div>
             
-            <p>Analysis identified 12 providers (0.1% of sample) exhibiting critical or high-risk indicators, with geographic concentration in states with large Medicare populations and historically high fraud rates. Texas led with $837K in estimated excess billing, followed by Florida ($302K) and Massachusetts ($209K).</p>
+            <p>Analysis identified 12 providers (0.1% of sample) exhibiting critical or high risk indicators, with geographic concentration in states with large Medicare populations and documented enforcement history.</p>
+            
+            <table style="margin-top: 1.5rem;">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Total Providers</th>
+                        <th>High Risk Count</th>
+                        <th>Risk Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Texas</td>
+                        <td>1,867</td>
+                        <td>5</td>
+                        <td>0.27%</td>
+                    </tr>
+                    <tr>
+                        <td>Florida</td>
+                        <td>1,089</td>
+                        <td>2</td>
+                        <td>0.18%</td>
+                    </tr>
+                    <tr>
+                        <td>Massachusetts</td>
+                        <td>294</td>
+                        <td>2</td>
+                        <td>0.68%</td>
+                    </tr>
+                    <tr>
+                        <td>California</td>
+                        <td>2,914</td>
+                        <td>2</td>
+                        <td>0.07%</td>
+                    </tr>
+                    <tr>
+                        <td>Ohio</td>
+                        <td>815</td>
+                        <td>1</td>
+                        <td>0.12%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p style="margin-top: 1rem;">Geographic patterns demonstrated 83% alignment with states regularly appearing in OIG and DOJ enforcement actions.</p>
             
             <h3 style="margin-top: 2rem;">Risk Score Distribution</h3>
             <div class="figure">
                 <p><strong>Figure 4: Program Integrity Risk Score Distribution Analysis</strong></p>
                 <img src="Project7_Fig_2.png" alt="Distribution of Program Integrity Risk Scores">
-                <p class="figure-caption">Distribution of risk scores across 12,112 home health agencies showing clear separation of high-risk providers</p>
+                <p class="figure-caption">Distribution of risk scores across 12,112 home health agencies showing clear separation of high risk providers</p>
             </div>
             
-            <p>The Composite Risk Index successfully stratified providers into actionable categories, with perfect separation between risk tiers. All medium-to-critical risk providers demonstrated quality ratings below 2.0 (5-point scale) and satisfaction ratings below 2.0, representing performance levels 2-3 standard deviations below national means.</p>
+            <p>The Composite Risk Score successfully stratified providers into actionable categories with clear separation between risk tiers. All medium to critical risk providers demonstrated quality ratings below 2.0 (5 point scale) and satisfaction ratings below 2.0, representing performance levels 2 to 3 standard deviations below national means.</p>
             
             <h3 style="margin-top: 2rem;">System Performance</h3>
             <div class="figure">
                 <p><strong>Figure 5: Executive Dashboard Overview</strong></p>
                 <img src="Project7_Fig_1.png" alt="Medicare Program Integrity Analytics System Executive Overview">
-                <p class="figure-caption">Comprehensive executive dashboard showing key metrics, national impact, risk distribution, and validation performance</p>
+                <p class="figure-caption">Comprehensive executive dashboard showing key metrics, risk distribution, and validation performance</p>
             </div>
             
             <div class="grid" style="margin-top: 2rem;">
@@ -167,7 +218,8 @@
                         <li>Specificity (True Negative Rate): 99.9%</li>
                         <li>Precision (Positive Predictive Value): 91.7%</li>
                         <li>F1 Score: 0.917</li>
-                        <li>AUC-ROC: 0.94</li>
+                        <li>AUC ROC: 0.94</li>
+                        <li>Ensemble Agreement: 87%</li>
                     </ul>
                 </div>
             </div>
@@ -175,75 +227,6 @@
     </section>
 
     <section class="section">
-        <div class="container">
-            <h2>Policy Implications</h2>
-            
-            <h3>Implementation Scenarios</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Scenario</th>
-                        <th>Target Population</th>
-                        <th>Estimated Impact</th>
-                        <th>Timeframe</th>
-                        <th>ROI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Conservative</td>
-                        <td>Top 0.1% providers (12)</td>
-                        <td>$4.5M recovered</td>
-                        <td>Year 1</td>
-                        <td>45x</td>
-                    </tr>
-                    <tr>
-                        <td>Moderate</td>
-                        <td>Top 1% providers (121)</td>
-                        <td>$18.2M recovered</td>
-                        <td>Years 1-2</td>
-                        <td>182x</td>
-                    </tr>
-                    <tr>
-                        <td>Aggressive</td>
-                        <td>Top 2% providers (242)</td>
-                        <td>$45.5M recovered</td>
-                        <td>Years 1-3</td>
-                        <td>455x</td>
-                    </tr>
-                    <tr>
-                        <td>National Scale</td>
-                        <td>All 35,000 HHAs</td>
-                        <td>$150-200M recovered</td>
-                        <td>Years 1-5</td>
-                        <td>1,500x</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3 style="margin-top: 2rem;">Policy Recommendations</h3>
-            <div class="grid">
-                <div class="card">
-                    <h4>Immediate Actions (Year 1):</h4>
-                    <ul style="margin-left: 1rem;">
-                        <li>Deploy risk scoring system in 5 highest-fraud states (TX, FL, CA, NY, IL)</li>
-                        <li>Establish inter-agency task force combining CMS, OIG, and DOJ resources</li>
-                        <li>Implement mandatory quarterly quality-payment correlation reviews for providers exceeding $5M annual billings</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h4>Medium-term Initiatives (Years 2-3):</h4>
-                    <ul style="margin-left: 1rem;">
-                        <li>Integrate predictive analytics into Medicare Administrative Contractor workflows</li>
-                        <li>Develop real-time API connecting quality databases with payment systems</li>
-                        <li>Create provider scorecards with public transparency ratings</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" style="background: #f8f9fa;">
         <div class="container">
             <h2>Technical Innovation</h2>
             
@@ -251,48 +234,20 @@
                 <div class="card">
                     <h3>Advanced Features</h3>
                     <ul style="margin-left: 1rem;">
-                        <li><strong>Ensemble Machine Learning:</strong> Combines statistical Z-scores with Isolation Forest algorithms</li>
-                        <li><strong>Triple Validation:</strong> Cross-references OIG exclusions, bootstrap CI, and sensitivity analysis</li>
-                        <li><strong>Real-time Processing:</strong> 4.3 minutes to analyze 12,112 providers</li>
-                        <li><strong>Scalable Architecture:</strong> Cloud-ready deployment with 1.2GB memory footprint</li>
+                        <li><strong>Ensemble Machine Learning:</strong> Combines statistical Z scores with Isolation Forest (300 estimators, 0.02 contamination rate)</li>
+                        <li><strong>Triple Validation:</strong> OIG concordance (25%), bootstrap (2,000 iterations), cross validation (91.2%)</li>
+                        <li><strong>Processing Time:</strong> 4.3 minutes to analyze 12,112 providers</li>
+                        <li><strong>Scalable Architecture:</strong> 1.2GB memory footprint with deterministic outputs (random seed 42)</li>
                     </ul>
                 </div>
                 
                 <div class="card">
                     <h3>Risk Stratification Framework</h3>
                     <ul style="margin-left: 1rem;">
-                        <li><strong>Critical (95-100):</strong> 4 providers - 100% validated anomalous</li>
-                        <li><strong>High (90-94):</strong> 1 provider - 100% validated anomalous</li>
-                        <li><strong>Medium (75-89):</strong> 7 providers - 100% validated anomalous</li>
-                        <li><strong>Low (0-74):</strong> 12,100 providers - Standard oversight sufficient</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2>Validation & Reliability</h2>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3>External Validation</h3>
-                    <ul style="margin-left: 1rem;">
-                        <li><strong>Federal Database Concordance:</strong> 25% of identified high-risk providers appeared in OIG LEIE database</li>
-                        <li><strong>CMS Benchmark Alignment:</strong> Risk scores correlated -0.72 with quality ratings</li>
-                        <li><strong>Geographic Pattern Consistency:</strong> 83% of high-risk providers in above-median fraud states</li>
-                        <li><strong>Temporal Stability:</strong> 78% maintained high-risk status in 6-month follow-up</li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <h3>Robustness Testing</h3>
-                    <ul style="margin-left: 1rem;">
-                        <li><strong>Bootstrap Validation:</strong> 2,000 iterations generated 95% CI of $3.1M - $6.1M</li>
-                        <li><strong>Sensitivity Analysis:</strong> Model maintained 90%+ detection across parameter variations</li>
-                        <li><strong>Cross-Validation:</strong> 5-fold achieved mean accuracy of 91.2% (SD=2.3%)</li>
-                        <li><strong>Permutation Testing:</strong> p<0.001 for actual risk score distributions</li>
+                        <li><strong>Critical (95 to 100):</strong> 4 providers, 100% validation rate</li>
+                        <li><strong>High (90 to 94):</strong> 1 provider, 100% validation rate</li>
+                        <li><strong>Medium (75 to 89):</strong> 7 providers, 100% validation rate</li>
+                        <li><strong>Low (0 to 74):</strong> 12,100 providers</li>
                     </ul>
                 </div>
             </div>
@@ -301,20 +256,63 @@
 
     <section class="section" style="background: #f8f9fa;">
         <div class="container">
+            <h2>Validation & Reliability</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>External Validation</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li><strong>Federal Database Concordance:</strong> 25% of high risk providers appeared in OIG LEIE database</li>
+                        <li><strong>CMS Benchmark Alignment:</strong> Risk scores correlated −0.72 with quality ratings</li>
+                        <li><strong>Geographic Pattern Consistency:</strong> 83% alignment with documented enforcement states</li>
+                        <li><strong>Temporal Stability:</strong> 78% maintained high risk status in follow up analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Robustness Testing</h3>
+                    <ul style="margin-left: 1rem;">
+                        <li><strong>Bootstrap Validation:</strong> 2,000 iterations establishing 95% confidence intervals</li>
+                        <li><strong>Sensitivity Analysis:</strong> Model maintained 90%+ detection across Z threshold variations (1.5 to 3.0 sigma)</li>
+                        <li><strong>Cross Validation:</strong> 5 fold achieved mean accuracy of 91.2% (SD 2.3%)</li>
+                        <li><strong>Ensemble Agreement:</strong> 87% between statistical and ML methods</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Problem Context</h2>
+            <p>Medicare home health and hospice services represent a significant component of federal healthcare expenditures. According to the Medicare Payment Advisory Commission, Medicare paid $16.1 billion for home health care in 2022, serving approximately 2.8 million beneficiaries through over 11,300 participating agencies.</p>
+            
+            <p style="margin-top: 1rem;">Medicare Fee for Service improper payments reached $31.70 billion in FY 2024, representing 7.66% of program expenditures. The HHS Office of Inspector General reported $7.13 billion in expected recoveries through 1,548 criminal and civil enforcement actions and 3,234 program exclusions.</p>
+            
+            <p style="margin-top: 1rem;">The National Health Care Fraud Takedown resulted in charges against 324 defendants for schemes involving over $14.6 billion. Recent prosecutions include a $17 million California hospice fraud case and an $87 million Fort Bend County hospice fraud scheme that operated from 2019 to 2025.</p>
+        </div>
+    </section>
+
+    <section class="section" style="background: #f8f9fa;">
+        <div class="container">
             <h2>Conclusion</h2>
-            <p>This research demonstrates that systematic application of ensemble machine learning methods to integrated federal healthcare datasets can identify millions in potentially improper Medicare billing while maintaining high precision to minimize false positives. The dual benefit addresses both moral imperatives and fiscal opportunities facing the United States healthcare system.</p>
+            <p>This research demonstrates that systematic application of ensemble machine learning methods to integrated federal healthcare datasets can identify providers exhibiting statistical anomalies consistent with improper billing patterns while maintaining high precision to minimize false positives.</p>
             
-            <p style="margin-top: 1rem;">Morally, protecting vulnerable Medicare beneficiaries from high-risk providers ensures access to legitimate care for elderly and disabled Americans. Fiscally, recovering even 10% of estimated annual losses to fraud in these sectors would fund expanded benefits for hundreds of thousands of beneficiaries while reducing pressure for premium increases.</p>
+            <p style="margin-top: 1rem;">The methodology achieved 91.7% precision with 99.9% specificity, validated through 25% concordance with OIG enforcement records and 91.2% cross validation accuracy. The Composite Risk Score framework integrates three weighted analytical dimensions into a unified risk assessment system, addressing a documented gap in existing detection approaches.</p>
             
-            <p style="margin-top: 1rem;">As Medicare enrollment continues to expand, data-driven program integrity capabilities become essential infrastructure for sustaining the federal healthcare safety net. This research provides both the technical foundation and empirical validation necessary for nationwide implementation of advanced program integrity analytics systems.</p>
+            <p style="margin-top: 1rem;">The system processed 12,112 Medicare certified home health agencies using 469,402 quality measures across 6 federal datasets in 4.3 minutes, demonstrating scalability for systematic analysis of the Medicare home health provider population.</p>
+            
+            <div class="disclaimer">
+                <strong>Important:</strong> These findings identify statistical anomalies warranting further investigation, not confirmed fraud or abuse. Actual improper payment determinations require clinical review and appropriate enforcement procedures by authorized agencies.
+            </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
             <div class="nav-links">
-                <a href="#">← Previous: Hospital Upcoding Fraud</a>
-                <a href="#">Next: Healthcare Access & Equity →</a>
+                <a href="#">← Previous: Medicare Billing Integrity Detection</a>
+                <a href="#">Next: Healthcare Equity & Program Integrity →</a>
             </div>
         </div>
     </footer>
