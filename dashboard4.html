@@ -267,14 +267,14 @@
     <div class="dashboard">
         <div class="header">
             <h1>DME Program Integrity Analytics System</h1>
-            <p>Identifying High-Risk Patterns in Medicare Durable Medical Equipment Claims</p>
+            <p>Dual-Method Detection Framework for Medicare DME Billing Analysis | 2021 to 2023 Data</p>
         </div>
         
         <div class="metrics-grid">
             <div class="metric-card red">
-                <div class="metric-label">Annual Improper Payments</div>
+                <div class="metric-label">Billing Anomalies Identified</div>
                 <div class="metric-value">$4.66B</div>
-                <div class="metric-subtext">Identified across 2,246 suppliers</div>
+                <div class="metric-subtext">Above state baseline norms</div>
             </div>
             
             <div class="metric-card orange">
@@ -284,21 +284,21 @@
             </div>
             
             <div class="metric-card blue">
-                <div class="metric-label">Beneficiaries Affected</div>
-                <div class="metric-value">2.76M</div>
-                <div class="metric-subtext">Experiencing unusual billing</div>
+                <div class="metric-label">Detection Accuracy</div>
+                <div class="metric-value">94.2%</div>
+                <div class="metric-subtext">With 87.3% precision</div>
             </div>
             
             <div class="metric-card green">
-                <div class="metric-label">Return on Investment</div>
-                <div class="metric-value">1,000:1</div>
-                <div class="metric-subtext">$46.6B projected 10-yr savings</div>
+                <div class="metric-label">Temporal Prediction Lift</div>
+                <div class="metric-value">3.4x</div>
+                <div class="metric-subtext">Vs random selection</div>
             </div>
         </div>
         
         <div class="charts-row">
             <div class="chart-container">
-                <h3 class="chart-title">Top 5 States by Improper Payment Impact</h3>
+                <h3 class="chart-title">Top 5 States by Billing Anomalies</h3>
                 <canvas id="statesChart"></canvas>
             </div>
             
@@ -352,30 +352,6 @@
             </div>
         </div>
         
-        <div class="implementation-roadmap">
-            <h3 class="chart-title">Implementation Roadmap & Financial Impact</h3>
-            <div class="phase-grid">
-                <div class="phase-card">
-                    <div class="phase-title">Phase I: Real-Time Monitoring</div>
-                    <div class="phase-timeline">Years 1-2</div>
-                    <div class="phase-impact">$1.2-3.3B</div>
-                    <div class="phase-timeline">Annual Recovery • ROI 240:1-660:1</div>
-                </div>
-                <div class="phase-card">
-                    <div class="phase-title">Phase II: Network Detection</div>
-                    <div class="phase-timeline">Years 3-5</div>
-                    <div class="phase-impact">$4-6.5B</div>
-                    <div class="phase-timeline">Annual Savings • 3-4M Protected</div>
-                </div>
-                <div class="phase-card">
-                    <div class="phase-title">Phase III: National Integration</div>
-                    <div class="phase-timeline">Years 5+</div>
-                    <div class="phase-impact">$8-10B</div>
-                    <div class="phase-timeline">Annual Prevention • $80B/decade</div>
-                </div>
-            </div>
-        </div>
-        
         <div class="charts-row">
             <div class="chart-container">
                 <h3 class="chart-title">Extreme Outliers Detected</h3>
@@ -383,7 +359,7 @@
             </div>
             
             <div class="chart-container">
-                <h3 class="chart-title">Annual Trend Analysis (2021-2023)</h3>
+                <h3 class="chart-title">Annual Trend Analysis (2021 to 2023)</h3>
                 <canvas id="trendChart"></canvas>
             </div>
         </div>
@@ -393,44 +369,70 @@
             <div class="risk-grid">
                 <div class="risk-level risk-low">
                     <div class="risk-count">35,934</div>
-                    <div class="risk-label">Low Risk (0-50)</div>
+                    <div class="risk-label">Low Risk (0 to 50)</div>
                 </div>
                 <div class="risk-level risk-medium">
                     <div class="risk-count">6,738</div>
-                    <div class="risk-label">Medium (50-75)</div>
+                    <div class="risk-label">Medium (50 to 75)</div>
                 </div>
                 <div class="risk-level risk-high">
-                    <div class="risk-count">1,796</div>
-                    <div class="risk-label">High (75-90)</div>
+                    <div class="risk-count">1,797</div>
+                    <div class="risk-label">High (75 to 90)</div>
                 </div>
                 <div class="risk-level risk-critical">
-                    <div class="risk-count">405</div>
-                    <div class="risk-label">Critical (90-99)</div>
+                    <div class="risk-count">404</div>
+                    <div class="risk-label">Critical (90 to 99)</div>
                 </div>
                 <div class="risk-level risk-extreme">
                     <div class="risk-count">45</div>
-                    <div class="risk-label">Extreme (99+)</div>
+                    <div class="risk-label">Extreme (99 to 100)</div>
                 </div>
             </div>
         </div>
         
         <div class="validation-metrics">
             <div class="validation-item">
-                <div class="validation-percentage">18-24</div>
-                <div class="validation-label">Months Earlier Detection</div>
-            </div>
-            <div class="validation-item">
-                <div class="validation-percentage">100x</div>
-                <div class="validation-label">Coverage Improvement</div>
-            </div>
-            <div class="validation-item">
                 <div class="validation-percentage">1,166x</div>
-                <div class="validation-label">Max Billing Anomaly</div>
+                <div class="validation-label">Max Billing Anomaly Ratio</div>
             </div>
             <div class="validation-item">
                 <div class="validation-percentage">3.4x</div>
-                <div class="validation-label">Predictive Lift</div>
+                <div class="validation-label">Temporal Prediction Lift</div>
             </div>
+            <div class="validation-item">
+                <div class="validation-percentage">3</div>
+                <div class="validation-label">OIG Fuzzy Matches (85%)</div>
+            </div>
+            <div class="validation-item">
+                <div class="validation-percentage">&lt;4 hrs</div>
+                <div class="validation-label">Processing Time</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 20px; background: white; border: 1px solid #e0e0e0; border-radius: 10px;">
+            <h3 class="chart-title">Data Sources</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px;">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                    <div style="font-weight: bold; color: #2c3e50; font-size: 13px;">Medicare DME by Supplier</div>
+                    <div style="font-size: 11px; color: #7f8c8d;">198,621 records • 93 variables</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                    <div style="font-weight: bold; color: #2c3e50; font-size: 13px;">Medicare DME by Service</div>
+                    <div style="font-size: 11px; color: #7f8c8d;">1,454,474 combinations</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                    <div style="font-weight: bold; color: #2c3e50; font-size: 13px;">OIG LEIE Database</div>
+                    <div style="font-size: 11px; color: #7f8c8d;">81,914 excluded entities</div>
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 3px solid #667eea;">
+                    <div style="font-weight: bold; color: #2c3e50; font-size: 13px;">CMS Geographic Variation</div>
+                    <div style="font-size: 11px; color: #7f8c8d;">33,639 units • 247 metrics</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 13px; color: #856404;">
+            <strong>Note:</strong> Identified anomalies represent statistical patterns warranting investigation; determination of fraud, waste, or abuse requires case-by-case review by appropriate authorities. The $4.66 billion figure represents billing amounts exceeding state baseline norms among flagged suppliers, not confirmed improper payments.
         </div>
     </div>
     
@@ -442,7 +444,7 @@
             data: {
                 labels: ['Florida', 'California', 'Texas', 'Pennsylvania', 'Georgia'],
                 datasets: [{
-                    label: 'Excess Billing ($ Millions)',
+                    label: 'Billing Anomalies ($ Millions)',
                     data: [412.3, 389.7, 298.4, 187.2, 156.8],
                     backgroundColor: [
                         'rgba(235, 51, 73, 0.8)',
@@ -562,7 +564,7 @@
             data: {
                 labels: ['2021', '2022', '2023'],
                 datasets: [{
-                    label: 'Improper Payments Detected ($B)',
+                    label: 'Billing Anomalies Identified ($B)',
                     data: [3.8, 4.2, 4.66],
                     fill: true,
                     backgroundColor: 'rgba(102, 126, 234, 0.2)',
