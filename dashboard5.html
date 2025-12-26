@@ -265,12 +265,32 @@
             color: #28a745;
             font-weight: 500;
         }
+
+        .disclaimer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 900px) {
+            .roadmap-timeline {
+                flex-direction: column;
+            }
+            .roadmap-phase {
+                margin: 5px 0;
+            }
+            .performance-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Medicare Telehealth Program Integrity System</h1>
-        <p>National Framework for Detecting and Preventing Improper Billing in Federal Healthcare Programs</p>
+        <p>Combined Risk Score Framework for Identifying Anomalous Billing Patterns</p>
     </div>
     
     <div class="dashboard">
@@ -286,11 +306,11 @@
             </div>
             <div class="metric-card crisis-metric">
                 <div class="metric-value">88x</div>
-                <div class="metric-label">Telehealth Usage Increase During COVID</div>
+                <div class="metric-label">Telehealth Usage Increase (Pandemic)</div>
             </div>
             <div class="metric-card crisis-metric">
                 <div class="metric-value">1,714</div>
-                <div class="metric-label">High-Risk Providers (HHS OIG)</div>
+                <div class="metric-label">High Risk Providers (HHS OIG)</div>
             </div>
         </div>
         
@@ -312,7 +332,7 @@
                         <div class="perf-label">Recall</div>
                     </div>
                     <div class="perf-metric">
-                        <div class="perf-value">59.0%</div>
+                        <div class="perf-value">0.59</div>
                         <div class="perf-label">F1 Score</div>
                     </div>
                     <div class="perf-metric">
@@ -347,13 +367,18 @@
                             <td class="status-optimal">OPTIMAL</td>
                         </tr>
                         <tr>
-                            <td>Cross-validation (k-fold=10)</td>
+                            <td>Cross Validation (k fold = 10)</td>
                             <td>91.3% ± 2.4%</td>
                             <td class="status-pass">PASS</td>
                         </tr>
                         <tr>
-                            <td>Bootstrap Analysis (n=1000)</td>
+                            <td>Bootstrap Analysis (n = 1,000)</td>
                             <td>95% CI Stable</td>
+                            <td class="status-pass">PASS</td>
+                        </tr>
+                        <tr>
+                            <td>Null Model Improvement</td>
+                            <td>47x</td>
                             <td class="status-pass">PASS</td>
                         </tr>
                     </tbody>
@@ -361,81 +386,109 @@
             </div>
         </div>
         
-        <!-- Implementation Roadmap -->
+        <!-- Analysis Results (Replaces Implementation Roadmap) -->
         <div class="section">
-            <h2 class="section-title">IMPLEMENTATION ROADMAP</h2>
+            <h2 class="section-title">RISK DISTRIBUTION RESULTS</h2>
             <div class="roadmap-timeline">
                 <div class="roadmap-phase">
-                    <div class="phase-title">Phase I</div>
-                    <div class="phase-timeline">Years 1-2</div>
-                    <div class="phase-impact">$1.5-3B annually (top 1%)<br>$6-9B (top 5%)</div>
+                    <div class="phase-title">Critical Risk</div>
+                    <div class="phase-timeline">Score 76 to 100</div>
+                    <div class="phase-impact">35 providers (0.07%)<br>$420.2M excess billing</div>
                 </div>
                 <div class="roadmap-phase">
-                    <div class="phase-title">Phase II</div>
-                    <div class="phase-timeline">Years 3-5</div>
-                    <div class="phase-impact">$8-14B annual savings<br>$40-50B cumulative</div>
+                    <div class="phase-title">High Risk</div>
+                    <div class="phase-timeline">Score 51 to 75</div>
+                    <div class="phase-impact">465 providers (0.93%)<br>$312.5M identified</div>
                 </div>
                 <div class="roadmap-phase">
-                    <div class="phase-title">Phase III</div>
-                    <div class="phase-timeline">Years 5+</div>
-                    <div class="phase-impact">$25-30B annually<br>$150-200B over decade</div>
+                    <div class="phase-title">Medium Risk</div>
+                    <div class="phase-timeline">Score 26 to 50</div>
+                    <div class="phase-impact">9,440 providers (18.88%)<br>Below threshold</div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="phase-title">Low Risk</div>
+                    <div class="phase-timeline">Score 0 to 25</div>
+                    <div class="phase-impact">40,060 providers (80.12%)<br>Normal patterns</div>
                 </div>
             </div>
         </div>
         
-        <!-- Financial Impact and ROI -->
+        <!-- Geographic Distribution and Feature Importance -->
         <div class="grid-2">
             <div class="section">
-                <h2 class="section-title">FINANCIAL IMPACT PROJECTIONS</h2>
+                <h2 class="section-title">GEOGRAPHIC DISTRIBUTION</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Implementation Phase</th>
-                            <th>Investment</th>
-                            <th>Potential Benefit</th>
-                            <th>ROI</th>
+                            <th>State</th>
+                            <th>Critical Risk Providers</th>
+                            <th>Percentage</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Pilot Demonstration</td>
-                            <td>~$150,000</td>
-                            <td>$420.2M identified</td>
-                            <td><strong>~42:1</strong></td>
+                            <td>Florida</td>
+                            <td>11</td>
+                            <td>31%</td>
                         </tr>
                         <tr>
-                            <td>National Deployment (Year 1)</td>
-                            <td>~$10 million</td>
-                            <td>$12.6B potential annual</td>
-                            <td><strong>~126:1</strong></td>
+                            <td>California</td>
+                            <td>5</td>
+                            <td>14%</td>
                         </tr>
                         <tr>
-                            <td>5-Year Program</td>
-                            <td>~$200 million total</td>
-                            <td>$63B cumulative</td>
-                            <td><strong>~630:1</strong></td>
+                            <td>Texas</td>
+                            <td>3</td>
+                            <td>9%</td>
+                        </tr>
+                        <tr>
+                            <td>Other States</td>
+                            <td>16</td>
+                            <td>46%</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="chart-container">
-                    <canvas id="roiChart"></canvas>
-                </div>
+                <p style="margin-top: 15px; font-size: 13px; color: #666;">
+                    Geographic concentration aligns with DOJ Healthcare Fraud Strike Force priority regions, providing independent validation of detection methodology.
+                </p>
             </div>
             
+            <div class="section">
+                <h2 class="section-title">FEATURE IMPORTANCE (ML MODEL)</h2>
+                <div class="chart-container">
+                    <canvas id="featureChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Risk Components and Data Sources -->
+        <div class="grid-2">
             <div class="section">
                 <h2 class="section-title">RISK SCORING COMPONENTS</h2>
                 <div class="chart-container">
                     <canvas id="riskComponentsChart"></canvas>
                 </div>
                 <div style="margin-top: 20px;">
-                    <h3 style="font-size: 14px; margin-bottom: 10px; color: #666;">HIGH-RISK SPECIALTIES IDENTIFIED</h3>
+                    <h3 style="font-size: 14px; margin-bottom: 10px; color: #666;">METHODOLOGY HIGHLIGHTS</h3>
                     <div class="specialty-list">
-                        <span class="specialty-badge">Family Practice</span>
-                        <span class="specialty-badge">Hematology-Oncology</span>
-                        <span class="specialty-badge">Clinical Laboratory</span>
-                        <span class="specialty-badge">Pharmacy</span>
+                        <span class="specialty-badge">Six Federal Databases</span>
+                        <span class="specialty-badge">Dual Validation</span>
+                        <span class="specialty-badge">Peer Benchmarking</span>
+                        <span class="specialty-badge">148 Records/Second</span>
                     </div>
                 </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">DATA SOURCES (6 FEDERAL DATABASES)</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• CMS Medicare Provider Utilization (1.1M providers)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• NPPES National Provider Registry (8.2M providers)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• OIG LEIE Exclusion Lists (81,914 exclusions)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• PECOS Provider Enrollment (2.3M records)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• Medicare Geographic Variation (306 HRRs)</li>
+                    <li style="padding: 8px 0;">• Medicare Telehealth Trends Data</li>
+                </ul>
             </div>
         </div>
         
@@ -449,10 +502,6 @@
                         <td><strong>148 records/second</strong></td>
                     </tr>
                     <tr>
-                        <td>Memory Usage</td>
-                        <td><strong>2.5 GB</strong></td>
-                    </tr>
-                    <tr>
                         <td>Total Processing Time</td>
                         <td><strong>5 minutes 47 seconds</strong></td>
                     </tr>
@@ -464,51 +513,74 @@
                         <td>Service Volume</td>
                         <td><strong>322.4 million services</strong></td>
                     </tr>
+                    <tr>
+                        <td>Data Completeness</td>
+                        <td><strong>99.7%</strong></td>
+                    </tr>
                 </table>
             </div>
             
             <div class="section">
-                <h2 class="section-title">DATA SOURCES</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• CMS Provider Utilization Database</li>
-                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• NPPES Registry (1.1M providers)</li>
-                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• OIG LEIE Exclusion Lists</li>
-                    <li style="padding: 8px 0; border-bottom: 1px solid #f0f2f5;">• PECOS Enrollment Data</li>
-                    <li style="padding: 8px 0;">• Medicare Part B Claims (2019-2023)</li>
-                </ul>
+                <h2 class="section-title">DATA QUALITY METRICS</h2>
+                <table>
+                    <tr>
+                        <td>Valid NPI Identifiers</td>
+                        <td><strong>99.97%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Complete Payment Data</td>
+                        <td><strong>98.47%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Geographic Matching</td>
+                        <td><strong>97.91%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Analysis Period</td>
+                        <td><strong>2019 to 2023</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Random Seed</td>
+                        <td><strong>42 (reproducible)</strong></td>
+                    </tr>
+                </table>
             </div>
             
             <div class="section">
-                <h2 class="section-title">VALIDATION METRICS</h2>
+                <h2 class="section-title">VALIDATION SUMMARY</h2>
                 <div style="margin-bottom: 15px;">
                     <h4 style="color: #666; font-size: 14px; margin-bottom: 8px;">Temporal Stability</h4>
                     <div style="font-size: 13px; line-height: 1.5;">
-                        • Temporal Stability Test: 92.0% PASS<br>
-                        • Pattern consistency: 2019-2023<br>
-                        • Detection patterns remain valid
+                        • Temporal Stability: 92.0% PASS<br>
+                        • Pattern consistency: 2019 to 2023<br>
+                        • Bootstrap: 1,000 iterations
                     </div>
                 </div>
                 <div>
-                    <h4 style="color: #666; font-size: 14px; margin-bottom: 8px;">Geographic & Peer Alignment</h4>
+                    <h4 style="color: #666; font-size: 14px; margin-bottom: 8px;">Detection Performance</h4>
                     <div style="font-size: 13px; line-height: 1.5;">
-                        • Geographic Adjustment: +10 points<br>
-                        • DOJ Strike Force alignment<br>
+                        • Null Model Improvement: 47x<br>
+                        • Cross Validation: 91.3% ± 2.4%<br>
                         • False Positive Rate: 0.0%
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- National Impact -->
+        <!-- Key Findings (Replaces National Impact) -->
         <div class="impact-box">
-            <div class="impact-title">$12.6B - $30B ANNUALLY</div>
+            <div class="impact-title">$420.2M EXCESS BILLING IDENTIFIED</div>
             <div class="impact-desc">
-                Identified $420.2M in excess payments from 35 high-risk providers (0.07% of sample). 
-                National deployment could prevent $12.6B annually in improper billing, with $63B over 5 years. 
-                Cross-program expansion to Medicaid, TRICARE, and VA systems projects $25-30B annual prevention 
-                and $150-200B over a decade.
+                Analysis of 50,000 Medicare telehealth providers covering 322.4 million services (2019 to 2023) 
+                identified 35 critical risk providers (0.07%) with billing patterns between 200% and 30,500% 
+                above peer benchmarks. The methodology achieved 91.3% accuracy with 100% precision in critical 
+                risk identification through dual validation across six federal databases.
             </div>
         </div>
+        
+        <p class="disclaimer">
+            Note: This system identifies statistical anomalies in billing patterns. Determination of actual improper payments requires investigation by authorized agencies.
+        </p>
     </div>
     
     <script>
@@ -560,57 +632,49 @@
             }
         });
         
-        // ROI Chart
-        const roiCtx = document.getElementById('roiChart').getContext('2d');
-        new Chart(roiCtx, {
-            type: 'line',
+        // Feature Importance Chart (Replaces ROI Chart)
+        const featureCtx = document.getElementById('featureChart').getContext('2d');
+        new Chart(featureCtx, {
+            type: 'bar',
             data: {
-                labels: ['Pilot', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                labels: ['Service Volume Anomaly', 'Payment Variance', 'Geographic Risk Factor', 'Temporal Growth Pattern', 'Service Diversity Index'],
                 datasets: [{
-                    label: 'Cumulative Savings (Billions)',
-                    data: [0.42, 12.6, 25.2, 37.8, 50.4, 63],
-                    borderColor: '#2a5298',
-                    backgroundColor: 'rgba(42, 82, 152, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }, {
-                    label: 'Investment (Millions)',
-                    data: [0.15, 10, 40, 80, 140, 200],
-                    borderColor: '#ff6b6b',
-                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    yAxisID: 'y1'
+                    label: 'Feature Importance (%)',
+                    data: [38, 27, 18, 11, 6],
+                    backgroundColor: [
+                        '#2a5298',
+                        '#3d6cb3',
+                        '#5080c7',
+                        '#6394db',
+                        '#76a8ef'
+                    ],
+                    borderWidth: 0
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                indexAxis: 'y',
                 plugins: {
                     legend: {
-                        position: 'top',
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.x + '%';
+                            }
+                        }
                     }
                 },
                 scales: {
-                    y: {
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                        title: {
-                            display: true,
-                            text: 'Savings ($B)'
-                        }
-                    },
-                    y1: {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        title: {
-                            display: true,
-                            text: 'Investment ($M)'
-                        },
-                        grid: {
-                            drawOnChartArea: false,
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
                         }
                     }
                 }
@@ -624,12 +688,12 @@
             data: {
                 labels: [
                     'Isolation Forest ML (85%)',
-                    'Statistical Z-Score (15%)',
-                    'Geographic Adjustment',
-                    'Temporal Anomaly'
+                    'Statistical Z Score (15%)',
+                    'Geographic Adjustment (+10 pts)',
+                    'Temporal Flag (>200% YoY)'
                 ],
                 datasets: [{
-                    data: [85, 15, 10, 200],
+                    data: [85, 15, 10, 5],
                     backgroundColor: [
                         '#2a5298',
                         '#28a745',
@@ -658,9 +722,13 @@
                             label: function(context) {
                                 const label = context.label || '';
                                 if (label.includes('Geographic')) {
-                                    return label + ': +10 points';
+                                    return 'Geographic Adjustment: +10 points for high risk states';
                                 } else if (label.includes('Temporal')) {
-                                    return label + ': >200% YoY';
+                                    return 'Temporal Flag: Triggers for >200% year over year increase';
+                                } else if (label.includes('ML')) {
+                                    return 'Machine Learning Component: 85% weight';
+                                } else if (label.includes('Z Score')) {
+                                    return 'Statistical Z Score: 15% weight';
                                 }
                                 return label;
                             }
