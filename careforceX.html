@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareforceX - Healthcare Workforce Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #333333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Color Variables */
+        :root {
+            --primary-dark: #1a5276;
+            --primary-medium: #2874a6;
+            --primary-light: #2e86de;
+            --accent-teal: #48c9b0;
+            --section-alt: #f0f4f8;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--primary-dark);
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+        
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+        
+        .text-large {
+            font-size: 1.25rem;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            padding: 16px 0;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .navbar-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .navbar-links a:hover {
+            color: white;
+        }
+        
+        /* Layout */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-alt {
+            background: var(--section-alt);
+        }
+        
+        .section-gradient {
+            background: linear-gradient(135deg, #1a5276 0%, #2e86de 50%, #48c9b0 100%);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #1a5276 0%, #2e86de 50%, #48c9b0 100%);
+            color: white;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Glass Stat Cards */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .glass-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .glass-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .glass-stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+        
+        /* Capability Cards */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        
+        .capability-card {
+            background: white;
+            border-radius: 15px;
+            padding: 32px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .capability-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .capability-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .capability-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .capability-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Mockup Styles */
+        .mockup {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .mockup-header {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            padding: 12px 16px;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .mockup-dot.red { background: #ff6b6b; }
+        .mockup-dot.yellow { background: #feca57; }
+        .mockup-dot.green { background: #48c9b0; }
+        
+        .mockup-content {
+            padding: 24px;
+        }
+        
+        /* Employee Table Mockup */
+        .table-mockup {
+            width: 100%;
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 80px;
+            gap: 16px;
+            padding: 12px 16px;
+            background: var(--section-alt);
+            border-radius: 8px 8px 0 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 80px;
+            gap: 16px;
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+            align-items: center;
+        }
+        
+        .employee-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .employee-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a5276 0%, #48c9b0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .employee-name {
+            font-weight: 500;
+        }
+        
+        .employee-email {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-leave {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .status-active .status-dot { background: #48c9b0; }
+        .status-leave .status-dot { background: #f59e0b; }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f6f3 0%, #d5f5e3 100%);
+            border-left: 5px solid var(--accent-teal);
+            border-radius: 0 10px 10px 0;
+            padding: 25px;
+            margin-top: 24px;
+        }
+        
+        .highlight-box-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Feature List */
+        .feature-list {
+            margin-top: 24px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #48c9b0 0%, #1abc9c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+        
+        /* Onboarding Mockup */
+        .onboarding-mockup {
+            padding: 24px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .progress-label {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .progress-percent {
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1a5276 0%, #48c9b0 100%);
+            border-radius: 5px;
+        }
+        
+        .checklist {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--section-alt);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+        }
+        
+        .check-complete {
+            background: var(--accent-teal);
+            color: white;
+        }
+        
+        .check-pending {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+        
+        /* Pipeline Mockup */
+        .pipeline-mockup {
+            padding: 32px 24px;
+        }
+        
+        .pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .pipeline-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pipeline-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .pipeline-complete {
+            background: var(--accent-teal);
+            color: white;
+        }
+        
+        .pipeline-active {
+            background: var(--primary-light);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(46, 134, 222, 0.2);
+        }
+        
+        .pipeline-pending {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+        
+        .pipeline-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 70px;
+        }
+        
+        .pipeline-line {
+            flex: 1;
+            height: 3px;
+            background: #e5e7eb;
+            margin: 0 -8px;
+            margin-top: -24px;
+        }
+        
+        .pipeline-line-complete {
+            background: var(--accent-teal);
+        }
+        
+        /* Stages List */
+        .stages-list {
+            margin-top: 24px;
+        }
+        
+        .stage-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .stage-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        /* Attendance */
+        .attendance-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .attendance-header {
+            background: var(--section-alt);
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+        
+        .status-present { background: #d1fae5; color: #065f46; }
+        .status-late { background: #fef3c7; color: #92400e; }
+        .status-absent { background: #fee2e2; color: #991b1b; }
+        
+        .badges-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .badge {
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .badge-present { background: #d1fae5; color: #065f46; }
+        .badge-late { background: #fef3c7; color: #92400e; }
+        .badge-half { background: #dbeafe; color: #1e40af; }
+        .badge-absent { background: #fee2e2; color: #991b1b; }
+        
+        /* Approval Cards */
+        .approval-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .approval-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .approval-type {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .approval-icon {
+            font-size: 1.5rem;
+        }
+        
+        .approval-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .approval-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .approval-badge {
+            padding: 4px 12px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .approval-details {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin-bottom: 16px;
+        }
+        
+        .approval-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-reject {
+            background: white;
+            border: 1px solid #fca5a5;
+            color: #dc2626;
+        }
+        
+        .btn-reject:hover {
+            background: #fef2f2;
+        }
+        
+        .btn-approve {
+            background: linear-gradient(135deg, #1a5276 0%, #48c9b0 100%);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(72, 201, 176, 0.4);
+        }
+        
+        /* Security Cards */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 48px auto 0;
+        }
+        
+        .security-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .security-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .security-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 32px 0 48px;
+            flex-wrap: wrap;
+        }
+        
+        .tech-badge {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .footer-tagline {
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        
+        .footer-tech {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo">CareforceX</a>
+            <div class="navbar-links">
+                <a href="#features">Features</a>
+                <a href="#capabilities">Capabilities</a>
+                <a href="#security">Security</a>
+                <a href="#architecture">Architecture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>CareforceX</h1>
+            <p class="hero-subtitle">Healthcare Workforce Management System</p>
+            <p class="hero-description">
+                Complete employee lifecycle management from onboarding to offboarding.
+                Built for healthcare organizations requiring comprehensive workforce administration.
+            </p>
+            <a href="#features" class="cta-button">
+                Explore Features
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </a>
+            
+            <div class="hero-stats">
+                <div class="glass-card">
+                    <div class="glass-stat-number">76,177</div>
+                    <div class="glass-stat-label">Lines of Code</div>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-stat-number">39</div>
+                    <div class="glass-stat-label">Database Schemas</div>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-stat-number">121</div>
+                    <div class="glass-stat-label">React Components</div>
+                </div>
+                <div class="glass-card">
+                    <div class="glass-stat-number">15</div>
+                    <div class="glass-stat-label">Onboarding Modules</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Capabilities -->
+    <section id="features" class="section">
+        <div class="container text-center">
+            <h2>Complete Workforce Management</h2>
+            <p class="text-large text-secondary" style="margin-top: 16px;">
+                Everything you need to manage employees from hire to retire
+            </p>
+            
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">👥</div>
+                    <div class="capability-title">Employee Management</div>
+                    <div class="capability-desc">Comprehensive profiles, documents, equipment tracking</div>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">🚀</div>
+                    <div class="capability-title">Onboarding</div>
+                    <div class="capability-desc">15-step structured workflow for new hires</div>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">📋</div>
+                    <div class="capability-title">Offboarding</div>
+                    <div class="capability-desc">7-stage exit process preserving knowledge</div>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">⏰</div>
+                    <div class="capability-title">Attendance</div>
+                    <div class="capability-desc">Configurable shifts, policies, real-time tracking</div>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">✅</div>
+                    <div class="capability-title">Approvals</div>
+                    <div class="capability-desc">Multi-level workflow for leaves, expenses</div>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">🏢</div>
+                    <div class="capability-title">Multi-Tenant</div>
+                    <div class="capability-desc">Independent configurations per organization</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employee Management -->
+    <section id="capabilities" class="section section-alt">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <div class="section-label">Employee Management</div>
+                    <h2>Track Your Entire Workforce</h2>
+                    <p class="text-large text-secondary" style="margin-top: 16px;">
+                        Store and manage comprehensive employee information including personal 
+                        details, company assignment, salary, benefits, documents, and equipment.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Personal Information & Emergency Contacts</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Department & Reporting Structure</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Salary Configuration & Benefits</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Document Management</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Equipment Tracking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-box-title">15 Data Modules</div>
+                        <div class="highlight-box-text">
+                            Capturing complete employee information across personal, professional, 
+                            financial, and administrative categories.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                    </div>
+                    <div class="mockup-content" style="padding: 0;">
+                        <div class="table-mockup">
+                            <div class="table-header">
+                                <span>Employee</span>
+                                <span>Department</span>
+                                <span>Position</span>
+                                <span>Status</span>
+                            </div>
+                            <div class="table-row">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">SJ</div>
+                                    <div>
+                                        <div class="employee-name">Sarah Johnson</div>
+                                        <div class="employee-email">sarah.j@company.com</div>
+                                    </div>
+                                </div>
+                                <span>Engineering</span>
+                                <span>Senior Engineer</span>
+                                <span class="status-badge status-active"><span class="status-dot"></span>Active</span>
+                            </div>
+                            <div class="table-row">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">MC</div>
+                                    <div>
+                                        <div class="employee-name">Michael Chen</div>
+                                        <div class="employee-email">michael.c@company.com</div>
+                                    </div>
+                                </div>
+                                <span>Operations</span>
+                                <span>Manager</span>
+                                <span class="status-badge status-active"><span class="status-dot"></span>Active</span>
+                            </div>
+                            <div class="table-row">
+                                <div class="employee-info">
+                                    <div class="employee-avatar">JW</div>
+                                    <div>
+                                        <div class="employee-name">James Wilson</div>
+                                        <div class="employee-email">james.w@company.com</div>
+                                    </div>
+                                </div>
+                                <span>Finance</span>
+                                <span>Analyst</span>
+                                <span class="status-badge status-leave"><span class="status-dot"></span>Leave</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding -->
+    <section class="section">
+        <div class="container">
+            <div class="grid-2">
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                    </div>
+                    <div class="onboarding-mockup">
+                        <div style="margin-bottom: 16px;">
+                            <div style="font-weight: 600; color: var(--primary-dark);">Robert Taylor</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Engineering Department</div>
+                        </div>
+                        <div class="progress-header">
+                            <span class="progress-label">Onboarding Progress</span>
+                            <span class="progress-percent">65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <span class="check-icon check-complete">✓</span>
+                                Personal Info
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-complete">✓</span>
+                                Company Details
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-complete">✓</span>
+                                Salary Config
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-complete">✓</span>
+                                Benefits
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-pending">○</span>
+                                Documents
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-pending">○</span>
+                                Bank Details
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-pending">○</span>
+                                Equipment
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon check-pending">○</span>
+                                Shift Assignment
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="section-label">Streamlined Onboarding</div>
+                    <h2>15-Step Onboarding Workflow</h2>
+                    <p class="text-large text-secondary" style="margin-top: 16px;">
+                        Ensure every new hire completes all required steps with our 
+                        structured onboarding pipeline. Track progress in real-time.
+                    </p>
+                    
+                    <div class="feature-list" style="columns: 2; column-gap: 24px;">
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Personal Information</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Benefits Enrollment</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Company Assignment</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Bank Details</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Salary Configuration</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Documents & IDs</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Equipment Allocation</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Shift Assignment</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 16px; color: var(--text-secondary); font-size: 0.875rem;">...and more steps</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offboarding -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <div class="section-label">Structured Offboarding</div>
+                    <h2>7-Stage Exit Process</h2>
+                    <p class="text-large text-secondary" style="margin-top: 16px;">
+                        Protect institutional knowledge and ensure consistent departures 
+                        with our comprehensive offboarding pipeline.
+                    </p>
+                    
+                    <div class="stages-list">
+                        <div class="stage-item">
+                            <div class="stage-number">1</div>
+                            <span>Termination Details</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">2</div>
+                            <span>Asset Return</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">3</div>
+                            <span>Knowledge Transfer</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">4</div>
+                            <span>Final Documents</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">5</div>
+                            <span>Final Pay Calculation</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">6</div>
+                            <span>Progress Tracking</span>
+                        </div>
+                        <div class="stage-item">
+                            <div class="stage-number">7</div>
+                            <span>Completion & Archive</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                    </div>
+                    <div class="pipeline-mockup">
+                        <div style="margin-bottom: 24px;">
+                            <div style="font-weight: 600; color: var(--primary-dark);">Kevin Martinez</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary);">Offboarding in Progress</div>
+                        </div>
+                        <div class="pipeline">
+                            <div class="pipeline-stage">
+                                <div class="pipeline-circle pipeline-complete">✓</div>
+                                <div class="pipeline-label">Termination</div>
+                            </div>
+                            <div class="pipeline-line pipeline-line-complete"></div>
+                            <div class="pipeline-stage">
+                                <div class="pipeline-circle pipeline-complete">✓</div>
+                                <div class="pipeline-label">Asset Return</div>
+                            </div>
+                            <div class="pipeline-line pipeline-line-complete"></div>
+                            <div class="pipeline-stage">
+                                <div class="pipeline-circle pipeline-active">3</div>
+                                <div class="pipeline-label">Knowledge Transfer</div>
+                            </div>
+                            <div class="pipeline-line"></div>
+                            <div class="pipeline-stage">
+                                <div class="pipeline-circle pipeline-pending">4</div>
+                                <div class="pipeline-label">Final Docs</div>
+                            </div>
+                            <div class="pipeline-line"></div>
+                            <div class="pipeline-stage">
+                                <div class="pipeline-circle pipeline-pending">5</div>
+                                <div class="pipeline-label">Final Pay</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attendance -->
+    <section class="section">
+        <div class="container">
+            <div class="grid-2">
+                <div class="mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                    </div>
+                    <div style="padding: 0;">
+                        <div class="attendance-row attendance-header">
+                            <span>Employee</span>
+                            <span>Clock In</span>
+                            <span>Status</span>
+                        </div>
+                        <div class="attendance-row">
+                            <span style="font-weight: 500;">Sarah Johnson</span>
+                            <span style="color: var(--text-secondary);">08:55 AM</span>
+                            <span class="status-badge status-present"><span class="status-dot" style="background:#48c9b0"></span>Present</span>
+                        </div>
+                        <div class="attendance-row">
+                            <span style="font-weight: 500;">Michael Chen</span>
+                            <span style="color: var(--text-secondary);">09:02 AM</span>
+                            <span class="status-badge status-present"><span class="status-dot" style="background:#48c9b0"></span>Present</span>
+                        </div>
+                        <div class="attendance-row">
+                            <span style="font-weight: 500;">Maria Garcia</span>
+                            <span style="color: var(--text-secondary);">09:18 AM</span>
+                            <span class="status-badge status-late"><span class="status-dot" style="background:#f59e0b"></span>Late</span>
+                        </div>
+                        <div class="attendance-row">
+                            <span style="font-weight: 500;">James Wilson</span>
+                            <span style="color: var(--text-secondary);">—</span>
+                            <span class="status-badge status-absent"><span class="status-dot" style="background:#ef4444"></span>Absent</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="section-label">Smart Attendance</div>
+                    <h2>Configurable Shifts & Policies</h2>
+                    <p class="text-large text-secondary" style="margin-top: 16px;">
+                        Handle complex scheduling with multiple shift types, flexible 
+                        attendance policies, and automatic status calculation.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Morning, Evening, Night Shifts</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Fixed and Flexible Shift Types</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Grace Period Configuration</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Overtime Calculation</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Real-time Clock In/Out</span>
+                        </div>
+                    </div>
+                    
+                    <div class="badges-row">
+                        <span class="badge badge-present">Present</span>
+                        <span class="badge badge-late">Late</span>
+                        <span class="badge badge-half">Half Day</span>
+                        <span class="badge badge-absent">Absent</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approvals -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <div class="section-label">Approval Workflows</div>
+                    <h2>Multi-Level Request Management</h2>
+                    <p class="text-large text-secondary" style="margin-top: 16px;">
+                        Route requests through configurable approval chains. 
+                        Managers see pending items instantly.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Leave Requests</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Expense Claims</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Attendance Corrections</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Document Approvals</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span>Multi-Stage Chains</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <div class="approval-type">
+                                <span class="approval-icon">🏖️</span>
+                                <div>
+                                    <div class="approval-title">Leave Request</div>
+                                    <div class="approval-subtitle">Sarah Johnson • Annual Leave</div>
+                                </div>
+                            </div>
+                            <span class="approval-badge">Pending</span>
+                        </div>
+                        <div class="approval-details">
+                            <strong>Jan 25 - Jan 28, 2025</strong> (4 days)<br>
+                            Reason: Family vacation<br>
+                            Leave Balance: 12 days remaining
+                        </div>
+                        <div class="approval-actions">
+                            <button class="btn btn-reject">Reject</button>
+                            <button class="btn btn-approve">Approve</button>
+                        </div>
+                    </div>
+                    
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <div class="approval-type">
+                                <span class="approval-icon">💰</span>
+                                <div>
+                                    <div class="approval-title">Expense Claim</div>
+                                    <div class="approval-subtitle">Michael Chen • Travel</div>
+                                </div>
+                            </div>
+                            <span class="approval-badge">Pending</span>
+                        </div>
+                        <div class="approval-details">
+                            <strong style="font-size: 1.25rem;">$450.00</strong><br>
+                            Flight to NYC, Airport Transfer, Meals
+                        </div>
+                        <div class="approval-actions">
+                            <button class="btn btn-reject">Reject</button>
+                            <button class="btn btn-approve">Approve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="section section-gradient">
+        <div class="container text-center">
+            <div class="section-label" style="color: rgba(255,255,255,0.9);">Enterprise-Grade Security</div>
+            <h2 style="color: white;">Comprehensive Protection for Sensitive Data</h2>
+            <p class="text-large" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">
+                Protect sensitive employee data with security features 
+                designed for healthcare environments.
+            </p>
+            
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-value">JWT</div>
+                    <div class="security-label">Authentication</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-value">5 Levels</div>
+                    <div class="security-label">Role-Based Access</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-value">9 Types</div>
+                    <div class="security-label">Events Logged</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-value">Last 5</div>
+                    <div class="security-label">Password History</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-value">5 Attempts</div>
+                    <div class="security-label">Account Lockout</div>
+                </div>
+                <div class="security-card">
+                    <div class="security-value">Max 3</div>
+                    <div class="security-label">Session Limits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Metrics -->
+    <section id="architecture" class="section">
+        <div class="container text-center">
+            <h2>Built with Modern Technology</h2>
+            <p class="text-large text-secondary" style="margin-top: 16px;">
+                Full-stack TypeScript implementation
+            </p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">NestJS</span>
+                <span class="tech-badge">GraphQL</span>
+                <span class="tech-badge">MongoDB</span>
+                <span class="tech-badge">Next.js</span>
+                <span class="tech-badge">React</span>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">76,177</div>
+                    <div class="metric-label">Total Lines of Code</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">24,330</div>
+                    <div class="metric-label">Backend Lines</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">51,847</div>
+                    <div class="metric-label">Frontend Lines</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">39</div>
+                    <div class="metric-label">Database Schemas</div>
+                </div>
+            </div>
+            
+            <div class="metrics-grid" style="margin-top: 24px;">
+                <div class="metric-card">
+                    <div class="metric-number">38</div>
+                    <div class="metric-label">GraphQL Resolvers</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">44</div>
+                    <div class="metric-label">Service Modules</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">121</div>
+                    <div class="metric-label">React Components</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">27</div>
+                    <div class="metric-label">Application Pages</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">CareforceX</div>
+            <div class="footer-tagline">Healthcare Workforce Management System</div>
+            <div class="footer-tech">
+                Full-Stack TypeScript • NestJS • GraphQL • MongoDB • Next.js • React
+            </div>
+            <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <div style="font-weight: 600; font-size: 1.1rem;">Seemab Hassan</div>
+                <div style="opacity: 0.8; margin-top: 4px;">seemab.connect@gmail.com</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
