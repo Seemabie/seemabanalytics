@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Telehealth Program Integrity | Seemab Hassan</title>
+<meta name="description" content="Provider level risk scoring for telehealth utilization patterns following the COVID 19 telehealth expansion, with full claim traceability.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 05 of 08</div>
+      <h1>Medicare Telehealth Program Integrity</h1>
+      <p class="abstract">A provider level risk scoring framework for Medicare telehealth utilization following the post pandemic expansion of covered telehealth services. The system analyzes the active telehealth provider universe, scores each provider against peer baselines, and validates 63 distinct numerical claims against persisted result files.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">46,900</div>
+          <div class="stat-label">Active telehealth providers, 2023</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">9.12M</div>
+          <div class="stat-label">Telehealth services billed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$396M</div>
+          <div class="stat-label">Total Medicare telehealth payments, 2023</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">63</div>
+          <div class="stat-label">Distinct numerical claims verified</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe is constructed from the 2023 Medicare Provider Utilization and Payment Public Use File, filtered to providers billing one or more of 27 telehealth HCPCS codes covered by CMS. The resulting universe is 46,900 active telehealth providers responsible for 9,118,975 distinct telehealth services and 396.17 million dollars in total Medicare telehealth payments.</p>
+        <p>Of the 27 telehealth HCPCS codes in the covered basket, 24 are observed in the analytical universe. The remaining three codes have no active providers in the 2023 file.</p>
+        <p>Risk scoring is conducted at the provider level using utilization rate, payment per beneficiary, claim density, and peer benchmarked deviation. Provider risk is calibrated against the post pandemic baseline period to isolate patterns specific to the expanded telehealth coverage policy.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The total Medicare telehealth payment volume of 396.17 million dollars represents a small fraction of overall Medicare Part B payments but is concentrated among a defined provider subset that warrants targeted oversight.</p>
+          <p>The 63 claim verification process tied every figure in the full report, dashboard, and preprint to a specific persisted result file with computational provenance. This includes universe sizes, service counts, payment totals, tier distributions, peer baselines, and bootstrap intervals.</p>
+          <p>The pattern alignment analysis maps the flagged provider population to documented OIG telehealth fraud typologies, providing an independent qualitative cross check on the statistical scoring.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/telehealth/fig1_tier_distribution.png" alt="Risk tier distribution across telehealth providers">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2023 active telehealth provider universe.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/telehealth/fig2_state_excess.png" alt="Per state telehealth payment concentration">
+          <div class="figure-caption">Figure 2. Per state telehealth payment concentration and provider density distribution.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/telehealth/fig9_dashboard.png" alt="Executive dashboard for telehealth program integrity">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing the analytical universe, payment totals, tier distribution, and pattern alignment with OIG telehealth fraud typologies.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>All 63 numerical claims in this project have been verified against persisted result files. Independent reviewers can reproduce the active telehealth universe, the service counts, the payment totals, the risk scores, and the flagged set from the same Medicare Provider Utilization and Payment Public Use File and the CMS covered telehealth services list.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/14-telehealth.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Medicare Telehealth Program Integrity Analytics: Provider Risk Scoring Following the Post Pandemic Expansion. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

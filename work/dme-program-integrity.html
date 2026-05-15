@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DME Program Integrity Analytics | Seemab Hassan</title>
+<meta name="description" content="Dual method risk scoring for Medicare durable medical equipment suppliers across 2021 to 2023, with bootstrap confidence intervals on national excess projections.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 04 of 08</div>
+      <h1>DME Program Integrity Analytics</h1>
+      <p class="abstract">A dual method risk scoring framework for Medicare durable medical equipment suppliers covering 2021 through 2023. The system combines per beneficiary payment anomaly detection against state median baselines with isolation forest machine learning, projects sample excess to a national figure using CMS reported totals, and computes bootstrap confidence intervals on every aggregate.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">44,918</div>
+          <div class="stat-label">Active 2023 DME suppliers</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">2,246</div>
+          <div class="stat-label">Flagged suppliers, top 5 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$3.57B</div>
+          <div class="stat-label">Sample excess, direct measurement</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$7.18B</div>
+          <div class="stat-label">Projected national excess</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe consists of 198,621 supplier year records across the 2021, 2022, and 2023 CMS Medicare DMEPOS Public Use Files, with 44,918 active suppliers in 2023 defined by positive beneficiary counts. Service level granularity expands to 1,454,474 supplier HCPCS combinations across the three years.</p>
+        <p>The risk framework computes payment per beneficiary for each supplier and compares against the state level median. Excess billing is calculated as the positive difference between supplier payment per beneficiary and the state median, multiplied by the supplier beneficiary count. Suppliers in the top five percent of combined risk score constitute the flagged set.</p>
+        <p>National projection scales sample excess to a national figure using the ratio of CMS reported total DMEPOS payments (11.2 billion dollars) to the sample Medicare payment total (5.566 billion dollars). Bootstrap confidence intervals are computed across one thousand iterations resampling with replacement.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The flagged top five percent (2,246 suppliers) accounts for 3.567 billion dollars in directly observed sample excess. Projected to the national DMEPOS universe, this represents 7.176 billion dollars in annual excess.</p>
+          <p>The bootstrap ninety five percent confidence interval on the sample excess is 2.98 to 4.22 billion dollars, indicating stable estimation across resamples.</p>
+          <p>The supplier tier distribution stratifies risk into Low (35,934 suppliers at 80 percent), Medium (6,738 at 15 percent), and High plus Critical plus Extreme (the flagged top 5 percent). The tier system corrects a prior off by one error and is now consistent with the documented tier boundaries.</p>
+          <p>Cross referencing the flagged set against the HHS OIG List of Excluded Individuals and Entities yields a small direct match count, consistent with the broader finding that exclusion based labels capture only a fraction of program integrity risk.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/dme/fig1_tier_distribution.png" alt="Risk tier distribution across DME suppliers">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2023 DME supplier universe.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/dme/fig2_state_excess.png" alt="Per state excess billing">
+          <div class="figure-caption">Figure 2. Per state excess billing concentration. The geographic distribution reflects both supplier density and state level cost structure variation.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/dme/fig9_dashboard.png" alt="Executive dashboard for DME program integrity">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing universe size, sample excess, projected national excess, and bootstrap confidence intervals.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. Independent reviewers can reproduce the supplier universe, the state level baselines, the risk scores, the flagged set, the national projection, and the bootstrap confidence intervals from the same CMS Medicare DMEPOS Public Use Files.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/13-dme-integrity.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). DME Program Integrity Analytics: Dual Method Risk Scoring with Bootstrap National Excess Projection. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

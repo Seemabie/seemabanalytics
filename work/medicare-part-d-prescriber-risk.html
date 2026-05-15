@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Part D Prescriber Risk Analytics | Seemab Hassan</title>
+<meta name="description" content="Machine learning and statistical scoring of every active Medicare Part D prescriber, with temporal holdout validation against newly excluded providers.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 01 of 08</div>
+      <h1>Medicare Part D Prescriber Risk Analytics</h1>
+      <p class="abstract">A reproducible risk scoring framework for every active Medicare Part D prescriber. The system combines statistical peer benchmarking with isolation forest machine learning across six engineered features, and validates the resulting risk score against an honest temporal holdout: providers newly added to the HHS OIG List of Excluded Individuals and Entities in 2023.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">1.38M</div>
+          <div class="stat-label">Part D prescribers analyzed, 2023</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">81,914</div>
+          <div class="stat-label">LEIE exclusion records (full)</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">69,034</div>
+          <div class="stat-label">Providers flagged, top 5 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">97.6%</div>
+          <div class="stat-label">Temporal coverage, 2022 flagged in 2023 universe</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe consists of 1,380,665 active Medicare Part D prescribers from the 2023 Public Use File. Six features are engineered from the underlying CMS columns: cost per claim, claims per beneficiary, cost per beneficiary, days per beneficiary, opioid share, and brand share. Each feature is standardized and assigned a statistical risk weight that sums to one.</p>
+        <p>The combined risk score blends the statistical component (weight 0.60) with an isolation forest machine learning component (weight 0.40). The isolation forest runs with one hundred trees, contamination set to 0.02, and a fixed random seed for reproducibility. Providers are placed into five risk tiers based on the percentile rank of the combined score.</p>
+        <p>Temporal validation uses an honest holdout: the model is trained on data through 2022 only, and tested against LEIE exclusions filed in 2023. This avoids the in sample inflation common in fraud detection benchmarks.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The flagged top five percent of prescribers (69,034 providers) represents an analytical priority set for downstream review. The tier distribution stratifies risk into Critical (1,381), High (12,426), Medium (55,227), Moderate (207,100), and Routine (1,104,531).</p>
+          <p>Temporal stability is high. Of providers flagged in the 2022 universe, 97.61 percent remain in the 2023 universe, with mean cost per beneficiary 8.59 times the population mean and median lift of 16.08 times.</p>
+          <p>Permutation importance identifies opioid share (29.80 percent) and brand share (17.74 percent) as the most discriminating features, followed by days per beneficiary, claims per beneficiary, cost per beneficiary, and cost per claim.</p>
+          <p>The bootstrap ninety five percent confidence interval on the flagged sample excess is 92,766 to 94,688 million dollars based on two hundred resample iterations.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-prescriber/fig1_tier_distribution.png" alt="Risk tier distribution across 1.38 million Part D prescribers">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2023 Part D prescriber universe, with Critical, High, Medium, Moderate, and Routine tiers defined by combined risk score percentile.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-prescriber/fig2_state_excess.png" alt="Per state count of flagged Part D prescribers">
+          <div class="figure-caption">Figure 2. Per state count of flagged providers in the top five percent of combined risk score. California, New York, Florida, and Texas lead by absolute count.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-prescriber/fig9_dashboard.png" alt="Executive dashboard summary panel">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing universe size, tier distribution, temporal validation, and bootstrap confidence intervals.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. The full claims traceability table maps each number to its source file, the notebook section that produced it, and the exact computational basis. Reviewers can reproduce any flagged provider from the same CMS public use files and LEIE downloadable database used in the analysis.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/10-part-d-prescriber-risk.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Medicare Part D Prescriber Risk and Compliance Analytics: A Reproducible Framework with Temporal Holdout Validation. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

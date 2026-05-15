@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Access and Equity Analytics | Seemab Hassan</title>
+<meta name="description" content="County level Medicare access disparities across all U.S. counties, with peer state baseline comparisons and high risk county identification.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 08 of 08</div>
+      <h1>Healthcare Access and Equity Analytics</h1>
+      <p class="abstract">A county level Medicare access and equity framework analyzing all U.S. counties from 2019 through 2022. The system identifies high risk counties where Medicare spending patterns indicate access disparities, computes observed versus counterfactual excess using two independent methods, and provides per state aggregation for federal program integrity targeting.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">3,198</div>
+          <div class="stat-label">U.S. counties analyzed, 2022</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">29.5M</div>
+          <div class="stat-label">Medicare FFS beneficiaries, 2022</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">255</div>
+          <div class="stat-label">High risk counties, 8.0 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$2.75B</div>
+          <div class="stat-label">Directly observed excess, V1V2 method</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe consists of 3,198 U.S. counties in 2022, covering 29,538,265 Medicare FFS beneficiaries. The longitudinal universe extends from 2019 through 2022, producing 12,785 county year observations across 3,206 unique FIPS codes pooled across years.</p>
+        <p>National baselines for 2022 establish the reference distribution: mean Medicare payment per beneficiary of 11,227.13 dollars and median of 11,006.43 dollars. The observed per beneficiary spending range across counties extends from 5,035 dollars to 32,264 dollars, a 6.41 fold spread.</p>
+        <p>Two independent excess computation methods are applied. The V1V2 method computes excess against the national distribution. The state peer median method computes excess against the median of counties within the same state, controlling for state level cost structure variation. Both methods are reported transparently rather than selecting whichever yields the larger headline figure.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The high risk county set consists of 255 counties representing 8.0 percent of the analytical universe and serving 2,484,783 Medicare FFS beneficiaries. The directly observed excess using the V1V2 method is 2.748 billion dollars; using the state peer median method, 6.625 billion dollars.</p>
+          <p>High risk counties average 12,243.55 dollars per beneficiary in Medicare spending versus 11,137.48 dollars in low risk counties, a per beneficiary gap of 1,106.07 dollars.</p>
+          <p>The top state by high risk county count is Georgia with 21 counties, followed by Oklahoma (20), Mississippi (18), Florida (15), California (15), New York (15), Louisiana (13), North Carolina (13), Texas (12), and Illinois (12).</p>
+          <p>HRSA validation provides external concordance for the high risk county identification, supporting independent cross verification of the analytical results against an established federal access dataset.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/access-equity/fig1_tier_distribution.png" alt="Risk tier distribution across U.S. counties">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 3,198 county analytical universe based on combined access and equity risk score.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/access-equity/fig3_top_counties.png" alt="Top 20 high risk counties">
+          <div class="figure-caption">Figure 3. Top twenty high risk counties by combined risk score, with state and Medicare FFS beneficiary population for context.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/access-equity/fig9_dashboard.png" alt="Executive dashboard for healthcare access and equity">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing the county universe, high risk identification, per beneficiary spending gap, and per state aggregation.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository, and the project has passed independent verification by a general purpose reviewer agent. Independent reviewers can reproduce the county universe, the national baselines, the observed versus counterfactual excess computations, the high risk county identification, and the per state aggregation from the same CMS Medicare Geographic Variation Public Use File and HRSA Area Health Resources File.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/17-equity.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Healthcare Access and Equity Analytics: A County Level Framework for Medicare Spending Disparities and Access Risk Identification. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

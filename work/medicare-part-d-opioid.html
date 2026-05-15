@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Part D Opioid Prescribing Analytics | Seemab Hassan</title>
+<meta name="description" content="Six feature risk scoring for opioid prescribing patterns across more than one million prescribers, with state and specialty peer benchmarking.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 02 of 08</div>
+      <h1>Medicare Part D Opioid Prescribing Analytics</h1>
+      <p class="abstract">A six feature risk scoring framework focused on opioid prescribing patterns within Medicare Part D. The analysis applies clinical exclusion logic to isolate the opioid prescribing universe, builds peer cohorts by state and specialty, and benchmarks every prescriber against cohort medians using both statistical scoring and isolation forest machine learning.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">1.03M</div>
+          <div class="stat-label">Opioid prescribers, modeling universe</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">2,020</div>
+          <div class="stat-label">State and specialty peer cohorts</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">51,275</div>
+          <div class="stat-label">Prescribers flagged, top 5 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">191</div>
+          <div class="stat-label">Specialties analyzed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe is constructed by filtering the 2023 Medicare Part D Prescriber Public Use File to opioid prescribing activity. Clinical exclusions are applied to remove appropriate end of life and palliative care prescribing patterns, producing a final modeling universe of 1,025,487 prescribers across 191 specialties and 61 jurisdictions.</p>
+        <p>Six features are engineered with explicit formulas documented in the feature definitions table. Peer cohorts are built at the state plus specialty level, requiring a minimum of thirty prescribers per cohort, yielding 2,020 distinct peer groups. National baselines provide a secondary reference for cohorts that fall below the minimum size.</p>
+        <p>Risk scoring blends statistical features (weighted to sum to one) with an isolation forest configured at contamination 0.05 across one hundred trees with a fixed random seed. The top five percent of the combined score defines the flagged set.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The flagged top five percent of opioid prescribers (51,275 providers) is distributed across five tiers: Extreme (1,026), Critical (9,229), High (41,020), Medium (153,823), and Low (820,389).</p>
+          <p>The isolation forest produces an independent anomaly set of 51,275 prescribers at the 0.05 contamination rate, providing a methodological cross check on the statistical scoring approach.</p>
+          <p>Peer benchmarking at the state and specialty level captures cohort variation that pure national baselines would obscure. A primary care opioid prescriber in West Virginia is benchmarked against West Virginia primary care peers, not against the national population.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-opioid/fig1_tier_distribution.png" alt="Risk tier distribution across opioid prescribers">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2023 opioid prescribing universe. The five tier system stratifies risk from Extreme through Low.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-opioid/fig2_state_excess.png" alt="Per state distribution of flagged opioid prescribers">
+          <div class="figure-caption">Figure 2. Per state distribution of flagged opioid prescribers, normalized for absolute count and per capita rate.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-d-opioid/fig9_dashboard.png" alt="Executive dashboard for opioid prescribing analytics">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing the analytical universe, peer cohort coverage, tier distribution, and key risk indicators.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. The full claims traceability table maps each number to its source file, notebook section, and computational basis. Independent reviewers can reproduce the modeling universe, the peer cohorts, the risk scores, and the flagged set from the same Medicare Part D Prescriber Public Use File.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/11-opioid-risk.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Medicare Part D Opioid Prescribing Risk Analytics: Peer Cohort Benchmarking Across 2,020 State and Specialty Groups. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

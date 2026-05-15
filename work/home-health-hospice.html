@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Health and Hospice Program Integrity | Seemab Hassan</title>
+<meta name="description" content="Dual track risk scoring across Medicare home health agencies and hospice providers, with state level baselines and threshold sensitivity analysis.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 07 of 08</div>
+      <h1>Home Health and Hospice Program Integrity</h1>
+      <p class="abstract">A dual track risk scoring framework for Medicare home health agencies and hospice providers. The system builds parallel analytical universes for each provider type, applies state level peer baselines per engineered feature, and produces threshold sensitivity analysis across percentile cutpoints to support flexible federal program integrity targeting.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">5,730</div>
+          <div class="stat-label">Home health agencies analyzed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">5,771</div>
+          <div class="stat-label">Hospices analyzed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">576</div>
+          <div class="stat-label">Combined flagged providers, top 5 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$289M</div>
+          <div class="stat-label">Combined sample excess</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe consists of 11,501 providers total, split between 5,730 Medicare certified home health agencies and 5,771 Medicare certified hospice providers. The universe filter requires at least eleven beneficiaries in the 2023 Post Acute Care Public Use File, the CMS threshold for protected health information masking.</p>
+        <p>Engineered features are computed separately for each provider track to respect the different clinical and billing structures of home health versus hospice. State level peer baselines provide the reference distribution for each feature, with national baselines as a secondary reference for small states.</p>
+        <p>The risk score combines statistical features with isolation forest anomaly detection. The top five percent of each track defines the flagged set: 287 home health agencies and 289 hospices, for a combined total of 576 flagged providers.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The dual track architecture produces 287 flagged home health agencies (sample excess 156.02 million dollars) and 289 flagged hospices (sample excess 133.31 million dollars). The combined sample excess is 289.33 million dollars.</p>
+          <p>State aggregation reveals concentration of flagged providers in specific states with elevated beneficiary counts. The per state excess analysis supports state level federal program integrity prioritization.</p>
+          <p>The threshold sensitivity analysis tests flagged count and excess at percentile cutpoints from 90 through 99, allowing reviewers to select a flag rate that matches operational review capacity.</p>
+          <p>Bootstrap distributions across one thousand iterations confirm stability of both the flagged count and the excess estimates within narrow confidence bands.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/home-health-hospice/fig1_tier_distribution.png" alt="Risk tier distribution across home health and hospice providers">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the combined home health and hospice analytical universe.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/home-health-hospice/fig2_state_excess.png" alt="Per state excess billing for home health and hospice">
+          <div class="figure-caption">Figure 2. Per state excess billing for the flagged home health and hospice provider populations.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/home-health-hospice/fig9_dashboard.png" alt="Executive dashboard for home health and hospice program integrity">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing dual track universe, flagged counts, sample excess, and threshold sensitivity.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. Independent reviewers can reproduce both the home health and hospice universes, the state peer baselines, the risk scores, the flagged sets, and the sample excess computations from the same CMS Post Acute Care Public Use File.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/16-hh-hospice.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Medicare Home Health and Hospice Program Integrity Analytics: Dual Track Risk Scoring with State Peer Baselines. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

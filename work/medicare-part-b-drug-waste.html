@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicare Part B Drug Waste Anomaly Detection | Seemab Hassan</title>
+<meta name="description" content="Anomaly detection on Medicare Part B injectable drug discard amounts, identifying the small share of drugs that drive the large share of national waste.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 03 of 08</div>
+      <h1>Medicare Part B Drug Waste Anomaly Detection</h1>
+      <p class="abstract">A drug level anomaly detection framework using CMS published discard amount data for Medicare Part B injectable drugs. The system computes per drug waste rates and excess waste against national baselines, identifies the small share of drugs that account for the large share of total waste, and provides a Pareto concentration analysis suitable for federal program integrity prioritization.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">823</div>
+          <div class="stat-label">Injectable drugs analyzed, 2023</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$935M</div>
+          <div class="stat-label">National Part B drug waste, 2023</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">42</div>
+          <div class="stat-label">Flagged drugs, top 5 percent</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$550M</div>
+          <div class="stat-label">Flagged drug excess waste</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe is constructed from the CMS Medicare Part B Discarded Drug Units Public Use File for 2023, filtered to remove the aggregate Overall row, producing 823 individual injectable drugs. Each drug is characterized by its national Medicare allowed amount, administered amount, discarded amount, and computed waste rate.</p>
+        <p>The national total Medicare allowed amount across the universe is 52.66 billion dollars, with administered total of 51.73 billion dollars and discarded total of 935.08 million dollars, yielding a national waste rate of 1.78 percent.</p>
+        <p>Risk scoring uses excess waste dollars as the primary feature, with secondary features capturing waste rate and concentration. The top five percent of drugs by combined score (42 drugs) constitutes the flagged set, with bootstrap confidence intervals computed on the excess waste totals.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>Waste is heavily concentrated. The top five percent of drugs by waste account for 80.95 percent of national Part B drug waste. The top ten percent account for 92.88 percent. The top 11.2 percent (42 drugs) account for 94.27 percent of national waste.</p>
+          <p>Total waste in the flagged set is 589.01 million dollars, of which 550.15 million is excess above the national baseline rate. The flagged drugs alone represent 62.99 percent of the 2023 national drug waste total.</p>
+          <p>The concentration pattern indicates that federal program integrity attention on a small set of drug HCPCS codes can capture the majority of recoverable waste, with no need to expand analytical attention across the full 823 drug universe.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-b-drug-waste/fig1_tier_distribution.png" alt="Risk tier distribution across 823 injectable drugs">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2023 Part B injectable drug universe, with the flagged top five percent isolated for federal program integrity priority.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-b-drug-waste/fig3_flagged_drugs.png" alt="Top flagged drugs by waste dollars">
+          <div class="figure-caption">Figure 3. Top flagged drugs by 2023 waste dollars, with each bar showing the drug HCPCS code, total waste amount, and waste rate.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/part-b-drug-waste/fig9_dashboard.png" alt="Executive dashboard for drug waste analytics">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing the universe, national totals, Pareto concentration, and flagged set composition.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. Independent reviewers can reproduce the universe, the national totals, the Pareto concentration analysis, and the flagged drug set from the same CMS Medicare Part B Discarded Drug Units Public Use File.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/12-drug-waste.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Medicare Part B Drug Waste Anomaly Detection System: A Pareto Concentration Framework for Federal Program Integrity. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>

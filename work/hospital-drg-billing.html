@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Inpatient DRG Billing Anomaly Detection | Seemab Hassan</title>
+<meta name="description" content="Five feature anomaly detection on hospital DRG billing patterns across 27 million Medicare inpatient discharges over five fiscal years.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../work.html" class="active">Work</a>
+      <a href="../recognition.html">Recognition</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-header">
+    <div class="container">
+      <div class="eyebrow">Project 06 of 08</div>
+      <h1>Hospital Inpatient DRG Billing Anomaly Detection</h1>
+      <p class="abstract">A five feature anomaly detection framework for Medicare inpatient hospital DRG billing patterns covering fiscal years 2019 through 2023. The system analyzes severity mix, payment ratios, high value DRG concentration, MCC volatility, and geographic mismatch to identify hospitals with billing patterns that diverge from peer baselines.</p>
+    </div>
+  </section>
+
+  <section style="padding:0;">
+    <div class="container">
+      <div class="project-stats">
+        <div class="stat-block">
+          <div class="stat-number">27.3M</div>
+          <div class="stat-label">Inpatient discharges analyzed</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">2,675</div>
+          <div class="stat-label">Hospitals in analytical universe</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">776,535</div>
+          <div class="stat-label">Provider DRG year combinations</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">$75.7M</div>
+          <div class="stat-label">Flagged excess billing, sample</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+      <div class="project-body">
+
+        <h2>Methodology</h2>
+        <p>The analytical universe consists of 27,269,086 Medicare inpatient discharges across 2,675 acute care hospitals over five fiscal years (2019 through 2023). The universe filter requires acute care designation, a maximum annual discharge volume of one hundred or more, and a five year MCC concentration of ten percent or greater. Specialty hospitals (orthopedic, spine, surgical, psychiatric) are excluded by the MCC filter.</p>
+        <p>Five features are engineered from the CMS Inpatient Provider Specific File: Severity Mix Index, Payment Ratio, High Value DRG Percentage, MCC Volatility, and Geographic Mismatch Score. Three of the five (Severity Mix Index, Payment Ratio, High Value DRG Percentage) are directional features where only positive z scores indicate risk.</p>
+        <p>Risk scoring combines a statistical weighted z score with an isolation forest at two percent contamination. The flagged set is the union of statistical top five percent and the isolation forest anomaly set, with the 54 hospital overlap representing the highest confidence flags.</p>
+
+        <h2>Key findings</h2>
+        <div class="findings">
+          <p>The isolation forest identifies 56 hospitals (2.0 percent of the universe) with billing pattern anomalies. The overlap between combined statistical flags and machine learning flags is 54 hospitals, indicating strong agreement between the two methods.</p>
+          <p>The sample excess billing for the flagged set is 75.7 million dollars across 11,698 excess MCC cases, with a mean per flagged hospital of 564,743 dollars and a maximum of 6.96 million dollars at a single facility.</p>
+          <p>The DRG family weight differential analysis covers 230 DRG families with MCC versus non MCC pairs, producing a median differential of 7,821 dollars and a mean differential of 8,691 dollars per case.</p>
+          <p>The five year longitudinal design distinguishes persistent billing pattern anomalies from single year noise, with 2,637 hospitals present in all five years providing a stable longitudinal cohort.</p>
+        </div>
+
+        <h2>Selected figures</h2>
+
+        <div class="figure-block">
+          <img src="../assets/figures/hospital-drg/fig1_tier_distribution.png" alt="Risk tier distribution across hospitals">
+          <div class="figure-caption">Figure 1. Risk tier distribution across the 2,675 hospital analytical universe based on combined risk score percentile.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/hospital-drg/fig2_state_excess.png" alt="Per state excess billing">
+          <div class="figure-caption">Figure 2. Per state excess billing concentration across flagged hospitals.</div>
+        </div>
+
+        <div class="figure-block">
+          <img src="../assets/figures/hospital-drg/fig9_dashboard.png" alt="Executive dashboard for hospital DRG analytics">
+          <div class="figure-caption">Figure 9. Executive dashboard summarizing universe, tier distribution, statistical and machine learning flag overlap, and excess billing totals.</div>
+        </div>
+
+        <h2>Verification</h2>
+        <p>Every numerical claim in this project traces to a persisted result file in the public rebuild repository. Independent reviewers can reproduce the hospital universe, the five engineered features, the risk scoring, the isolation forest results, and the per hospital excess billing computations from the same CMS Medicare Inpatient Provider Specific File.</p>
+
+        <h2>Downloads</h2>
+        <div class="downloads">
+          <a href="../assets/downloads/15-hospital-drg.pdf" class="download-link">Technical Report (PDF)</a>
+        </div>
+
+        <h2>Citation</h2>
+        <div class="citation">Hassan, S. (2026). Hospital Inpatient DRG Billing Anomaly Detection and Risk Stratification System. Working paper. SSRN identifier forthcoming.</div>
+
+        <p style="margin-top:48px;"><a href="../work.html" class="link-arrow">&larr; Back to all projects</a></p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../work.html">Work</a></li>
+          <li><a href="../recognition.html">Recognition</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>
