@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Seemab Hassan</title>
+<meta name="description" content="Background, education, and methodological commitments behind the Medicare program integrity portfolio.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="site-title">Seemab Hassan</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="work.html">Work</a>
+      <a href="recognition.html">Recognition</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container-narrow">
+      <div class="eyebrow">About</div>
+      <h1>The work, the standard, the record</h1>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="container-narrow">
+      <div class="about-section">
+
+        <h2>Background</h2>
+        <p>Seemab Hassan is a healthcare data analyst building reproducible program integrity systems for U.S. federal healthcare programs. The current portfolio covers Medicare Parts A, B, C, and D, with eight completed analytical projects spanning prescriber risk, opioid prescribing, drug waste, durable medical equipment, telehealth, hospital DRG billing, home health and hospice, and county level access equity.</p>
+        <p>Each project follows the same methodological commitment. Every numerical claim in the final report, dashboard, and academic preprint traces to a persisted result file in a public rebuild repository. Every flagged provider, drug, or county can be reproduced from the same CMS public use files that any independent reviewer can download.</p>
+        <p>He holds an undergraduate degree from Lahore University of Management Sciences and is currently employed at NSK Wholesale Group in the United States.</p>
+
+        <h2>Methodological commitments</h2>
+        <div class="commitments">
+          <div>
+            <h4>Public data only</h4>
+            <p>Every analysis uses CMS Public Use Files, the HHS OIG List of Excluded Individuals and Entities, HRSA datasets, or other publicly released federal data. No restricted, proprietary, or internal data is used at any stage.</p>
+          </div>
+          <div>
+            <h4>Full traceability</h4>
+            <p>Every numerical claim in every artifact (report, dashboard, preprint) maps to a persisted result file. Independent reviewers can pick any number and trace it to a specific notebook cell, the originating CMS column, and the exact computational basis.</p>
+          </div>
+          <div>
+            <h4>Honest holdouts</h4>
+            <p>Where temporal validation is feasible, training and test data are split on a future event boundary. The Part D prescriber model trains on data through 2022 and tests against LEIE exclusions filed in 2023. Inflated in sample accuracy is never reported as predictive performance.</p>
+          </div>
+        </div>
+
+        <h2>Education and credentials</h2>
+        <p>Lahore University of Management Sciences, undergraduate degree. U.S. Department of State Global UGRAD program participant. Punjab Educational Endowment Fund recognition. Letter of acknowledgment from the Chief Minister of Punjab.</p>
+
+        <h2>Current role</h2>
+        <p>Employed at NSK Wholesale Group in the United States. NSK has adopted the Medicare analytics methodology across its operating group. The methodology was developed before joining NSK using public CMS data on personal time, and remains his personal intellectual property.</p>
+
+        <h2>Field of work</h2>
+        <p>Healthcare Data Systems and Program Integrity. The work focuses on protecting federal healthcare programs from improper billing while improving access for vulnerable populations, using reproducible statistical and machine learning frameworks that federal agencies and contractors can deploy directly against the same public datasets.</p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand">Seemab Hassan</div>
+        <p>Healthcare Data Systems and Program Integrity. Reproducible analytics built on public CMS data.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="recognition.html">Recognition</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:seemab.lums@gmail.com">seemab.lums@gmail.com</a></li>
+          <li>+1 332 248 8760</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 Seemab Hassan.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>
