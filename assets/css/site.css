@@ -735,3 +735,26 @@ section.tight {
   a { color: #14213d; border: none; }
   section { padding: 24pt 0; page-break-inside: avoid; }
 }
+
+/* ---------- Publication links (publications page) ---------- */
+
+.pub-links {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-family: "Helvetica Neue", "Inter", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pub-links a {
+  color: #14213d;
+  border-bottom: 1px solid #14213d;
+  letter-spacing: 0.02em;
+}
+
+.pub-links a:hover {
+  color: #4a4a4a;
+  border-bottom-color: #4a4a4a;
+}
